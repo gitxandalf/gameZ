@@ -10,6 +10,7 @@ class Category(db.Model):
     product = db.relationship(
         "Product", back_populates="category", cascade="all")
 
+
     def to_dict(self):
         return {
             'id': self.id,

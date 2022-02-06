@@ -20,6 +20,7 @@ class Product(db.Model):
     cart_item = db.relationship(
         "CartItem", back_populates="product", cascade="all, delete-orphan")
 
+
     def to_dict(self):
         return {
             'id': self.id,

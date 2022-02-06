@@ -8,7 +8,8 @@ class Category(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=True)
     description = db.Column(db.Text, nullable=False)
     product = db.relationship(
-        "Product", back_populates="category", cascade="all, delete-orphan")
+        "Product", back_populates="category", cascade="all")
+
 
     def to_dict(self):
         return {

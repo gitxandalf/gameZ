@@ -4,7 +4,7 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', image_url="https://cdn.onlinewebfonts.com/svg/img_87237.svg", first_name="Demo", last_name="Dave", email='demo@aa.io', hashed_password="test")
+        username='Demo', image_url="https://cdn.onlinewebfonts.com/svg/img_87237.svg", first_name="Demo", last_name="Dave", email='demo@aa.io', password="test")
     # marnie = User(
     #     username='marnie', email='marnie@aa.io', password='password')
     # bobbie = User(

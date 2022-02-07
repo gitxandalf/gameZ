@@ -1,0 +1,15 @@
+footer {
+    height: 50px;
+    background-color: black;
+    display: flex;
+    justify-content: space-around;
+    padding: 0 300px
+}
+
+.footer-links {
+    font-size: 15px;
+    color: white;
+    font-weight: 300;
+    align-items: center;
+    padding-top: 12px;
+}

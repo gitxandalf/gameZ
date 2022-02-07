@@ -3,10 +3,13 @@ from app.models import db, Category
 
 # Adds a demo user, you can add other users here if you want
 def seed_categories():
-    category = Category(
+    category1 = Category(
         name="RPG", description="Role Playing Games")
+    category2 = Category(
+        name="FPS", description="First Person Shooters")
 
-    db.session.add(category)
+    db.session.add(category1)
+    db.session.add(category2)
 
     db.session.commit()
 

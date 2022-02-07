@@ -3,10 +3,16 @@ from app.models import db, Review
 
 # Adds a demo user, you can add other users here if you want
 def seed_reviews():
-    review = Review(
+    review1 = Review(
         user_id=1, product_id=1, title="Best Game Ever", content="No really, it's the best.")
+    review2 = Review(
+        user_id=1, product_id=1, title="Worst Game Ever", content="No really, it's the worst.")
+    review3 = Review(
+        user_id=1, product_id=2, title="Todd Howard is a Troll", content="How many times is he going to sell this game?")
 
-    db.session.add(review)
+    db.session.add(review1)
+    db.session.add(review2)
+    db.session.add(review3)
 
     db.session.commit()
 

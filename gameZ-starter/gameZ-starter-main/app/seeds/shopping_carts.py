@@ -5,8 +5,11 @@ from app.models import db, ShoppingCart
 def seed_shopping_carts():
     shopping_cart = ShoppingCart(
         user_id=1, checked_out=False)
+    shopping_cart2 = ShoppingCart(
+        user_id=2, checked_out=True)
 
     db.session.add(shopping_cart)
+    db.session.add(shopping_cart2)
 
     db.session.commit()
 

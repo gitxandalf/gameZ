@@ -17,3 +17,8 @@ class ShoppingCart(db.Model):
             'id': self.id,
             'checked_out': self.checked_out
         }
+
+
+# SELECT user_id, checked_out, cart_items.product_id
+# FROM shopping_carts
+# INNERJOIN cart_items ON shopping_carts.id = cart_items.shopping_cart_id

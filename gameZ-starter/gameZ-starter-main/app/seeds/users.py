@@ -5,12 +5,16 @@ from app.models import db, User
 def seed_users():
     demo = User(
         username='Demo', image_url="https://cdn.onlinewebfonts.com/svg/img_87237.svg", first_name="Demo", last_name="Dave", email='demo@aa.io', password="test")
+    demo2 = User(
+        username='Demo2', first_name='demo', last_name='lition', email='demo2@aa.io', password='test')
     # marnie = User(
     #     username='marnie', email='marnie@aa.io', password='password')
     # bobbie = User(
     #     username='bobbie', email='bobbie@aa.io', password='password')
 
     db.session.add(demo)
+    db.session.add(demo2)
+
     # db.session.add(marnie)
     # db.session.add(bobbie)
 

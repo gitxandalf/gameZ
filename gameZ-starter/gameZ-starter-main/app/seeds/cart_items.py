@@ -5,8 +5,11 @@ from app.models import db, CartItem
 def seed_cart_items():
     item = CartItem(
         shopping_cart_id=1, product_id=1, quantity=1)
+    item2 = CartItem(
+        shopping_cart_id=1, product_id=2, quantity=2)
 
     db.session.add(item)
+    db.session.add(item2)
 
     db.session.commit()
 

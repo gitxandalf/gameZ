@@ -43,7 +43,7 @@ const AddProductForm = () => {
 //     };
 //    if (product) {
             
-//             //  return <Redirect to={`/products/${product.id}`} />;
+//              return <Redirect to={`/products/${product.id}`} />;
            
 //         }
 

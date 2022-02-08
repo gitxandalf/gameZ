@@ -44,7 +44,7 @@ const shoppingCartReducer = (state = {}, action) => {
         case GETCART: {
             return {
                 ...state,
-                entries: [...action.list]
+                cartItems: action.payload
             }
         }
         default: return state;

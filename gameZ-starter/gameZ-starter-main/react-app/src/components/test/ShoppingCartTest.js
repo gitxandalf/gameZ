@@ -6,7 +6,7 @@ import { loadCart } from '../../store/shoppingCart';
 
 const ShoppingCartTest = () => {
     const user = useSelector(state => state.session.user);
-    const cart = useSelector(state => state?.shoppingCart?.spots);
+    // const cart = useSelector(state => state?.shoppingCart?.spots);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -15,11 +15,9 @@ const ShoppingCartTest = () => {
 
     return (
         <div>
-
+            Test
         </div>
     )
 }
 
 export default ShoppingCartTest;
-
-// what exactly gets the session as a state? cant seem to get update shoppingCart state

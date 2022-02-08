@@ -11,6 +11,8 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
 import ShoppingCartTest from './components/test/ShoppingCartTest'
+import ProductDetail from './components/ProductDetail';
+import HomePage from './components/HomePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -57,9 +59,14 @@ function App() {
         <ProtectedRoute path='/shoppingCart' exact={true} >
           <ShoppingCartTest />
         </ProtectedRoute>
+        
+        <Route path='/products/:productId' exact={true} >
+          <ProductDetail />
+        </Route>
 
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
+          <HomePage />
         </Route>
 
       </Switch>

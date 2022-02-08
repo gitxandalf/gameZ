@@ -14,7 +14,7 @@ function HomePage() {
 
     useEffect(() => {
         dispatch(getCategories())
-    }, [])
+    }, [dispatch])
 
     return (
         <div id="home-page">

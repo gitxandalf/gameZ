@@ -1,18 +1,6 @@
-const ADD = '/shoppingCart/ADD';
-const REMOVE = '/shoppingCart/REMOVE';
 const CHECKOUT = '/shoppingCart/CHECKOUT';
 const RESET = '/shoppingCart/RESET';
 const GETCART = '/shoppingCart/GETCART'
-
-const add = item => ({
-    type: ADD,
-    item
-})
-
-const remove = item => ({
-    type: REMOVE,
-    item
-})
 
 const checkout = products => ({
     type: CHECKOUT,
@@ -45,7 +33,34 @@ export const addItem = (item) => async dispatch => {
     })
     if(res.ok) {
         const item = await res.json();
-        console.log((item))
+        dispatch(loadCart(item.shopping_cart_id));
+        return "ok";
+    }
+}
+
+export const removeItem = (cart_item_id) => async dispatch => {
+    const res = await fetch('/api/shopping_carts/delete_cart_item', {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({cart_item_id})
+    })
+
+    if(res.ok) {
+        const item = await res.json();
+        dispatch(loadCart(item.shopping_cart_id));
+        return "ok";
+    }
+}
+
+export const editItem = (item) => async dispatch => {
+    const res = await fetch('/api/shopping_carts/edit_cart_item', {
+        method: 'PUT',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({cart_item_id: item.cart_item_id, quantity: item.quantity})
+    })
+
+    if(res.ok) {
+        const item = await res.json();
         dispatch(loadCart(item.shopping_cart_id));
         return "ok";
     }
@@ -59,12 +74,6 @@ const shoppingCartReducer = (state = {}, action) => {
             return {
                 ...state,
                 cartItems: action.payload
-            }
-        }
-        case ADD: {
-            return {
-                ...state,
-                cartItems: action.item
             }
         }
         default: return state;

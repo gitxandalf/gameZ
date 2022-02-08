@@ -10,9 +10,9 @@ class CartItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
     quantity = db.Column(db.Integer, nullable=False)
     shopping_cart = db.relationship(
-        "ShoppingCart", back_populates="cart_item", cascade="all")
+        "ShoppingCart", back_populates="cart_item",)
     product = db.relationship(
-        "Product", back_populates="cart_item", cascade="all")
+        "Product", back_populates="cart_item",)
 
     def to_dict(self):
         return {
@@ -21,3 +21,11 @@ class CartItem(db.Model):
             'shopping_cart_id': self.shopping_cart_id,
             'product_id': self.product_id
         }
+
+    # @property
+    # def quantity(self):
+    #     return self.quantity
+
+    # @quantity.setter
+    # def quantity(self, value):
+    #     self.quantity = value

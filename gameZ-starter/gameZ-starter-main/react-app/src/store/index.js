@@ -8,7 +8,7 @@ import category from './category'
 const rootReducer = combineReducers({
   session,
   product,
-  shoppingCart
+  shoppingCart,
   category
 });
 

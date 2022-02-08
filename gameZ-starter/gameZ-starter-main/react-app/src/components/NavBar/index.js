@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
 import "./NavBar.css"
+import logo from '../../images/logo.png'
 
 const NavBar = () => {
   const [search, setSearch] = useState("");
@@ -12,7 +13,7 @@ const NavBar = () => {
   return (
     <nav>
       <div id="nav-div">
-        <img id="nav-logo" src="logo.png" />
+        <img id="nav-logo" alt="logo" src={logo} />
         <div id="nav-search">
           <form onSubmit={e =>/* logic to route search correctly goes here */ 0}>
             <label htmlFor='search'>Search</label>
@@ -34,25 +35,25 @@ const NavBar = () => {
           </li>
           <li className='nav-li'>
             {!sessionUser &&
-            <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
-            </NavLink>}
+              <NavLink to='/login' exact={true} activeClassName='active'>
+                Login
+              </NavLink>}
           </li>
           <li className='nav-li'>
-            { !sessionUser &&
-            <NavLink to='/sign-up' exact={true} activeClassName='active'>
-              Sign Up
-            </NavLink>}
-          </li>
-          <li className='nav-li'>
-            {sessionUser &&
-            <NavLink to='/users' exact={true} activeClassName='active'>
-              Users
-            </NavLink>}
+            {!sessionUser &&
+              <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                Sign Up
+              </NavLink>}
           </li>
           <li className='nav-li'>
             {sessionUser &&
-            <LogoutButton />}
+              <NavLink to='/users' exact={true} activeClassName='active'>
+                Users
+              </NavLink>}
+          </li>
+          <li className='nav-li'>
+            {sessionUser &&
+              <LogoutButton />}
           </li>
         </ul>
       </div>

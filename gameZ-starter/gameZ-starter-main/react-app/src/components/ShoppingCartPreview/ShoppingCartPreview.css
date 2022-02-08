@@ -1,0 +1,7 @@
+.shopping-cart-preview {
+    background-color: white;
+    position: absolute;
+    top: 120px;
+    right: 30px;
+    border: 1px solid black;
+}

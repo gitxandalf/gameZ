@@ -66,6 +66,21 @@ export const editItem = (item) => async dispatch => {
     }
 }
 
+export const checkoutCart = (shoppingCart) => async dispatch => {
+    const res = await fetch('/api/shopping_carts/checkout_cart', {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({id: shoppingCart.id})
+    })
+
+    if(res.ok) {
+        const newCart = await res.json();
+        dispatch(loadCart(newCart.id));
+        return "ok";
+    }
+
+}
+
 const shoppingCartReducer = (state = {}, action) => {
     let newState;
 
@@ -79,5 +94,5 @@ const shoppingCartReducer = (state = {}, action) => {
         default: return state;
     }
 }
-// const testItem = state?.cartItems?.cart_items.find(item => item.id == 34)
+
 export default shoppingCartReducer;

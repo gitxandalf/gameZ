@@ -21,11 +21,11 @@ function HomePage() {
 
                 <h1>Categories</h1>
 
-                <p className='category-links'>{allCategories && allCategories?.map((category) => (
+                <div className='category-links'>{allCategories && allCategories?.map((category) => (
                     <div key={category?.id}>
                         <Link key={category?.id} to={`/categories/${category?.id}/products`}>{category?.name}</Link>
                     </div>
-                ))}</p>
+                ))}</div>
 
             </div>
 

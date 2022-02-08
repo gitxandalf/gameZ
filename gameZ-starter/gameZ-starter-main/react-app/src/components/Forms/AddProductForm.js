@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import "./AddProductForm.css"
-import addProduct from '../../store/product'
+import { postProduct } from '../../store/product'
 
 const AddProductForm = () => {
     const [errors, setErrors] = useState([]);
-    const [categoryId, setCategoryId] = useState('');
+    const [categoryId, setCategoryId] = useState('1');
     const [name, setName] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [price, setPrice] = useState('')
@@ -20,7 +20,7 @@ const AddProductForm = () => {
     const onSubmit = async (e) => {
         e.preventDefault();
         if (user) {
-            product = await dispatch(addProduct(user.id, categoryId, name, imageUrl, price, description));
+            product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
             if (product) {
                 setErrors(product)
             }
@@ -47,9 +47,7 @@ const AddProductForm = () => {
         setDescription(e.target.value);
     };
 
-
-
-    if (user) {
+    if (product) {
         return <Redirect to={`/products/${product.id}`} />;
     }
 
@@ -57,7 +55,7 @@ const AddProductForm = () => {
         <div id="add-product-div">
             <form className="add-product-form" onSubmit={onSubmit}>
                 <div>
-                    {errors.map((error, ind) => (
+                    {errors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>

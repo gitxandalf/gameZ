@@ -1,6 +1,8 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import login_required
-from app.models import Product, Review, Category
+from app.models import Product, Review, Category, db
+from app.forms import AddProductForm
+
 
 product_routes = Blueprint(
     'products', __name__)
@@ -37,11 +39,14 @@ def product(id):
 @product_routes.route('/add-product', methods=['POST'])
 @login_required
 def post_product():
+    data = request.json
     form = AddProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+
     if form.validate_on_submit():
         product = Product(
-            category_id=form.data['category_id'],
+            user_id=data["user_id"],
+            category_id=data["category_id"],
             name=form.data['name'],
             image_url=form.data['image_url'],
             price=form.data['price'],

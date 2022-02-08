@@ -9,7 +9,6 @@ category_routes = Blueprint(
 def categories():
     # Route to GET all available Categories
     categories = Category.query.all()
-    print("CATEGORIES", categories)
     return {'categories': [category.to_dict() for category in categories]}
 
 

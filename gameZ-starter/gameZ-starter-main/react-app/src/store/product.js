@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf"
-
 const LOAD = "products/LOAD";
 const ADD_PRODUCT = "products/ADD_PRODUCT"
 const EDIT_PRODUCT = "products/EDIT_PRODUCT"
@@ -27,7 +25,7 @@ const deleteProduct = product => ({
 })
 
 export const getProducts = () => async dispatch => {
-    const response = await csrfFetch(`/api/products`);
+    const response = await fetch(`/api/products`);
 
     if (response.ok) {
         const list = await response.json();
@@ -37,7 +35,7 @@ export const getProducts = () => async dispatch => {
 
 export const getProduct = (payload) => async dispatch => {
 
-    const response = await csrfFetch(`/api/products/${payload}`);
+    const response = await fetch(`/api/products/${payload}`);
 
     if (response.ok) {
         const product = await response.json();
@@ -46,9 +44,20 @@ export const getProduct = (payload) => async dispatch => {
 }
 
 export const postProduct = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/products`, {
+    const { userId, categoryId, name, imageUrl, price, description } = payload
+    const response = await fetch(`/api/products/add-product`, {
         method: 'POST',
-        body: JSON.stringify(payload)
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "user_id": userId,
+            "category_id": categoryId,
+            "name": name,
+            "image_url": imageUrl,
+            "price": price,
+            "description": description,
+        }),
     })
 
     if (response.ok) {
@@ -59,7 +68,7 @@ export const postProduct = (payload) => async dispatch => {
 }
 
 export const updateProduct = (payload) => async dispatch => {
-    const response = await csrfFetch(`/api/products/${payload.id}`, {
+    const response = await fetch(`/api/products/${payload.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -68,13 +77,13 @@ export const updateProduct = (payload) => async dispatch => {
     })
     if (response.ok) {
         const edit = await response.json()
-        dispatch(editImage(edit))
+        dispatch(editProduct(edit))
         return edit
     }
 }
 
 export const removeProduct = (id) => async dispatch => {
-    const response = await csrfFetch(`/api/products/${id}`, {
+    const response = await fetch(`/api/products/${id}`, {
         method: 'delete'
     });
 
@@ -101,21 +110,21 @@ const productReducer = (state = initialState, action) => {
             }
         }
 
-        case ADD_IMAGE: {
+        case ADD_PRODUCT: {
             return {
                 ...state,
                 entries: [...state.entries, action.product]
             }
         }
 
-        case EDIT_IMAGE: {
+        case EDIT_PRODUCT: {
             return {
                 ...state,
                 [action.payload]: action.id
             }
         }
 
-        case DELETE_IMAGE: {
+        case DELETE_PRODUCT: {
             newState = { ...state };
             delete newState[action.product]
             return newState;

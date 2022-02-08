@@ -1,5 +1,7 @@
+from cmath import log
+from hashlib import new
 from flask import Blueprint, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from sqlalchemy.orm import joinedload, defaultload
 from app.models import ShoppingCart, CartItem, db
 
@@ -48,9 +50,22 @@ def delete_item():
 @shopping_cart_routes.route('/edit_cart_item', methods=['PUT'])
 @login_required
 def edit_item():
-    data = request.json
-    print(data)
-    cart_item = db.session.query(CartItem).get(data['cart_item_id'])
-    cart_item.quantity = data['quantity']
-    db.session.commit()
-    return {'shopping_cart_id': cart_item.shopping_cart_id}
+  data = request.json
+  print(data)
+  cart_item = db.session.query(CartItem).get(data['cart_item_id'])
+  cart_item.quantity = data['quantity']
+  db.session.commit()
+  return {'shopping_cart_id': cart_item.shopping_cart_id}
+
+
+@shopping_cart_routes.route('/checkout_cart', methods=['POST'])
+@login_required
+def checkout_cart():
+  data = request.json
+  print(data)
+  shopping_cart = db.session.query(ShoppingCart).get(data['id'])
+  shopping_cart.checked_out = True
+  new_cart = ShoppingCart(user_id = shopping_cart.user_id)
+  db.session.add(new_cart)
+  db.session.commit()
+  return new_cart.to_dict()

@@ -15,15 +15,17 @@ const NavBar = () => {
       <div id="nav-div">
         <img id="nav-logo" alt="logo" src={logo} />
         <div id="nav-search">
-          <label htmlFor='search'>Search</label>
-          <input
+          <form onSubmit={e =>/* logic to route search correctly goes here */ 0}>
+            <label htmlFor='search'>Search</label>
+            <input
             id="search-input"
             name='search'
             type='text'
             placeholder='Search'
             value={search}
-            onChange={e => setSearch(e)}
-          />
+            onChange={e=> setSearch(e)}
+            />
+          </form>
         </div>
         <ul id="nav-ul">
           <li className='nav-li'>

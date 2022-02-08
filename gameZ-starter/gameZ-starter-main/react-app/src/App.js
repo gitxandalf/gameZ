@@ -11,6 +11,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
 import ProductDetail from './components/ProductDetail';
+import HomePage from './components/HomePage';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -58,9 +59,9 @@ function App() {
           <ProductDetail />
         </Route>
 
-
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>
+          <HomePage />
         </Route>
 
       </Switch>

@@ -6,13 +6,13 @@ def seed_categories():
     category1 = Category(
         name="RPG", description="Role Playing Games")
     category2 = Category(
-        name="FPS", description="First Person Shooters")
+        name="FPS", description="First Person Shooter")
     category3 = Category(
-        name="Platformers", description="Jumpin' Good Fun!")
+        name="Platformer", description="Jumpin' Good Fun!")
     category4 = Category(
         name="Horror", description="Spoopy.")
     category5 = Category(
-        name="Simulations", description="Living the life you actually want.")
+        name="Simulation", description="Living the life you actually want.")
     category6 = Category(
         name="Fighting", description="Beat Em' Up!")
 

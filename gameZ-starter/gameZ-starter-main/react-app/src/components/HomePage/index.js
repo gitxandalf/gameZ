@@ -10,8 +10,6 @@ function HomePage() {
     const allCategories = useSelector(state => state.category.entries)
     const sessionUser = useSelector(state => state.session.user);
 
-    console.log("RPG OUTER", allCategories)
-
     useEffect(() => {
         dispatch(getCategories())
     }, [])

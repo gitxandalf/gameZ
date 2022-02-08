@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect,useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import "./AddProductForm.css"
 import { postProduct } from '../../store/product'
 
@@ -16,8 +16,6 @@ const AddProductForm = () => {
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
-    console.log(description)
-
     useEffect(() => {
         const errors = [];
         if (!categoryId) errors.push("Please select a category")
@@ -25,27 +23,27 @@ const AddProductForm = () => {
         if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
         if (!price || typeof price === "number") errors.push("Please provide a valid price")
 
-        
+
         setErrors(errors)
     }, [categoryId, name, imageUrl, price, description])
 
     // Previous onSubmit
-//     let product;
+    //     let product;
 
-//     const onSubmit = async (e) => {
-//         e.preventDefault();
-//         if (user) {
-//             product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
-//             if (product) {
-//                 setErrors(product)
-//             }
-//         }
-//     };
-//    if (product) {
-            
-//              return <Redirect to={`/products/${product.id}`} />;
-           
-//         }
+    //     const onSubmit = async (e) => {
+    //         e.preventDefault();
+    //         if (user) {
+    //             product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
+    //             if (product) {
+    //                 setErrors(product)
+    //             }
+    //         }
+    //     };
+    //    if (product) {
+
+    //              return <Redirect to={`/products/${product.id}`} />;
+
+    //         }
 
     let product;
     const onSubmit = async (e) => {

@@ -104,7 +104,7 @@ const productReducer = (state = initialState, action) => {
         case LOAD: {
             return {
                 ...state,
-                entries: [...action.list]
+                entries: [...action.list.products]
             }
         }
 

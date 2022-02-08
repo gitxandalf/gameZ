@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
+import ShoppingCartTest from './components/test/ShoppingCartTest'
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -51,6 +52,10 @@ function App() {
 
         <ProtectedRoute path='/products/add-product' exact={true} >
           <AddProductForm />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/shoppingCart' exact={true} >
+          <ShoppingCartTest />
         </ProtectedRoute>
 
         <Route path='/' exact={true} >

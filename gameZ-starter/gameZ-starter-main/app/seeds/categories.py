@@ -7,9 +7,21 @@ def seed_categories():
         name="RPG", description="Role Playing Games")
     category2 = Category(
         name="FPS", description="First Person Shooters")
+    category3 = Category(
+        name="Platformers", description="Jumpin' Good Fun!")
+    category4 = Category(
+        name="Horror", description="Spoopy.")
+    category5 = Category(
+        name="Simulations", description="Living the life you actually want.")
+    category6 = Category(
+        name="Fighting", description="Beat Em' Up!")
 
     db.session.add(category1)
     db.session.add(category2)
+    db.session.add(category3)
+    db.session.add(category4)
+    db.session.add(category5)
+    db.session.add(category6)
 
     db.session.commit()
 

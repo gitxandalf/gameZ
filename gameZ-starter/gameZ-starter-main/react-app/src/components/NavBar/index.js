@@ -34,6 +34,12 @@ const NavBar = () => {
             </NavLink>
           </li>
           <li className='nav-li'>
+            {sessionUser &&
+              <NavLink to='/products/add-product' exact={true} activeClassName='active'>
+                Add Product
+              </NavLink>}
+          </li>
+          <li className='nav-li'>
             {!sessionUser &&
               <NavLink to='/login' exact={true} activeClassName='active'>
                 Login
@@ -45,12 +51,12 @@ const NavBar = () => {
                 Sign Up
               </NavLink>}
           </li>
-          <li className='nav-li'>
+          {/* <li className='nav-li'>
             {sessionUser &&
               <NavLink to='/users' exact={true} activeClassName='active'>
                 Users
               </NavLink>}
-          </li>
+          </li> */}
           <li className='nav-li'>
             {sessionUser &&
               <LogoutButton />}

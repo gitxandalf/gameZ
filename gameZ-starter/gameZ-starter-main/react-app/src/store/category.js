@@ -7,9 +7,9 @@ const load = list => ({
     list
 })
 
-const addCategory = category => ({
+const addCategory = (category) => ({
     type: ADD_CATEGORY,
-    category,
+    category
 });
 
 
@@ -18,7 +18,6 @@ export const getCategories = () => async dispatch => {
 
     if (response.ok) {
         const list = await response.json();
-        console.log("LIST", list)
         dispatch(load(list));
     }
 }
@@ -53,7 +52,7 @@ const categoryReducer = (state = initialState, action) => {
             console.log("State", state)
             return {
                 ...state,
-                entries: [...state.entries, action.category]
+                entries: [...state.entries, action.category, action.products]
             }
         }
 

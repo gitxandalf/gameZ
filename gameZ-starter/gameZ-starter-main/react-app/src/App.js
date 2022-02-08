@@ -11,6 +11,9 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
 import ProductDetail from './components/ProductDetail';
+import CategoryDetail from './components/CategoryDetail'
+
+
 import HomePage from './components/HomePage';
 
 function App() {
@@ -57,6 +60,10 @@ function App() {
 
         <Route path='/products/:productId' exact={true} >
           <ProductDetail />
+        </Route>
+
+        <Route path='/categories/:categoryId/products'>
+          <CategoryDetail />
         </Route>
 
         <Route path='/' exact={true} >

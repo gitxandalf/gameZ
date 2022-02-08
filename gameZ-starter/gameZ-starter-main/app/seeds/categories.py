@@ -13,6 +13,7 @@ def seed_categories():
         name="Horror", description="Spoopy.")
     category5 = Category(
         name="Simulation", description="Living the life you actually want.")
+
     category6 = Category(
         name="Fighting", description="Beat Em' Up!")
 

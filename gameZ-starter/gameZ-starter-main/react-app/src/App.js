@@ -12,6 +12,8 @@ import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
 import ProductDetail from './components/ProductDetail';
 import CategoryDetail from './components/CategoryDetail'
+
+
 import HomePage from './components/HomePage';
 
 function App() {

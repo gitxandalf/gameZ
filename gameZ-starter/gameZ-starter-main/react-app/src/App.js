@@ -10,6 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
+import ProductDetail from './components/ProductDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -52,6 +53,11 @@ function App() {
         <ProtectedRoute path='/products/add-product' exact={true} >
           <AddProductForm />
         </ProtectedRoute>
+
+        <Route path='/products/:productId' exact={true} >
+          <ProductDetail />
+        </Route>
+
 
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>

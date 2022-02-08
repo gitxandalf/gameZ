@@ -34,7 +34,6 @@ export const getProducts = () => async dispatch => {
 }
 
 export const getProduct = (payload) => async dispatch => {
-
     const response = await fetch(`/api/products/${payload}`);
 
     if (response.ok) {
@@ -98,7 +97,6 @@ const initialState = {
 };
 
 const productReducer = (state = initialState, action) => {
-
     let newState;
 
     switch (action.type) {
@@ -111,6 +109,7 @@ const productReducer = (state = initialState, action) => {
         }
 
         case ADD_PRODUCT: {
+            console.log("State", state)
             return {
                 ...state,
                 entries: [...state.entries, action.product]

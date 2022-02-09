@@ -1,4 +1,7 @@
 
+import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
@@ -13,9 +16,16 @@ const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
   const [preview, setPreview] = useState(false)
 
+  useEffect(() => {
+    if (!sessionUser) setPreview(false);
+  },[sessionUser]);
+
   const handleClick = () => {
     if (preview) setPreview(false);
     else setPreview(true);
+    console.log(preview);
+}
+
 }
 
   return (

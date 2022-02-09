@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import "./EditProductForm.css"
+import { postReview } from '../../store/review';
 
 
 
@@ -14,7 +15,6 @@ const ReviewForm = ({ productId }) => {
    const[errors, setErrors] = useState([])
    const[title, setTile] = useState('')
    const[content, setContent] = useState('')
-
    const user = useSelector(state => state.session.user)
 
 //     useEffect(() => {
@@ -31,11 +31,11 @@ const ReviewForm = ({ productId }) => {
    const onSubmit = async(e) => {
        e.preventDefault()
        if(user) {
-           // review = await dispatch(postReview({title, content}))
+           review = await dispatch(postReview({productId, title, content, userId: user.id}))
      }
-       if(productId) {
+       if(review) {
 
-           history.push(`/ products /${productId}`)
+           history.push(`/products/${productId}`)
      }
    }
 

@@ -26,31 +26,34 @@ const deleteReview = review => ({
     })
 
 export const getReviews = () => async dispatch => {
-    const response = await fetch(`/ api/reviews`)
+    const response = await fetch(`/api/reviews`)
 
     if (response.ok) {
         const list = await response.json()
-        dispatch(load(list))
+        console.log("LOST&&&&&&", list)
+        dispatch(load(list.reviews))
         }
     }
 
-export const getReview = (payload) => async dispatch => {
-    const response = await fetch(`/ api/reviews/${payload}`)
+// export const getReview = (payload) => async dispatch => {
+//     const response = await fetch(`/api/reviews/${payload}`)
 
-    if (response.ok) {
-        const review = await response.json()
-        dispatch(addReview(review))
-        }
-    }
+//     if (response.ok) {
+//         const review = await response.json()
+//         dispatch(addReview(review))
+//         }
+//     }
 
 export const postReview = (payload) => async dispatch => {
-    const {title, content} = payload
-    const response = await fetch(`/ api/reviews/add-review`, {
+    const {productId, title, content, userId} = payload
+    const response = await fetch(`/api/reviews/add-review`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
             },
         body: JSON.stringify({
+            "user_id": userId,
+            "product_id": productId,
             "title": title,
             "content": content
             }),
@@ -63,31 +66,32 @@ export const postReview = (payload) => async dispatch => {
         }
     }
 
-export const updateReview = (payload) => async dispatch => {
-    const response = await fetch(`/api/reviews/${payload.id}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-            },
-        body: JSON.stringify(payload)
-        })
-    if (response.ok) {
-        const edit = await response.json()
-        dispatch(editReview(edit))
-        return edit
-        }
-    }
+// export const updateReview = (payload) => async dispatch => {
+//     const response = await fetch(`/api/reviews/${payload.id}/edit-review`, {
+//         method: 'PUT',
+//         headers: {
+//             'Content-Type': 'application/json'
+//             },
+//         body: JSON.stringify(payload)
+//         })
+//     if (response.ok) {
+//         const edit = await response.json()
+//         dispatch(editReview(edit))
+//         dispatch(getReview(edit.id))
+//         return edit
+//         }
+//     }
 
-export const removeReview = (id) => async dispatch => {
-    const response = await fetch(`/ api/reviews/${id}`, {
-        method: 'delete'
-        })
+// export const removeReview = (id) => async dispatch => {
+//     const response = await fetch(`/ api/reviews/${id}`, {
+//         method: 'delete'
+//         })
 
-    if (response.ok) {
-        const review = await response.json()
-        dispatch(deleteReview(review))
-        }
-    }
+//     if (response.ok) {
+//         const review = await response.json()
+//         dispatch(deleteReview(review))
+//         }
+//     }
 
 const initialState = {
     entries: []
@@ -95,9 +99,7 @@ const initialState = {
 
 const reviewReducer = (state=initialState, action) => {
     let newState
-
     switch(action.type) {
-
         case LOAD: {
             return {
                 ...state,

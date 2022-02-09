@@ -5,6 +5,6 @@ from wtforms.validators import DataRequired, ValidationError
 from app.models import Product, Category
 
 
-class ReviewFrom(FlaskForm):
+class AddReviewFrom(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     content = TextAreaField('Content', validators=[DataRequired()])

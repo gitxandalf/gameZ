@@ -4,6 +4,7 @@ import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { getProduct, getProducts, removeProduct } from "../../store/product"
 import "./ProductDetail.css"
 import ReviewForm from '../Forms/ReviewForm';
+import { getReviews } from '../../store/review';
 
 function ProductDetail({ products }) {
     const history = useHistory()
@@ -21,6 +22,7 @@ function ProductDetail({ products }) {
     useEffect(() => {
         dispatch(getProducts())
         dispatch(getProduct(productId))
+        dispatch(getReviews())
     }, [dispatch, productId])
 
     const handleDelete = (e) => {

@@ -9,13 +9,12 @@ import { getReviews } from '../../store/review';
 function ProductDetail({ products }) {
     const history = useHistory()
     const dispatch = useDispatch()
-
     const allReviews = useSelector(state => state?.review.entries)
     const user = useSelector(state => state?.session?.user);
 
     const { productId } = useParams();
     const product = products.find(product => product.id === +productId)
-
+    
 
     useEffect(() => {
         dispatch(getProducts())
@@ -50,7 +49,8 @@ function ProductDetail({ products }) {
                     <p>Review Content: {review?.content}</p>
                 </> 
             ))}
-            <ReviewForm productId={productId} />
+            {!(product.user_id === user.id) &&
+            <ReviewForm productId={productId} />}
         </div>
     );
 }

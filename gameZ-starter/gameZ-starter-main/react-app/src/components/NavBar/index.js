@@ -1,8 +1,5 @@
 
 import React, { useState, useEffect } from 'react';
-import React, { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import React, { useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
@@ -18,32 +15,31 @@ const NavBar = () => {
 
   useEffect(() => {
     if (!sessionUser) setPreview(false);
-  },[sessionUser]);
+  }, [sessionUser]);
 
   const handleClick = () => {
     if (preview) setPreview(false);
     else setPreview(true);
     console.log(preview);
-}
+  }
 
-}
 
   return (
     <nav>
       <div id="nav-div">
         <Link to='/' exact={true} activeClassName='active'>
-        <img id="nav-logo" alt="logo" src={logo} />
+          <img id="nav-logo" alt="logo" src={logo} />
         </Link>
         <div id="nav-search">
           <form onSubmit={e =>/* logic to route search correctly goes here */ 0}>
             <label htmlFor='search'>Search</label>
             <input
-            id="search-input"
-            name='search'
-            type='text'
-            placeholder='Search'
-            value={search}
-            onChange={e=> setSearch(e)}
+              id="search-input"
+              name='search'
+              type='text'
+              placeholder='Search'
+              value={search}
+              onChange={e => setSearch(e)}
             />
           </form>
         </div>
@@ -74,17 +70,17 @@ const NavBar = () => {
           {/* <li className='nav-li'>
             {sessionUser &&
               <NavLink to='/users' exact={true} activeClassName='active'>
-                Users
+              Users
               </NavLink>}
-          </li> */}
+            </li> */}
           <li className='nav-li'>
             {sessionUser &&
               <LogoutButton />}
           </li>
 
           <li className='nav-li'>
-              {sessionUser &&
-              <ShoppingCart props={handleClick}/>}
+            {sessionUser &&
+              <ShoppingCart props={handleClick} />}
           </li>
           {preview && <ShoppingCartPreview />}
         </ul>

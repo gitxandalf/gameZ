@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
@@ -12,6 +12,10 @@ const NavBar = () => {
   const [search, setSearch] = useState("");
   const sessionUser = useSelector(state => state.session.user);
   const [preview, setPreview] = useState(false)
+
+  useEffect(() => {
+    if (!sessionUser) setPreview(false);
+  },[sessionUser]);
 
   const handleClick = () => {
     if (preview) setPreview(false);

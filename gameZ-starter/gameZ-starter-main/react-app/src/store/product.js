@@ -67,16 +67,26 @@ export const postProduct = (payload) => async dispatch => {
 }
 
 export const updateProduct = (payload) => async dispatch => {
-    const response = await fetch(`/api/products/${payload.id}`, {
+    const { userId, id, categoryId, name, imageUrl, price, description } = payload
+    const response = await fetch(`/api/products/${payload.id}/edit-product`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({
+            "user_id": userId,
+            "id": id,
+            "category_id": categoryId,
+            "name": name,
+            "image_url": imageUrl,
+            "price": price,
+            "description": description,
+        })
     })
     if (response.ok) {
         const edit = await response.json()
         dispatch(editProduct(edit))
+        dispatch(getProduct(id))
         return edit
     }
 }

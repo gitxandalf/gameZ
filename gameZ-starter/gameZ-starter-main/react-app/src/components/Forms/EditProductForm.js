@@ -1,59 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom';
-import "./AddProductForm.css"
-import { postProduct } from '../../store/product'
+import { Redirect, useHistory, useParams } from 'react-router-dom';
+import "./EditProductForm.css"
+import { updateProduct } from '../../store/product'
 
-const AddProductForm = () => {
-    const history = useHistory()
 
-    const [errors, setErrors] = useState([]);
-    const [categoryId, setCategoryId] = useState('1');
-    const [name, setName] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
-    const [price, setPrice] = useState('')
-    const [description, setDescription] = useState('');
-    const user = useSelector(state => state.session.user);
+const EditProductForm = ({ products }) => {
+
+    const history = useHistory();
     const dispatch = useDispatch();
+    const { productId } = useParams();
+
+    const product = products.find(product => product.id === +productId)
+
+    const user = useSelector(state => state.session.user);
+
+    const [categoryId, setCategoryId] = useState(product?.category_id);
+    const [name, setName] = useState(product?.name)
+    const [imageUrl, setImageUrl] = useState(product?.image_url)
+    const [price, setPrice] = useState(product?.price)
+    const [description, setDescription] = useState(product?.description);
+    const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         const errors = [];
-        if (!categoryId) errors.push("Please select a category")
-        if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
-        if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
-        if (!price || typeof price === "number") errors.push("Please provide a valid price")
-
+        if (!categoryId) errors.push("Please select a category.")
+        if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less than 50 characters.")
+        if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url must be less than 255 characters.")
+        if (!price || typeof price === "number") errors.push("Please provide a valid price.")
 
         setErrors(errors)
     }, [categoryId, name, imageUrl, price, description])
 
-    // Previous onSubmit
-    //     let product;
-
-    //     const onSubmit = async (e) => {
-    //         e.preventDefault();
-    //         if (user) {
-    //             product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
-    //             if (product) {
-    //                 setErrors(product)
-    //             }
-    //         }
-    //     };
-    //    if (product) {
-
-    //              return <Redirect to={`/products/${product.id}`} />;
-
-    //         }
-
-    let product;
     const onSubmit = async (e) => {
-        e.preventDefault();
-        if (user) {
-            product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
-        }
-        if (product) {
 
-            history.push(`/products/${product.id}`);
+        e.preventDefault();
+
+        const updatedProduct = await dispatch(updateProduct({ userId: user.id, id: parseInt(productId), categoryId, name, imageUrl, price, description }));
+
+        if (updatedProduct) {
+            history.push(`/products/${product?.id}`)
         }
     };
 
@@ -79,8 +65,8 @@ const AddProductForm = () => {
 
 
     return (
-        <div id="add-product-div">
-            <form className="add-product-form" onSubmit={onSubmit}>
+        <div id="edit-product-div">
+            <form className="edit-product-form" onSubmit={onSubmit}>
                 <div>
                     {errors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
@@ -142,10 +128,10 @@ const AddProductForm = () => {
                         value={description}
                     ></textarea>
                 </div>
-                <button type='submit'>Sell This Game!</button>
+                <button type='submit'>Sell This Updated Game!</button>
             </form>
         </div>
     );
 };
 
-export default AddProductForm;
+export default EditProductForm;

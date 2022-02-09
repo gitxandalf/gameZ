@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import AddProductForm from './components/Forms/AddProductForm';
@@ -13,17 +13,19 @@ import Footer from './components/Footer/index.js';
 import ShoppingCartTest from './components/test/ShoppingCartTest'
 import ProductDetail from './components/ProductDetail';
 import CategoryDetail from './components/CategoryDetail'
-
-
 import HomePage from './components/HomePage';
+import EditProductForm from './components/Forms/EditProductForm'
+import { getProducts } from './store/product';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.entries)
 
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
+      await dispatch(getProducts())
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -56,20 +58,25 @@ function App() {
         </ProtectedRoute>
 
         <ProtectedRoute path='/products/add-product' exact={true} >
-          <AddProductForm />
+          <AddProductForm products={products} />
         </ProtectedRoute>
 
         <ProtectedRoute path='/shoppingCart' exact={true} >
           <ShoppingCartTest />
         </ProtectedRoute>
-        
+
+        <Route path='/products/:productId/edit-product'>
+          <EditProductForm products={products} />
+        </Route>
+
         <Route path='/products/:productId' exact={true} >
-          <ProductDetail />
+          <ProductDetail products={products} />
         </Route>
 
         <Route path='/categories/:categoryId/products'>
           <CategoryDetail />
         </Route>
+
 
         <Route path='/' exact={true} >
           <h1>My Home Page</h1>

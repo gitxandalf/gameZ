@@ -30,7 +30,6 @@ export const getReviews = () => async dispatch => {
 
     if (response.ok) {
         const list = await response.json()
-        console.log("LOST&&&&&&", list)
         dispatch(load(list.reviews))
         }
     }

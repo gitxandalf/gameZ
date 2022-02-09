@@ -10,7 +10,7 @@ function ProductDetail({ products }) {
     const history = useHistory()
     const dispatch = useDispatch()
 
-    const allReviews = useSelector(state => state?.product?.entries[0])
+    const allReviews = useSelector(state => state?.review.entries)
     const user = useSelector(state => state?.session?.user);
 
     const { productId } = useParams();
@@ -31,7 +31,7 @@ function ProductDetail({ products }) {
         dispatch(removeProduct(id))
         history.push(`/categories/${product?.category_id}/products`)
     }
-
+    
     return (
         <div id="product-detail-div">
             <h1>ProductDetail</h1>
@@ -46,11 +46,11 @@ function ProductDetail({ products }) {
             <NavLink hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} className="edit">Edit</NavLink>
             <button hidden={user?.id === product?.user_id ? false : true} className="delete" value={product?.id} onClick={handleDelete} type="submit">Delete</button>
             <h2>Review</h2>
-            {allReviews && allReviews?.reviews?.map(review => (
-                <>
+            {allReviews && allReviews.filter(review => review.product_id === parseInt(productId)).map(review => (
+                <>  
                     <p>Review Title: {review?.title}</p>
                     <p>Review Content: {review?.content}</p>
-                </>
+                </> 
             ))}
             <ReviewForm productId={productId} />
         </div>

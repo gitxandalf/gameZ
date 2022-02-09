@@ -16,7 +16,6 @@ const NavBar = () => {
   const handleClick = () => {
     if (preview) setPreview(false);
     else setPreview(true);
-    console.log(preview);
 }
 
   return (

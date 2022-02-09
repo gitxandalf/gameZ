@@ -66,7 +66,6 @@ export const postReview = (payload) => async dispatch => {
     }
 
 export const updateReview = (payload) => async dispatch => {
-    console.log("THUNK",payload)
     const {productId, content, title, userId, reviewId} = payload
     const response = await fetch(`/api/reviews/${reviewId}/edit-review`, {
         method: 'PUT',
@@ -96,7 +95,6 @@ export const removeReview = (id) => async dispatch => {
     
     if (response.ok) {
         const review = await response.json()
-        console.log("REVIEW", review)
         dispatch(deleteReview(review))
         }
     }

@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import "./EditProductForm.css"
 import { getReviews, postReview } from '../../store/review';
 import { updateReview } from '../../store/review';
@@ -90,6 +90,7 @@ const EditReviewForm = ({ products }) => {
                     ></textarea>
                 </div>
                 <button type='submit'> Submit </button>
+                <Link to={`/products/${productId}`}>Cancel</Link>
             </form>
         </div>
     )

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
 import "./NavBar.css"
@@ -16,13 +16,14 @@ const NavBar = () => {
   const handleClick = () => {
     if (preview) setPreview(false);
     else setPreview(true);
-    console.log(preview);
 }
 
   return (
     <nav>
       <div id="nav-div">
+        <Link to='/' exact={true} activeClassName='active'>
         <img id="nav-logo" alt="logo" src={logo} />
+        </Link>
         <div id="nav-search">
           <form onSubmit={e =>/* logic to route search correctly goes here */ 0}>
             <label htmlFor='search'>Search</label>

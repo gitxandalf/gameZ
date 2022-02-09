@@ -2,27 +2,42 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import "./NavBar.css"
 import logo from '../../images/logo.png'
-import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import ShoppingCart from '../ShoppingCart';
 import ShoppingCartPreview from '../ShoppingCartPreview/ShoppingCartPreview';
+import shoppingCartIcon from '../../images/shopping-cart-icon.png'
+import { loadCart } from '../../store/shoppingCart'
 
 const NavBar = () => {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const sessionUser = useSelector(state => state.session.user);
   const [preview, setPreview] = useState(false)
 
   useEffect(() => {
+    dispatch(loadCart(sessionUser.id));
+  }, [dispatch])
+
+  useEffect(() => {
     if (!sessionUser) setPreview(false);
-  }, [sessionUser]);
+    if (!preview) return;
+
+    const closeMenu = (e) => {
+      if(e.target.className === 'shopping-cart-preview' || e.target.parentNode.className === 'shopping-cart-preview') return
+      setPreview(false);
+    };
+
+    document.addEventListener('click', closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [preview, sessionUser]);
 
   const handleClick = () => {
-    if (preview) setPreview(false);
-    else setPreview(true);
-    console.log(preview);
+    if (preview) setPreview(false)
+    else setPreview(true)
   }
-
 
   return (
     <nav>
@@ -80,7 +95,9 @@ const NavBar = () => {
 
           <li className='nav-li'>
             {sessionUser &&
-              <ShoppingCart props={handleClick} />}
+              <img
+                src={shoppingCartIcon}
+                onClick={handleClick} />}
           </li>
           {preview && <ShoppingCartPreview />}
         </ul>

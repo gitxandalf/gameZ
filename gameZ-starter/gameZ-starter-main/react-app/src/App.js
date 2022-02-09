@@ -10,7 +10,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import Footer from './components/Footer/index.js';
-import ShoppingCartTest from './components/test/ShoppingCartTest'
+import ShoppingCart from './components/ShoppingCart'
 import ProductDetail from './components/ProductDetail';
 import CategoryDetail from './components/CategoryDetail'
 import HomePage from './components/HomePage';
@@ -62,8 +62,8 @@ function App() {
           <AddProductForm products={products} />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/shoppingCart' exact={true} >
-          <ShoppingCartTest />
+        <ProtectedRoute path='/shoppingCart/:id' exact={true} >
+          <ShoppingCart />
         </ProtectedRoute>
 
         <Route path='/products/:productId/edit-product'>
@@ -81,7 +81,6 @@ function App() {
         <Route path='/reviews/:reviewId/edit-reviews' exact={true} >
           <EditReviewForm products={products} />
         </Route>
-
 
         <Route path='/' exact={true} >
           <HomePage />

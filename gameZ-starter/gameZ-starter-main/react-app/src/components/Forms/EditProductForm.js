@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { Redirect, useHistory, useParams, Link } from 'react-router-dom';
 import "./EditProductForm.css"
 import { updateProduct } from '../../store/product'
 
@@ -129,6 +129,7 @@ const EditProductForm = ({ products }) => {
                     ></textarea>
                 </div>
                 <button type='submit'>Sell This Updated Game!</button>
+                <Link to={`/products/${productId}`}>Cancel</Link>
             </form>
         </div>
     );

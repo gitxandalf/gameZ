@@ -49,7 +49,6 @@ const categoryReducer = (state = initialState, action) => {
         }
 
         case ADD_CATEGORY: {
-            console.log("State", state)
             return {
                 ...state,
                 entries: [...state.entries, action.category, action.products]

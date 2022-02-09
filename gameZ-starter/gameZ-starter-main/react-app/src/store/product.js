@@ -118,7 +118,6 @@ const productReducer = (state = initialState, action) => {
         }
 
         case ADD_PRODUCT: {
-            console.log("State", state)
             return {
                 ...state,
                 entries: [...state.entries, action.product]

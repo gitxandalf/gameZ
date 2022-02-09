@@ -3,5 +3,41 @@
 }
 
 .image-link {
-    max-width: 400px;
+    max-width: 250px;
+    max-height: 180px;
+}
+
+#category-title-div {
+    background-color: #9882C4;
+    display: flex;
+    justify-content: space-around;
+}
+
+/* #category-h1 {
+} */
+
+#each-product-category {
+    width: 350px;
+    height: 300px;
+}
+
+#each-product-category:hover {
+    transition: margin-right 2s ease-in-out;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); 
+    width: 355px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+}
+
+
+.product-links {
+    display: flex;
+    margin: 2% 6%;
+    padding: 0;
+    flex-direction: row !important; 
+    flex-wrap: wrap !important;
+    justify-content: center;
+    row-gap: 25px;
+    column-gap: 25px;
+    align-items: center;
 }

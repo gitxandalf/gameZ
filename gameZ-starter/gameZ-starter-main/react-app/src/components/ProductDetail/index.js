@@ -14,10 +14,8 @@ function ProductDetail({ products }) {
     const user = useSelector(state => state?.session?.user);
 
     const { productId } = useParams();
-
     const product = products.find(product => product.id === +productId)
 
-    console.log("PRODUCT", productId)
 
     useEffect(() => {
         dispatch(getProducts())

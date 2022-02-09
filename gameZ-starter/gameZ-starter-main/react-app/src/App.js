@@ -16,6 +16,7 @@ import CategoryDetail from './components/CategoryDetail'
 import HomePage from './components/HomePage';
 import EditProductForm from './components/Forms/EditProductForm'
 import { getProducts } from './store/product';
+import EditReviewForm from './components/Forms/EditReviewForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -75,6 +76,10 @@ function App() {
 
         <Route path='/categories/:categoryId/products'>
           <CategoryDetail />
+        </Route>
+
+        <Route path='/reviews/:reviewId/edit-reviews' exact={true} >
+          <EditReviewForm products={products} />
         </Route>
 
 

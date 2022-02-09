@@ -8,12 +8,12 @@ import { postReview } from '../../store/review';
 
 
 
-const ReviewForm = ({ productId }) => {
+const AddReviewForm = ({ productId }) => {
    const history = useHistory()
    const dispatch = useDispatch()
 
    const[errors, setErrors] = useState([])
-   const[title, setTile] = useState('')
+   const[title, setTitle] = useState('')
    const[content, setContent] = useState('')
    const user = useSelector(state => state.session.user)
 
@@ -41,7 +41,7 @@ const ReviewForm = ({ productId }) => {
 
 
    const updateTitle = (e) => {
-       setTile(e.target.value)
+       setTitle(e.target.value)
    }
 
    const updateContent = (e) => {
@@ -84,7 +84,7 @@ const ReviewForm = ({ productId }) => {
     )
 }
 
- export default ReviewForm;
+ export default AddReviewForm;
 
 
   

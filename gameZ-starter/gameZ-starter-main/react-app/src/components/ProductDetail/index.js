@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { getProduct, getProducts, removeProduct } from "../../store/product"
 import "./ProductDetail.css"
-import ReviewForm from '../Forms/ReviewForm';
-import { getReviews } from '../../store/review';
+import AddReviewForm from '../Forms/AddReviewForm';
+import { getReviews, removeReview } from '../../store/review';
 
 function ProductDetail({ products }) {
     const history = useHistory()
@@ -28,6 +28,21 @@ function ProductDetail({ products }) {
         dispatch(removeProduct(id))
         history.push(`/categories/${product?.category_id}/products`)
     }
+
+    const handleReviewDelete = async (e) => {
+        e.preventDefault();
+        const id = parseInt(e.target.value)
+        let deleteReviewRes;
+        try {
+            deleteReviewRes = await dispatch(removeReview(id));
+        } catch (error) {
+            throw new Error("Error - Resource not found")
+        }
+        // if (deleteReviewRes.message === "Delete Successful") {
+        //     history.push(`/products/${productId}`)
+        // } 
+    }
+
     
     return (
         <div id="product-detail-div">
@@ -43,14 +58,21 @@ function ProductDetail({ products }) {
             <NavLink hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} className="edit">Edit</NavLink>
             <button hidden={user?.id === product?.user_id ? false : true} className="delete" value={product?.id} onClick={handleDelete} type="submit">Delete</button>
             <h2>Review</h2>
-            {allReviews && allReviews.filter(review => review.product_id === parseInt(productId)).map(review => (
-                <>  
+            {allReviews && allReviews?.filter(review => review?.product_id === parseInt(productId)).map(review => (
+                <div> 
                     <p>Review Title: {review?.title}</p>
                     <p>Review Content: {review?.content}</p>
-                </> 
+                    {user &&
+                        <>
+                            <NavLink  hidden={review?.user_id !== user.id} to={`/reviews/${review?.id}/edit-reviews`} value={review?.id} className="edit">Edit</NavLink>
+                            <button  hidden={review?.user_id !== user.id} className="delete" value={review?.id} onClick={handleReviewDelete} type="submit">Delete</button>
+                        </>
+                     }
+                </div> 
             ))}
-            {!(product.user_id === user.id) &&
-            <ReviewForm productId={productId} />}
+
+            {user && !(product?.user_id === user?.id) &&
+            <AddReviewForm productId={productId} />}
         </div>
     );
 }

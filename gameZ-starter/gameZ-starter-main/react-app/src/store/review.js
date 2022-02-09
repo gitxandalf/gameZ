@@ -65,32 +65,41 @@ export const postReview = (payload) => async dispatch => {
         }
     }
 
-// export const updateReview = (payload) => async dispatch => {
-//     const response = await fetch(`/api/reviews/${payload.id}/edit-review`, {
-//         method: 'PUT',
-//         headers: {
-//             'Content-Type': 'application/json'
-//             },
-//         body: JSON.stringify(payload)
-//         })
-//     if (response.ok) {
-//         const edit = await response.json()
-//         dispatch(editReview(edit))
-//         dispatch(getReview(edit.id))
-//         return edit
-//         }
-//     }
+export const updateReview = (payload) => async dispatch => {
+    console.log("THUNK",payload)
+    const {productId, content, title, userId, reviewId} = payload
+    const response = await fetch(`/api/reviews/${reviewId}/edit-review`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+            },
+        body: JSON.stringify({
+            "user_id": userId,
+            "product_id": productId,
+            "title": title,
+            "content": content,
+            "review_id": reviewId
+        })
+        })
+    if (response.ok) {
+        const edit = await response.json()
+        dispatch(editReview(edit))
+        // dispatch(getReview(edit.id))
+        return edit
+        }
+    }
 
-// export const removeReview = (id) => async dispatch => {
-//     const response = await fetch(`/ api/reviews/${id}`, {
-//         method: 'delete'
-//         })
-
-//     if (response.ok) {
-//         const review = await response.json()
-//         dispatch(deleteReview(review))
-//         }
-//     }
+export const removeReview = (id) => async dispatch => {
+    const response = await fetch(`/api/reviews/${id}`, {
+        method: 'delete'
+    })
+    
+    if (response.ok) {
+        const review = await response.json()
+        console.log("REVIEW", review)
+        dispatch(deleteReview(review))
+        }
+    }
 
 const initialState = {
     entries: []

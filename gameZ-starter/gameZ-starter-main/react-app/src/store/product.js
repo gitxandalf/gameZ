@@ -44,6 +44,7 @@ export const getProduct = (payload) => async dispatch => {
 
 export const postProduct = (payload) => async dispatch => {
     const { userId, categoryId, name, imageUrl, price, description } = payload
+    console.log(payload)
     const response = await fetch(`/api/products/add-product`, {
         method: 'POST',
         headers: {

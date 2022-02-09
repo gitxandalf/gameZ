@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams, NavLink } from 'react-router-dom';
-import { getProduct, getProducts } from "../../store/product"
+import { useParams, NavLink, useHistory } from 'react-router-dom';
+import { getProduct, getProducts, removeProduct } from "../../store/product"
 import "./ProductDetail.css"
 
 function ProductDetail({ products }) {
+    const history = useHistory()
     const dispatch = useDispatch()
 
     const allReviews = useSelector(state => state?.product?.entries[0])
@@ -21,6 +22,13 @@ function ProductDetail({ products }) {
         dispatch(getProduct(productId))
     }, [dispatch, productId])
 
+    const handleDelete = (e) => {
+        e.preventDefault();
+        const id = e.target.value
+        dispatch(removeProduct(id))
+        history.push(`/categories/${product?.category_id}/products`)
+    }
+
     return (
         <div id="product-detail-div">
             <h1>ProductDetail</h1>
@@ -33,6 +41,7 @@ function ProductDetail({ products }) {
             <p>Price: {product?.price}</p>
             <p>Description: {product?.description}</p>
             <NavLink hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} className="edit">Edit</NavLink>
+            <button hidden={user?.id === product?.user_id ? false : true} className="delete" value={product?.id} onClick={handleDelete} type="submit">Delete</button>
             <h2>Review</h2>
             {allReviews && allReviews?.reviews?.map(review => (
                 <>

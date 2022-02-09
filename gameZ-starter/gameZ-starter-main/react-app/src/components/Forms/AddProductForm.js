@@ -13,41 +13,13 @@ const AddProductForm = () => {
     const [imageUrl, setImageUrl] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('');
+
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        const errors = [];
-        if (!categoryId) errors.push("Please select a category")
-        if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
-        if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
-        if (!price || typeof price === "number") errors.push("Please provide a valid price")
-
-
-        setErrors(errors)
-    }, [categoryId, name, imageUrl, price, description])
-
-    // Previous onSubmit
-    //     let product;
-
-    //     const onSubmit = async (e) => {
-    //         e.preventDefault();
-    //         if (user) {
-    //             product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
-    //             if (product) {
-    //                 setErrors(product)
-    //             }
-    //         }
-    //     };
-    //    if (product) {
-
-    //              return <Redirect to={`/products/${product.id}`} />;
-
-    //         }
-
-    let product;
     const onSubmit = async (e) => {
         e.preventDefault();
+
         if (user) {
             product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
         }
@@ -56,6 +28,21 @@ const AddProductForm = () => {
             history.push(`/products/${product.id}`);
         }
     };
+
+    // useEffect(() => {
+    //     const errors = [];
+    //     if (!categoryId) errors.push("Please select a category")
+    //     if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
+    //     if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
+    //     if (!price) errors.push("Please provide a valid price")
+    //     if (price < 0) errors.push("You want to make money, right?")
+
+    //     if (product.errors) setErrors(errors)
+
+    // }, [categoryId, name, imageUrl, price, description])
+
+    let product;
+
 
     const updateCategory = (e) => {
         setCategoryId(e.target.value);
@@ -81,7 +68,7 @@ const AddProductForm = () => {
     return (
         <div id="add-product-div">
             <form className="add-product-form" onSubmit={onSubmit}>
-                <div>
+                <div className='add-product-errors'>
                     {errors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
@@ -105,6 +92,7 @@ const AddProductForm = () => {
                 <div>
                     <label>Name</label>
                     <input
+                        placeholder='Your game name'
                         type='text'
                         name='name'
                         required
@@ -115,6 +103,7 @@ const AddProductForm = () => {
                 <div>
                     <label>Image Url</label>
                     <input
+                        placeholder='Image Url'
                         type='text'
                         name='image_url'
                         required
@@ -125,6 +114,7 @@ const AddProductForm = () => {
                 <div>
                     <label>Price</label>
                     <input
+                        placeholder='Name your price'
                         type='number'
                         name='price'
                         onChange={updatePrice}
@@ -134,6 +124,8 @@ const AddProductForm = () => {
                 <div>
                     <label>Description</label>
                     <textarea
+                        placeholder='Description'
+                        className='text-area'
                         type='text'
                         name='description'
                         required

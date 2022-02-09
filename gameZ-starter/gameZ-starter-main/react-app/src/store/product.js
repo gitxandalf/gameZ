@@ -38,6 +38,8 @@ export const getProduct = (payload) => async dispatch => {
 
     if (response.ok) {
         const product = await response.json();
+
+        dispatch(getProducts())
         dispatch(addProduct(product))
     }
 }
@@ -111,9 +113,15 @@ const productReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case LOAD: {
+
+            const usersEntries = [...action.list.users].reduce((a, b) => {
+                return { ...a, [b.id]: { id: b.id, username: b.username, image_url: b.image_url } }
+            }, {})
+            console.log("USERS ENTRIES ===========>", usersEntries)
             return {
                 ...state,
-                entries: [...action.list.products]
+                entries: [...action.list.products],
+                usersEntries: usersEntries
             }
         }
 

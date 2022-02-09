@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { getProduct, getProducts, removeProduct } from "../../store/product"
 import "./ProductDetail.css"
+import ReviewForm from '../Forms/ReviewForm';
 
 function ProductDetail({ products }) {
     const history = useHistory()
@@ -49,7 +50,7 @@ function ProductDetail({ products }) {
                     <p>Review Content: {review?.content}</p>
                 </>
             ))}
-
+            <ReviewForm productId={productId} />
         </div>
     );
 }

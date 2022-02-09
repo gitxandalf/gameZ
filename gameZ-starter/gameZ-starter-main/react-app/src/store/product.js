@@ -97,8 +97,7 @@ export const removeProduct = (id) => async dispatch => {
     });
 
     if (response.ok) {
-        const product = await response.json();
-        dispatch(deleteProduct(product))
+        dispatch(getProducts())
     }
 }
 

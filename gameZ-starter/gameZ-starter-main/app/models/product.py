@@ -12,14 +12,13 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text, nullable=False)
     user = db.relationship(
-        "User", back_populates="product", cascade="all")
+        "User", back_populates="product")
     category = db.relationship(
-        "Category", back_populates="product", cascade="all")
+        "Category", back_populates="product")
     review = db.relationship(
-        "Review", back_populates="product", cascade="all, delete-orphan")
+        "Review", back_populates="product", cascade="delete-orphan")
     cart_item = db.relationship(
-        "CartItem", back_populates="product", cascade="all, delete-orphan")
-
+        "CartItem", back_populates="product")
 
     def to_dict(self):
         return {

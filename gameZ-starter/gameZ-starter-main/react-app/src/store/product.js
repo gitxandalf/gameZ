@@ -97,8 +97,7 @@ export const removeProduct = (id) => async dispatch => {
     });
 
     if (response.ok) {
-        const product = await response.json();
-        dispatch(deleteProduct(product))
+        dispatch(getProducts())
     }
 }
 
@@ -119,7 +118,6 @@ const productReducer = (state = initialState, action) => {
         }
 
         case ADD_PRODUCT: {
-            console.log("State", state)
             return {
                 ...state,
                 entries: [...state.entries, action.product]

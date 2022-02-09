@@ -3,8 +3,8 @@
 }
 
 .image-link {
-    max-width: 250px;
-    max-height: 180px;
+    width: 300px;
+    height: 250px;
 }
 
 #category-title-div {
@@ -16,9 +16,19 @@
 /* #category-h1 {
 } */
 
+
+/* .image-link:hover {
+    transition: margin-right 2s ease-in-out;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); 
+    width: 255px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
+    text-align: center;
+} */
+
+
 #each-product-category {
     width: 350px;
-    height: 300px;
+    height: 380px;
 }
 
 #each-product-category:hover {

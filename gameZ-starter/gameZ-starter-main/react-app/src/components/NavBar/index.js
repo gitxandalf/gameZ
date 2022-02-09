@@ -13,11 +13,16 @@ const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
   const [preview, setPreview] = useState(false)
 
+  useEffect(() => {
+    if (!sessionUser) setPreview(false);
+  },[sessionUser]);
+
   const handleClick = () => {
     if (preview) setPreview(false);
     else setPreview(true);
     console.log(preview);
 }
+
 
   return (
     <nav>

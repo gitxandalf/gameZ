@@ -1,5 +1,6 @@
 from .db import db
-import datetime
+from datetime import datetime
+
 
 
 class CartItem(db.Model):
@@ -10,6 +11,7 @@ class CartItem(db.Model):
         db.Integer, db.ForeignKey("shopping_carts.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
     quantity = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow())
 
     shopping_cart = db.relationship(
         "ShoppingCart", back_populates="cart_item",)

@@ -2,6 +2,7 @@ from cmath import log
 from hashlib import new
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from sqlalchemy import asc, desc
 from sqlalchemy.orm import joinedload, defaultload
 from app.models import ShoppingCart, CartItem, db
 
@@ -17,7 +18,7 @@ def shopping_carts():
 @login_required
 def shopping_cart(id):
   shopping_cart = ShoppingCart.query.get(id)
-  cart_items = CartItem.query.filter(shopping_cart.id == CartItem.shopping_cart_id)
+  cart_items = CartItem.query.filter(shopping_cart.id == CartItem.shopping_cart_id).order_by(CartItem.created_at.asc())
   return {
     'shopping_cart': shopping_cart.to_dict(),
     'cart_items': [cart_item.to_dict() for cart_item in cart_items]}

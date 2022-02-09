@@ -23,7 +23,7 @@ export const getCategories = () => async dispatch => {
 }
 
 export const getCategory = (payload) => async dispatch => {
-    const response = await fetch(`/api/categories/${payload}`);
+    const response = await fetch(`/api/categories/${payload}/products`);
 
     if (response.ok) {
         const category = await response.json();

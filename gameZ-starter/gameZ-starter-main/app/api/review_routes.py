@@ -2,7 +2,7 @@
 from turtle import title
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import Review, db
+from app.models import Review, User, db
 from app.forms import AddReviewFrom, EditReviewFrom
 from sqlalchemy import asc
 
@@ -27,8 +27,9 @@ def validation_errors_to_error_messages(validation_errors):
 @review_routes.route('/')
 def reviews():
     # GET Route for all reviews
+    users = User.query.all()
     reviews = Review.query.order_by(Review.id.asc()).all()
-    return {'reviews': [review.to_dict() for review in reviews]}
+    return {'reviews': [review.to_dict() for review in reviews], 'users': [user.to_dict() for user in users]}
 
 # POST A REVIEW
 

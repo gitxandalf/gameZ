@@ -20,7 +20,6 @@ class User(db.Model, UserMixin):
     shopping_cart = db.relationship(
         "ShoppingCart", back_populates="user")
 
-
     @property
     def password(self):
         return self.hashed_password

@@ -1,8 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required
-from app.models import Product, Review, Category, db
+from app.models import Product, User, Review, Category, db
 from app.forms import AddProductForm, EditProductForm
-from sqlalchemy import desc, asc
 
 
 product_routes = Blueprint(
@@ -25,17 +24,18 @@ def products():
     # GET Route for all products regardless of category
     # At top of page, should be a NavLink to Categories (page listing each category)
     # Once NavLink for a cartain Category is clicked, user would be routed to products_by_category(id)
-    products = Product.query.order_by(Product.name.asc()).all()
-    return {'products': [product.to_dict() for product in products]}
+    products = Product.query.all()
+    users = User.query.all()
+    return {'products': [product.to_dict() for product in products], 'users': [user.to_dict() for user in users]}
 
 
 @product_routes.route('/<int:id>')
 def product(id):
     # GET Route for all data for a specified product
     product = Product.query.get(id)
-
+    users = User.query.all()
     reviews = Review.query.filter(Review.product_id == id).all()
-    return {'product': product.to_dict(), 'reviews': [review.to_dict() for review in reviews]}
+    return {'product': product.to_dict(), 'reviews': [review.to_dict() for review in reviews], 'users': [user.to_dict() for user in users]}
 
 
 @product_routes.route('/add-product', methods=['POST'])

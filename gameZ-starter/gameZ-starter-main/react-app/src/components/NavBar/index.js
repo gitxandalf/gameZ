@@ -45,11 +45,6 @@ const NavBar = () => {
         </div>
         <ul id="nav-ul">
           <li className='nav-li'>
-            <NavLink to='/' exact={true} activeClassName='active'>
-              Home
-            </NavLink>
-          </li>
-          <li className='nav-li'>
             {sessionUser &&
               <NavLink to='/products/add-product' exact={true} activeClassName='active'>
                 Add Product

@@ -8,9 +8,9 @@ import "./CategoryDetail.css"
 function CategoryDetail() {
     const dispatch = useDispatch()
 
-    const allCategories = useSelector(state => state.category.entries)
-    const allProducts = useSelector(state => state.product.entries)
-    const sessionUser = useSelector(state => state.session.user);
+    const allCategories = useSelector(state => state?.category?.entries)
+    const allProducts = useSelector(state => state?.product?.entries)
+    const sessionUser = useSelector(state => state?.session?.user);
 
     const { categoryId } = useParams();
 
@@ -28,8 +28,8 @@ function CategoryDetail() {
                 <h1>{allCategories[`${categoryId - 1}`]?.name} Games</h1>
                 <div className='product-links'>{allProducts?.filter(product => product?.category_id === parseInt(categoryId)).map((product) => (
                     <div key={product?.id}>
-                        <Link key={product?.id} to={`/products/${product.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>
-                        <Link key={product?.id} to={`/products/${product.id}`}> <br /> Title: {product?.name} <br /> Description: {product?.description} <br /> Price: {`$${product?.price}`}</Link>
+                        <Link key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>
+                        <Link key={product?.id} to={`/products/${product?.id}`}> <br /> Title: {product?.name} <br /> Description: {product?.description} <br /> Price: {`$${product?.price}`}</Link>
                     </div>
                 ))}</div>
 

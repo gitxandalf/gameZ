@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required
 from app.models import Product, Review, Category, db
-from app.forms import AddProductForm
+from app.forms import AddProductForm, EditProductForm
 
 
 product_routes = Blueprint(
@@ -32,6 +32,7 @@ def products():
 def product(id):
     # GET Route for all data for a specified product
     product = Product.query.get(id)
+
     reviews = Review.query.filter(Review.product_id == id).all()
     return {'product': product.to_dict(), 'reviews': [review.to_dict() for review in reviews]}
 
@@ -55,4 +56,27 @@ def post_product():
         db.session.add(product)
         db.session.commit()
         return product.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@product_routes.route('/<int:productId>/edit-product', methods=['PUT'])
+@login_required
+def edit_product(productId):
+    data = request.json
+    form = EditProductForm()
+
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    currentProduct = Product.query.get(productId)
+
+    if form.validate_on_submit() and currentProduct:
+
+        currentProduct.category_id = data["category_id"]
+        currentProduct.name = form.data['name']
+        currentProduct.image_url = form.data['image_url']
+        currentProduct.price = form.data['price']
+        currentProduct.description = form.data['description']
+
+        db.session.commit()
+        return currentProduct.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

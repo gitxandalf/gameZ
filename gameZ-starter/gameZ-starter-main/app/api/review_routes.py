@@ -4,6 +4,7 @@ from flask import Blueprint, request
 from flask_login import login_required
 from app.models import Review, db
 from app.forms import AddReviewFrom, EditReviewFrom
+from sqlalchemy import asc
 
 
 review_routes = Blueprint(
@@ -21,13 +22,17 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 # GET ALL REVIEWS
+
+
 @review_routes.route('/')
 def reviews():
     # GET Route for all reviews
-    reviews = Review.query.all()
+    reviews = Review.query.order_by(Review.id.asc()).all()
     return {'reviews': [review.to_dict() for review in reviews]}
 
-# POST A REVIEW 
+# POST A REVIEW
+
+
 @review_routes.route('/add-review', methods=['POST'])
 @login_required
 def post_review():
@@ -48,8 +53,7 @@ def post_review():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-
-# EDIT REVIEW 
+# EDIT REVIEW
 @review_routes.route('/<int:reviewId>/edit-review', methods=['PUT'])
 @login_required
 def edit_product(reviewId):
@@ -72,14 +76,12 @@ def edit_product(reviewId):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-
-
-# STARTED DELETE ROUTE 
+# STARTED DELETE ROUTE
 @review_routes.route('/<int:id>', methods=["DELETE"])
 @login_required
 def delete_review(id):
     currentReview = Review.query.get(id)
-    
+
     db.session.delete(currentReview)
     db.session.commit()
     return {}

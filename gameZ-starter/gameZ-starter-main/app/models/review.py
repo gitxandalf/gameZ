@@ -10,9 +10,9 @@ class Review(db.Model):
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.Text, nullable=False)
     product = db.relationship(
-        "Product", back_populates="review", cascade="all")
+        "Product", back_populates="review")
     user = db.relationship(
-        "User", back_populates="review", cascade="all")
+        "User", back_populates="review")
 
     def to_dict(self):
         return {

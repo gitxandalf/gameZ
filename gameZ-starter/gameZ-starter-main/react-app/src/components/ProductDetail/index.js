@@ -29,18 +29,12 @@ function ProductDetail({ products }) {
         history.push(`/categories/${product?.category_id}/products`)
     }
 
-    const handleReviewDelete = async (e) => {
+    const handleReviewDelete = (e) => {
         e.preventDefault();
         const id = parseInt(e.target.value)
-        let deleteReviewRes;
-        try {
-            deleteReviewRes = await dispatch(removeReview(id));
-        } catch (error) {
-            throw new Error("Error - Resource not found")
-        }
-        // if (deleteReviewRes.message === "Delete Successful") {
-        //     history.push(`/products/${productId}`)
-        // } 
+        dispatch(removeReview(id));
+        dispatch(getReviews())
+        history.push(`/products/${productId}`)
     }
 
     

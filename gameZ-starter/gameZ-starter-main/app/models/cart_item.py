@@ -2,7 +2,6 @@ from .db import db
 from datetime import datetime
 
 
-
 class CartItem(db.Model):
     __tablename__ = 'cart_items'
 

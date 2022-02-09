@@ -4,8 +4,15 @@ import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import configureStore from './store';
+import * as shoppingCart from './store/shoppingCart'
 
 const store = configureStore();
+
+if (process.env.NODE_ENV !== 'production') {
+  window.store = store;
+  window.shoppingCart = shoppingCart;
+}
+
 
 ReactDOM.render(
   <React.StrictMode>

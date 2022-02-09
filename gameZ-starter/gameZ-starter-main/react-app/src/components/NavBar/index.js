@@ -5,10 +5,19 @@ import LogoutButton from '../auth/LogoutButton';
 import { useSelector } from 'react-redux';
 import "./NavBar.css"
 import logo from '../../images/logo.png'
+import ShoppingCart from '../ShoppingCart/ShoppingCart';
+import ShoppingCartPreview from '../ShoppingCartPreview/ShoppingCartPreview';
 
 const NavBar = () => {
   const [search, setSearch] = useState("");
   const sessionUser = useSelector(state => state.session.user);
+  const [preview, setPreview] = useState(false)
+
+  const handleClick = () => {
+    if (preview) setPreview(false);
+    else setPreview(true);
+    console.log(preview);
+}
 
   return (
     <nav>
@@ -61,6 +70,12 @@ const NavBar = () => {
             {sessionUser &&
               <LogoutButton />}
           </li>
+
+          <li className='nav-li'>
+              {sessionUser &&
+              <ShoppingCart props={handleClick}/>}
+          </li>
+          {preview && <ShoppingCartPreview />}
         </ul>
       </div>
     </nav>

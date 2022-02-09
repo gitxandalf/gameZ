@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getCategory, getCategories } from '../../store/category';
+import { getProducts } from '../../store/product';
 import "./HomePage.css"
 
 function HomePage() {
@@ -9,10 +10,11 @@ function HomePage() {
 
     const allCategories = useSelector(state => state.category.entries)
     const sessionUser = useSelector(state => state.session.user);
-
+    
     useEffect(() => {
         dispatch(getCategories())
-    }, [])
+        dispatch(getProducts())
+    }, [dispatch])
 
     return (
         <div id="home-page">

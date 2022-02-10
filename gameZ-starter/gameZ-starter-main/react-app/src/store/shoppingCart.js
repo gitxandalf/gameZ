@@ -86,7 +86,6 @@ const shoppingCartReducer = (state = {}, action) => {
 
     switch(action.type) {
         case GETCART: {
-            console.log('PAYLOAD', action.payload)
             newState = {
                 ...state,
                 ...action.payload

@@ -54,7 +54,8 @@ function ProductDetail({ products }) {
         }
         for(let i = 0; i < currShoppingCart.cart_items.length; i++) {
             const cartItem = currShoppingCart.cart_items[i];
-            if(cartItem.product_id === newCartItem.product_id) {
+            console.log('CARTITEM', cartItem)
+            if(cartItem.product.id === newCartItem.product_id) {
                 const newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
                 dispatch(editItem({
                     cart_item_id: cartItem.id,

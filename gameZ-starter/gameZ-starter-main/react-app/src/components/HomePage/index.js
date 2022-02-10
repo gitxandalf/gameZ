@@ -10,7 +10,7 @@ function HomePage() {
 
     const allCategories = useSelector(state => state.category.entries)
     const sessionUser = useSelector(state => state.session.user);
-    
+
     useEffect(() => {
         dispatch(getCategories())
         dispatch(getProducts())
@@ -19,24 +19,13 @@ function HomePage() {
     return (
         <div id="home-page">
 
-            <div className='categories'>
-
-                <h1>Categories</h1>
-
-                <div className='category-links'>{allCategories && allCategories?.map((category) => (
-                    <div key={category?.id}>
-                        <Link key={category?.id} to={`/categories/${category?.id}/products`}>{category?.name}</Link>
-                    </div>
-                ))}</div>
-
+            <div className='site-info-header'>
+                <h2>What is GameZ?</h2>
+                <a href="https://github.com/gitxandalf/gameZ/wiki">Read our wonderfully weird story.</a>
             </div>
 
             <div className='site-info'>
 
-                <div className='site-info-header'>
-                    <h2>What is GameZ?</h2>
-                    <p>Read our wonderfully weird story</p>
-                </div>
 
                 <div className='community'>
                     <h3>A community doing good</h3>
@@ -61,11 +50,12 @@ function HomePage() {
                         And if you ever need assistance, we are always ready to step in for support.</p>
                 </div>
 
-                <div className='site-info-footer'>
-                    <h4>Have a question? Well, we’ve got some answers.</h4>
-                    <button>Go to Help Center</button>
-                </div>
 
+            </div>
+
+            <div className='site-info-footer'>
+                <h4>Have a question? Well, we’ve got some answers.</h4>
+                <a href="https://github.com/gitxandalf/gameZ/blob/main/README.md">Go to Help Center</a>
             </div>
 
         </div>

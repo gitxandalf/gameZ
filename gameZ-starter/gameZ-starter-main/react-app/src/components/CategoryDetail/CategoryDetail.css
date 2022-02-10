@@ -8,13 +8,15 @@
 }
 
 #category-title-div {
-    background-color: #9882C4;
+    background-color: #c2c2f0;
     display: flex;
     justify-content: space-around;
 }
 
-/* #category-h1 {
-} */
+#category-h1 {
+    color: #504e4d
+}
+
 #info-link-a,
 #image-link-a {
  padding: 0;
@@ -58,8 +60,9 @@
 .title-product-cat {
     font-weight: 400;
     font-size: 14px;
+    margin-top: 6px;
 }
-
+.username-product-cat,
 .description-product-cat {
    font-weight: 200; 
    font-size: 14px;
@@ -68,4 +71,9 @@
 .price-product-cat {
     font-size: 16px;
     font-weight: 700;
+}
+
+#slogan-cat-pg {
+    font-weight: 300;
+    margin-left: 20px;
 }

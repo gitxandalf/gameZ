@@ -10,6 +10,7 @@ function CategoryDetail() {
 
     const allCategories = useSelector(state => state?.category?.entries)
     const allProducts = useSelector(state => state?.product?.entries)
+    const allUsers = useSelector(state => state?.product?.usersEntries)
     const sessionUser = useSelector(state => state?.session?.user);
 
     const { categoryId } = useParams();
@@ -36,6 +37,7 @@ function CategoryDetail() {
                                 <p className="product-info-cat title-product-cat" key={product?.id}> Title: {product?.name}</p>
                                 <p className="product-info-cat description-product-cat" key={product?.id}>Description: {product?.description} </p>
                                 <p className="product-info-cat price-product-cat" key={product?.id}>{`$${product?.price}`}</p>
+                                <p className="product-info-cat username-product-cat" key={product?.id}>{allUsers[product?.user_id]?.username}</p>
                             </Link>
                         </div>
                     </div>

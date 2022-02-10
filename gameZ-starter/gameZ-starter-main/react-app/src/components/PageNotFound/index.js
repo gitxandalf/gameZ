@@ -12,7 +12,7 @@ function PageNotFound() {
                 <h1 id="error-msg">404</h1>
                 <h2 id="page-not-found-404">Page not found.</h2>
                 <h3 >Sorry, the page you were looking for does not exist</h3>
-                <Link id="btn-home-back" to="/">Go back to GameZ</Link>
+                <Link className="btn-home-back" to="/">Go back to GameZ</Link>
             </div>
         </div>
     );

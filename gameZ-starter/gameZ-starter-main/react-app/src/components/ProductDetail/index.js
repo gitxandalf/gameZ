@@ -20,7 +20,7 @@ function ProductDetail({ products }) {
     const product = products.find(product => product.id === +productId)
     const stateUsers = useSelector(state => state?.product?.usersEntries)
     const category = useSelector(state => state?.category?.entries)
-    const cartItems = useSelector(state => state?.shoppingCart?.cartItems)
+    const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart)
 
 
     useEffect(() => {
@@ -48,12 +48,12 @@ function ProductDetail({ products }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         const newCartItem = {
-            shopping_cart_id: cartItems.current_shopping_cart.id,
+            shopping_cart_id: currShoppingCart.id,
             product_id: product.id,
             quantity: itemQuantity
         }
-        for(let i = 0; i < cartItems.cart_items.length; i++) {
-            const cartItem = cartItems.cart_items[i];
+        for(let i = 0; i < currShoppingCart.cart_items.length; i++) {
+            const cartItem = currShoppingCart.cart_items[i];
             if(cartItem.product_id === newCartItem.product_id) {
                 const newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
                 dispatch(editItem({
@@ -61,13 +61,13 @@ function ProductDetail({ products }) {
                     quantity: newQuantity
                 }));
                 setItemQuantity(1)
-                history.push(`/shoppingCart/${cartItems.current_shopping_cart.id}`)
+                history.push(`/shoppingCart/${currShoppingCart.id}`)
                 return;
             }
         }
         dispatch(addItem(newCartItem))
         setItemQuantity(1)
-        history.push(`/shoppingCart/${cartItems.current_shopping_cart.id}`)
+        history.push(`/shoppingCart/${currShoppingCart.id}`)
     }
 
     return (

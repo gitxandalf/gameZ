@@ -10,12 +10,12 @@ function ShoppingCart() {
     const [loaded, setLoaded] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
-    const cartItems = useSelector(state => state?.shoppingCart?.cartItems);
+    const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
     const products = useSelector(state => state?.product?.entries);
     let price = 0;
 
     useEffect(() => {
-        if(loaded) dispatch(loadCart(cartItems.current_shopping_cart.id));
+        if(loaded) dispatch(loadCart(currShoppingCart.user_id));
         setLoaded(true);
     }, [dispatch]);
 
@@ -30,7 +30,7 @@ function ShoppingCart() {
             quantity: e.target.value
         }
         dispatch(editItem(item))
-        dispatch(loadCart(cartItems.current_shopping_cart.id))
+        dispatch(loadCart(currShoppingCart.user_id))
     }
     const handleDelete = (e) => {
         e.preventDefault();
@@ -58,8 +58,8 @@ function ShoppingCart() {
                     <button onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
                     <button onClick={handleDelete} value={false}>No</button>
                 </div>}
-            {cartItems && cartItems.cart_items?.map(item => {
-                const currProduct = products.find(product => item.product_id === product.id);
+            {currShoppingCart && currShoppingCart.cart_items?.map(item => {
+                const currProduct = item.product;
                 price += currProduct.price * item.quantity;
                 return (
                     <ul>
@@ -101,7 +101,7 @@ function ShoppingCart() {
             </li>
             <button onClick={(e) => {
                 e.preventDefault()
-                history.push(`/shoppingCart/${cartItems.current_shopping_cart.id}/checkout`)
+                history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
             }}>Checkout</button>
         </div>
     )

@@ -15,14 +15,15 @@ def shopping_carts():
   shopping_carts = ShoppingCart.query.all()
   return {'shopping_carts': [shopping_cart.to_dict() for shopping_cart in shopping_carts]}
 
-@shopping_cart_routes.route('/<int:id>')
+@shopping_cart_routes.route('/<int:user_id>')
 @login_required
-def shopping_cart(id):
-  shopping_cart = ShoppingCart.query.get(id)
-  cart_items = CartItem.query.filter(shopping_cart.id == CartItem.shopping_cart_id).order_by(CartItem.created_at.asc())
+def shopping_cart(user_id):
+  current_shopping_cart = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == False)
+  past_shopping_carts = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == True)
   return {
-    'current_shopping_cart': shopping_cart.to_dict(),
-    'cart_items': [cart_item.to_dict() for cart_item in cart_items]}
+    'current_shopping_cart': current_shopping_cart[0].to_dict(),
+    'past_shopping_carts': [past_shopping_cart.to_dict() for past_shopping_cart in past_shopping_carts]
+  }
 
 @shopping_cart_routes.route('/add_cart_item', methods=['POST'])
 @login_required

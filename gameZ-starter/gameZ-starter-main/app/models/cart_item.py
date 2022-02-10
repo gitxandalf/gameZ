@@ -13,7 +13,7 @@ class CartItem(db.Model):
     created_at = db.Column(db.DateTime, nullable=False)
 
     shopping_cart = db.relationship(
-        "ShoppingCart", back_populates="cart_item",)
+        "ShoppingCart", back_populates="cart_items",)
     product = db.relationship(
         "Product", back_populates="cart_item",)
 
@@ -22,7 +22,7 @@ class CartItem(db.Model):
             'id': self.id,
             'quantity': self.quantity,
             'shopping_cart_id': self.shopping_cart_id,
-            'product_id': self.product_id
+            'product': self.product.to_dict()
         }
 
     # @property

@@ -18,9 +18,22 @@ def seed_cart_items():
         shopping_cart_id=1, product_id=1, quantity=1, created_at=randomDate())
     item2 = CartItem(
         shopping_cart_id=1, product_id=2, quantity=2, created_at=randomDate())
+    item3 = CartItem(
+        shopping_cart_id=2, product_id=10, quantity=4, created_at=randomDate())
+    item4 = CartItem(
+        shopping_cart_id=2, product_id=6, quantity=7, created_at=randomDate())
+    item5 = CartItem(
+        shopping_cart_id=3, product_id=6, quantity=9, created_at=randomDate())
+    item6 = CartItem(
+        shopping_cart_id=3, product_id=2, quantity=5, created_at=randomDate())
+
 
     db.session.add(item)
     db.session.add(item2)
+    db.session.add(item3)
+    db.session.add(item4)
+    db.session.add(item5)
+    db.session.add(item6)
 
     db.session.commit()
 

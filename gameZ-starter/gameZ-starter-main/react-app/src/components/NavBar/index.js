@@ -18,8 +18,8 @@ const NavBar = () => {
   const [preview, setPreview] = useState(false)
 
   useEffect(() => {
-    dispatch(loadCart(sessionUser.id));
-  }, [dispatch])
+    if(sessionUser) dispatch(loadCart(sessionUser.id));
+  }, [dispatch, sessionUser])
 
   useEffect(() => {
     if (!sessionUser) setPreview(false);

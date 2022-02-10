@@ -40,6 +40,7 @@ export const addItem = (item) => async dispatch => {
 }
 
 export const removeItem = (cart_item_id) => async dispatch => {
+    console.log(cart_item_id)
     const res = await fetch('/api/shopping_carts/delete_cart_item', {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },

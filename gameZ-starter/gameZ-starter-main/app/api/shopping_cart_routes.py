@@ -43,8 +43,8 @@ def add_item():
 @login_required
 def delete_item():
   cart_item_id = request.json
-  item = db.session.query(CartItem).get(cart_item_id['cart_item_id'])
   print('--------------------', cart_item_id)
+  item = db.session.query(CartItem).get(cart_item_id['cart_item_id'])
   print('--------------------', item)
   db.session.delete(item)
   db.session.commit()

@@ -91,7 +91,7 @@ function ShoppingCart() {
                         <li>
                             Price: {currProduct.price}
                         </li>
-                        <button id={currProduct.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
+                        <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
                     </ul>)
             })}
             <li>

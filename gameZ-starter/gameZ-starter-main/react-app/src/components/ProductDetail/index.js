@@ -6,18 +6,21 @@ import "./ProductDetail.css"
 import AddReviewForm from '../Forms/AddReviewForm';
 import { getReviews, removeReview } from '../../store/review';
 import { getCategories } from '../../store/category'
+import { addItem } from '../../store/shoppingCart';
 
 function ProductDetail({ products }) {
     const history = useHistory()
     const dispatch = useDispatch()
     const allReviews = useSelector(state => state?.review.entries)
     const user = useSelector(state => state?.session?.user);
+    const [itemQuantity, setItemQuantity] = useState(1)
 
     const { productId } = useParams();
 
     const product = products.find(product => product.id === +productId)
     const stateUsers = useSelector(state => state?.product?.usersEntries)
     const category = useSelector(state => state?.category?.entries)
+    const cartItems = useSelector(state => state?.shoppingCart?.cartItems)
 
 
     useEffect(() => {
@@ -42,6 +45,17 @@ function ProductDetail({ products }) {
         history.push(`/products/${productId}`)
     }
 
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const newCartItem = {
+            shopping_cart_id: cartItems.shopping_cart.id,
+            product_id: product.id,
+            quantity: itemQuantity
+        }
+        dispatch(addItem(newCartItem))
+        setItemQuantity(1)
+        history.push(`/shoppingCart/${cartItems.shopping_cart.id}`)
+    }
 
     return (
         <div id="product-detail-div">
@@ -52,6 +66,16 @@ function ProductDetail({ products }) {
             <p>Category: {category[product?.category_id - 1]?.name}</p>
             <p>Price: {`$${product?.price}`}</p>
             <p>Description: {product?.description}</p>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        className='quantity-input'
+                        type='number'
+                        value={itemQuantity}
+                        onChange={(e) => setItemQuantity(e.target.value)}></input>
+                    <button type='submit'>Add to cart</button>
+                </form>
+            </div>
             <NavLink hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} className="edit">Edit</NavLink>
             <button hidden={user?.id === product?.user_id ? false : true} className="delete" value={product?.id} onClick={handleDelete} type="submit">Delete</button>
             <h2>Review</h2>

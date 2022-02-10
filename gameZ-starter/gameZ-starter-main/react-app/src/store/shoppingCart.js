@@ -29,10 +29,11 @@ export const addItem = (item) => async dispatch => {
     const res = await fetch('/api/shopping_carts/add_cart_item', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({shopping_cart_id: item.shopping_cart_id, product_id: item.product_id, quantity: 1})
+        body: JSON.stringify({shopping_cart_id: item.shopping_cart_id, product_id: item.product_id, quantity: item.quantity})
     })
     if(res.ok) {
         const item = await res.json();
+        console.log(item)
         dispatch(loadCart(item.shopping_cart_id));
         return "ok";
     }

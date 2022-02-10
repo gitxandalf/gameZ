@@ -8,7 +8,7 @@ def randomDate():
     randMin = int(math.floor(60 * random()))
     randSec = int(math.floor(60 * random()))
     date = datetime.utcnow()
-    newDate = date.replace(hour=randHour, minute=randMin, second=randSec)
+    newDate = date.replace(hour=randHour, minute=randMin, second=randSec, day=8)
     return newDate
 
 

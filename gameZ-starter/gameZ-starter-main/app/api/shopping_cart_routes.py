@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 from sqlalchemy import asc, desc
 from sqlalchemy.orm import joinedload, defaultload
 from app.models import ShoppingCart, CartItem, db
+from datetime import datetime
 
 shopping_cart_routes = Blueprint('shopping_carts', __name__)
 
@@ -30,7 +31,8 @@ def add_item():
   cart_item = CartItem(
     shopping_cart_id = item['shopping_cart_id'],
     product_id = item['product_id'],
-    quantity = item['quantity']
+    quantity = item['quantity'],
+    created_at = datetime.utcnow()
   )
 
   db.session.add(cart_item)
@@ -42,6 +44,8 @@ def add_item():
 def delete_item():
   cart_item_id = request.json
   item = db.session.query(CartItem).get(cart_item_id['cart_item_id'])
+  print('--------------------', cart_item_id)
+  print('--------------------', item)
   db.session.delete(item)
   db.session.commit()
   return {
@@ -52,7 +56,7 @@ def delete_item():
 @login_required
 def edit_item():
   data = request.json
-  print(data)
+  print('------------------------------', data)
   cart_item = db.session.query(CartItem).get(data['cart_item_id'])
   cart_item.quantity = data['quantity']
   db.session.commit()

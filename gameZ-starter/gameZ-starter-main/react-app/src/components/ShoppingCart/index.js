@@ -30,11 +30,11 @@ function ShoppingCart() {
         dispatch(editItem(item))
         dispatch(loadCart(cartItems.shopping_cart.id))
     }
-
     const handleDelete = (e) => {
         e.preventDefault();
         if(!deleteAlert) {
             setDeleteItemId(e.target.id);
+            console.log(deleteItemId)
             setDeleteAlert(true);
             return
         }
@@ -80,7 +80,7 @@ function ShoppingCart() {
                         </li>
                         <li>
                             <input
-                                id={currProduct.id}
+                                id={item.id}
                                 className='quantity-input'
                                 type='number'
                                 placeholder={item.quantity}

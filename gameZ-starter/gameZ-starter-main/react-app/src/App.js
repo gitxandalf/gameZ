@@ -17,6 +17,7 @@ import HomePage from './components/HomePage';
 import EditProductForm from './components/Forms/EditProductForm'
 import { getProducts } from './store/product';
 import EditReviewForm from './components/Forms/EditReviewForm';
+import Checkout from './components/Checkout';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -26,7 +27,7 @@ function App() {
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
-      await dispatch(getProducts())
+      await dispatch(getProducts());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -64,6 +65,10 @@ function App() {
 
         <ProtectedRoute path='/shoppingCart/:id' exact={true} >
           <ShoppingCart />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/shoppingCart/:id/checkout' exact={true} >
+          <Checkout />
         </ProtectedRoute>
 
         <Route path='/products/:productId/edit-product'>

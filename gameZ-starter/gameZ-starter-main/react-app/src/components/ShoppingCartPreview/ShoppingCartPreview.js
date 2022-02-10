@@ -21,7 +21,7 @@ function ShoppingCartPreview(){
             <li>
                 Cart Total: {price}
             </li>
-            <button><NavLink to={`/shoppingCart/${cartItems.shopping_cart.id}`}>More Details</NavLink></button>
+            <button><NavLink to={`/shoppingCart/${cartItems.current_shopping_cart.id}`}>More Details</NavLink></button>
         </div>
     )
 };

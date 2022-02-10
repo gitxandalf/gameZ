@@ -48,7 +48,7 @@ function ProductDetail({ products }) {
     const handleSubmit = (e) => {
         e.preventDefault()
         const newCartItem = {
-            shopping_cart_id: cartItems.shopping_cart.id,
+            shopping_cart_id: cartItems.current_shopping_cart.id,
             product_id: product.id,
             quantity: itemQuantity
         }
@@ -61,13 +61,13 @@ function ProductDetail({ products }) {
                     quantity: newQuantity
                 }));
                 setItemQuantity(1)
-                history.push(`/shoppingCart/${cartItems.shopping_cart.id}`)
+                history.push(`/shoppingCart/${cartItems.current_shopping_cart.id}`)
                 return;
             }
         }
         dispatch(addItem(newCartItem))
         setItemQuantity(1)
-        history.push(`/shoppingCart/${cartItems.shopping_cart.id}`)
+        history.push(`/shoppingCart/${cartItems.current_shopping_cart.id}`)
     }
 
     return (

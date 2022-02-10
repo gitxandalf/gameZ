@@ -16,8 +16,8 @@ const getCart = (payload) => ({
     payload
 })
 
-export const loadCart = (id) => async dispatch => {
-    const response = await fetch(`/api/shopping_carts/${id}`)
+export const loadCart = (userId) => async dispatch => {
+    const response = await fetch(`/api/shopping_carts/${userId}`)
 
     if (response.ok) {
         const cart = await response.json();
@@ -86,10 +86,11 @@ const shoppingCartReducer = (state = {}, action) => {
 
     switch(action.type) {
         case GETCART: {
-            return {
+            newState = {
                 ...state,
                 cartItems: action.payload
-            }
+            };
+            return newState;
         }
         default: return state;
     }

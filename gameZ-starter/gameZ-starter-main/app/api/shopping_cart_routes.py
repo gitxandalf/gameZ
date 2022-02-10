@@ -21,7 +21,7 @@ def shopping_cart(id):
   shopping_cart = ShoppingCart.query.get(id)
   cart_items = CartItem.query.filter(shopping_cart.id == CartItem.shopping_cart_id).order_by(CartItem.created_at.asc())
   return {
-    'shopping_cart': shopping_cart.to_dict(),
+    'current_shopping_cart': shopping_cart.to_dict(),
     'cart_items': [cart_item.to_dict() for cart_item in cart_items]}
 
 @shopping_cart_routes.route('/add_cart_item', methods=['POST'])

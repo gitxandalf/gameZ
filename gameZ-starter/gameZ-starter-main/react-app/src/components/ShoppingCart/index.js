@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { editItem, loadCart, removeItem } from '../../store/shoppingCart'
 import './ShoppingCart.css'
 
 function ShoppingCart() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [loaded, setLoaded] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
@@ -13,7 +15,7 @@ function ShoppingCart() {
     let price = 0;
 
     useEffect(() => {
-        if(loaded) dispatch(loadCart(cartItems.shopping_cart.id));
+        if(loaded) dispatch(loadCart(cartItems.current_shopping_cart.id));
         setLoaded(true);
     }, [dispatch]);
 
@@ -28,7 +30,7 @@ function ShoppingCart() {
             quantity: e.target.value
         }
         dispatch(editItem(item))
-        dispatch(loadCart(cartItems.shopping_cart.id))
+        dispatch(loadCart(cartItems.current_shopping_cart.id))
     }
     const handleDelete = (e) => {
         e.preventDefault();
@@ -97,6 +99,10 @@ function ShoppingCart() {
             <li>
                 Cart Total: {price}
             </li>
+            <button onClick={(e) => {
+                e.preventDefault()
+                history.push(`/shoppingCart/${cartItems.current_shopping_cart.id}/checkout`)
+            }}>Checkout</button>
         </div>
     )
 }

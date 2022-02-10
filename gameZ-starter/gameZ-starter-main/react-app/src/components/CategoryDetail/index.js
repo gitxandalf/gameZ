@@ -35,7 +35,7 @@ function CategoryDetail() {
                         <div id="category-product-info">
                             <Link id="info-link-a" key={product?.id} to={`/products/${product?.id}`}>
                                 <p className="product-info-cat title-product-cat" key={product?.id}> Title: {product?.name}</p>
-                                <p className="product-info-cat description-product-cat" key={product?.id}>Description: {product?.description} </p>
+                                <p id="ellipsis-text" className="product-info-cat description-product-cat" key={product?.id}>Description: {product?.description} </p>
                                 <p className="product-info-cat price-product-cat" key={product?.id}>{`$${product?.price}`}</p>
                                 <p className="product-info-cat username-product-cat" key={product?.id}>{allUsers[product?.user_id]?.username}</p>
                             </Link>

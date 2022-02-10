@@ -19,10 +19,10 @@ function OrderDetails() {
 
   return (
     <>
-      {loaded && pastShoppingCarts &&
+      {loaded && pastShoppingCarts.length &&
         <div>
           <div>Thank You For Your Purchase!</div>
-          <div>Order number #{checkedOutCartId}</div>
+          <div>Order confirmation number #{checkedOutCartId}</div>
           {pastShoppingCarts
             .find(cart => cart.id === parseInt(checkedOutCartId, 10))
             .cart_items

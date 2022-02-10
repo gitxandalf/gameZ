@@ -1,0 +1,24 @@
+#error-404-div {
+    border: 2px solid red;
+}
+
+#inner-404-div {
+    margin: 5% 30%;
+    border: 3px solid blue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#error-msg {
+    font-size: 100px;
+    margin: 10px 0;
+}
+
+#page-not-found-404 {
+    font-size: 50px;
+    margin: 10px 0;
+}
+
+#btn-home-back {
+}

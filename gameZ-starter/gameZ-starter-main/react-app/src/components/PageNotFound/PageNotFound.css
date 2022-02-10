@@ -21,3 +21,30 @@
 #btn-home-back {
     padding-top: 5px;
 }
+
+#btn-home-back { 
+    left: 50px;
+    list-style: none;
+    background: none;
+    border: none;
+    color: #6036EB;
+    background-color: white; /* Green */
+    border: 2px solid #6036EB;
+    padding: 6px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    transition-duration: 0.4s;
+    margin-left: 28%;
+    cursor: pointer; 
+    margin-left: 0!important;
+}
+
+#btn-home-back:hover { 
+  cursor: pointer;
+    transform: scale(1.1);
+    background-color: #6036EB;
+    color: white;
+      
+}

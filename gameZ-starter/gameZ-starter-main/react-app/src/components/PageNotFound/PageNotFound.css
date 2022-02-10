@@ -1,10 +1,8 @@
-#error-404-div {
-    border: 2px solid red;
-}
+
 
 #inner-404-div {
     margin: 5% 30%;
-    border: 3px solid blue;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -21,4 +19,5 @@
 }
 
 #btn-home-back {
+    padding-top: 5px;
 }

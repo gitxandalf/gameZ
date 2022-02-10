@@ -103,3 +103,34 @@ font-size: 15px;
     /* text-decoration-line: underline; */
     text-decoration-thickness:3px;
 }
+
+#logout-btn-style {
+     left: 50px;
+    list-style: none;
+    background: none;
+    border: none;
+    color: white;
+    background-color: black; /* Green */
+    border: 2px solid white;
+    padding: 6px 9px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    transition-duration: 0.4s;
+    margin-left: 28%;
+    cursor: pointer; 
+    margin-left: 0!important;
+}
+
+#logout-btn-style:hover { 
+  cursor: pointer;
+    transform: scale(1.1);
+    background-color: #6036EB;
+    color: white;
+      
+}
+
+ul {
+     list-style-type: none;
+}

@@ -123,12 +123,14 @@ const EditProductForm = ({ products }) => {
                         type='text'
                         name='description'
                         required
-                        disabled={errors.length > 0}
+                      
                         onChange={updateDescription}
                         value={description}
                     ></textarea>
                 </div>
-                <button type='submit'>Sell This Updated Game!</button>
+                <button 
+                // disabled={errors.length > 0}
+                type='submit'>Sell This Updated Game!</button>
                 <Link to={`/products/${productId}`}>Cancel</Link>
             </form>
         </div>

@@ -17,7 +17,9 @@ import HomePage from './components/HomePage';
 import EditProductForm from './components/Forms/EditProductForm'
 import { getProducts } from './store/product';
 import EditReviewForm from './components/Forms/EditReviewForm';
+import PageNotFound from './components/PageNotFound';
 import Checkout from './components/Checkout';
+
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -89,6 +91,10 @@ function App() {
 
         <Route path='/' exact={true} >
           <HomePage />
+        </Route>
+
+        <Route>
+          <PageNotFound />
         </Route>
 
       </Switch>

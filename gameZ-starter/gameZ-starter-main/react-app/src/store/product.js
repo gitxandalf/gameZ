@@ -117,7 +117,6 @@ const productReducer = (state = initialState, action) => {
             const usersEntries = [...action.list.users].reduce((a, b) => {
                 return { ...a, [b.id]: { id: b.id, username: b.username, image_url: b.image_url } }
             }, {})
-            console.log("USERS ENTRIES ===========>", usersEntries)
             return {
                 ...state,
                 entries: [...action.list.products],

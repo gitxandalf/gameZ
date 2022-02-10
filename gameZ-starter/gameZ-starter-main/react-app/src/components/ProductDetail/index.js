@@ -6,7 +6,7 @@ import "./ProductDetail.css"
 import AddReviewForm from '../Forms/AddReviewForm';
 import { getReviews, removeReview } from '../../store/review';
 import { getCategories } from '../../store/category'
-import { addItem } from '../../store/shoppingCart';
+import { addItem, editItem, loadCart } from '../../store/shoppingCart';
 
 function ProductDetail({ products }) {
     const history = useHistory()
@@ -51,6 +51,19 @@ function ProductDetail({ products }) {
             shopping_cart_id: cartItems.shopping_cart.id,
             product_id: product.id,
             quantity: itemQuantity
+        }
+        for(let i = 0; i < cartItems.cart_items.length; i++) {
+            const cartItem = cartItems.cart_items[i];
+            if(cartItem.product_id === newCartItem.product_id) {
+                const newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
+                dispatch(editItem({
+                    cart_item_id: cartItem.id,
+                    quantity: newQuantity
+                }));
+                setItemQuantity(1)
+                history.push(`/shoppingCart/${cartItems.shopping_cart.id}`)
+                return;
+            }
         }
         dispatch(addItem(newCartItem))
         setItemQuantity(1)

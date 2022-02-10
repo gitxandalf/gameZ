@@ -43,9 +43,7 @@ def add_item():
 @login_required
 def delete_item():
   cart_item_id = request.json
-  print('--------------------', cart_item_id)
   item = db.session.query(CartItem).get(cart_item_id['cart_item_id'])
-  print('--------------------', item)
   db.session.delete(item)
   db.session.commit()
   return {
@@ -56,7 +54,6 @@ def delete_item():
 @login_required
 def edit_item():
   data = request.json
-  print('------------------------------', data)
   cart_item = db.session.query(CartItem).get(data['cart_item_id'])
   cart_item.quantity = data['quantity']
   db.session.commit()
@@ -67,7 +64,6 @@ def edit_item():
 @login_required
 def checkout_cart():
   data = request.json
-  print(data)
   shopping_cart = db.session.query(ShoppingCart).get(data['id'])
   shopping_cart.checked_out = True
   new_cart = ShoppingCart(user_id = shopping_cart.user_id)

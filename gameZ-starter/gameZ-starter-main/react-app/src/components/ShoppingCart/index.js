@@ -34,7 +34,6 @@ function ShoppingCart() {
         e.preventDefault();
         if(!deleteAlert) {
             setDeleteItemId(e.target.id);
-            console.log(deleteItemId)
             setDeleteAlert(true);
             return
         }
@@ -80,6 +79,7 @@ function ShoppingCart() {
                         </li>
                         <li>
                             <input
+                                key={item.quantity}
                                 id={item.id}
                                 className='quantity-input'
                                 type='number'

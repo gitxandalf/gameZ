@@ -54,7 +54,6 @@ function ProductDetail({ products }) {
         }
         for(let i = 0; i < currShoppingCart.cart_items.length; i++) {
             const cartItem = currShoppingCart.cart_items[i];
-            console.log('CARTITEM', cartItem)
             if(cartItem.product.id === newCartItem.product_id) {
                 const newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
                 dispatch(editItem({

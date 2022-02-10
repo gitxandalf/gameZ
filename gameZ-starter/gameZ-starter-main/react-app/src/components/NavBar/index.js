@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import "./NavBar.css"
@@ -9,12 +9,19 @@ import ShoppingCart from '../ShoppingCart';
 import ShoppingCartPreview from '../ShoppingCartPreview/ShoppingCartPreview';
 import shoppingCartIcon from '../../images/shopping-cart.png'
 import { loadCart } from '../../store/shoppingCart'
+import { getCategories } from '../../store/category';
+import { getProducts } from '../../store/product';
+
+let queriedProducts;
+let queriedCategorys;
 
 const NavBar = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
-  const sessionUser = useSelector(state => state.session.user);
-  const allCategories = useSelector(state => state.category.entries)
+  const sessionUser = useSelector(state => state?.session?.user);
+  const allCategories = useSelector(state => state?.category?.entries)
+  const allProducts = useSelector(state => state?.products?.entries)
   const [preview, setPreview] = useState(false)
 
   useEffect(() => {
@@ -22,8 +29,18 @@ const NavBar = () => {
   }, [dispatch, sessionUser])
 
   useEffect(() => {
+    if(window.location.pathname !== '/search-results'){
+      queriedProducts = '';
+      queriedCategorys = '';
+    }
+  }, [dispatch, sessionUser, window.location.pathname])
+
+  useEffect(() => {
     if (!sessionUser) setPreview(false);
     if (!preview) return;
+
+    dispatch(getCategories())
+    dispatch(getProducts())
 
     const closeMenu = (e) => {
       if(e.target.className === 'shopping-cart-preview' || e.target.parentNode.className === 'shopping-cart-preview') return
@@ -33,11 +50,40 @@ const NavBar = () => {
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [preview, sessionUser]);
+  }, [dispatch, preview, sessionUser]);
 
   const handleClick = () => {
     if (preview) setPreview(false)
     else setPreview(true)
+  }
+
+  let searchProductResponse;
+  let searchCategoryResponse;
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const searchQuery = search;
+    searchProductResponse = await fetch(`/api/search/products/${searchQuery}`).then((res => res.json())).catch((error => history.push('/error-page')));
+    if (searchProductResponse){
+      const queryProductResponse = searchProductResponse;
+      queriedProducts = queryProductResponse.products;
+      if(window.location.pathname === '/search-results') {
+        history.push('/')
+        history.push('/search-results');
+      }
+      history.push('/search-results');
+    };
+
+    searchCategoryResponse = await fetch(`/api/search/categories/${searchQuery}`).then((res => res.json())).catch((error => history.push('/error-page')));
+    if (searchCategoryResponse){
+      const queryCategoryResponse = searchCategoryResponse;
+      queriedCategorys = queryCategoryResponse.products;
+      if(window.location.pathname === '/search-results') {
+        history.push('/')
+        history.push('/search-results');
+      }
+      history.push('/search-results');
+    }
   }
 
   return (
@@ -50,7 +96,7 @@ const NavBar = () => {
           <Link to='/' exact={true} activeClassName='active'>
             <img id="nav-logo" alt="logo" src={logo} />
           </Link>
-          <form onSubmit={e =>/* logic to route search correctly goes here */ 0}>
+          <form onSubmit={handleSearch}>
             <label htmlFor='search'>Search</label>
             <input
               id="search-input"
@@ -58,7 +104,7 @@ const NavBar = () => {
               type='text'
               placeholder='Search'
               value={search}
-              onChange={e => setSearch(e)}
+              onChange={e => setSearch(e.target.value)}
             />
           </form>
 
@@ -117,3 +163,4 @@ const NavBar = () => {
 }
 
 export default NavBar;
+export { queriedProducts, queriedCategorys }

@@ -1,4 +1,5 @@
 from .db import db
+from datetime import datetime
 
 
 class CartItem(db.Model):
@@ -9,8 +10,10 @@ class CartItem(db.Model):
         db.Integer, db.ForeignKey("shopping_carts.id"))
     product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
     quantity = db.Column(db.Integer, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False)
+
     shopping_cart = db.relationship(
-        "ShoppingCart", back_populates="cart_item",)
+        "ShoppingCart", back_populates="cart_items",)
     product = db.relationship(
         "Product", back_populates="cart_item",)
 
@@ -19,7 +22,7 @@ class CartItem(db.Model):
             'id': self.id,
             'quantity': self.quantity,
             'shopping_cart_id': self.shopping_cart_id,
-            'product_id': self.product_id
+            'product': self.product.to_dict()
         }
 
     # @property

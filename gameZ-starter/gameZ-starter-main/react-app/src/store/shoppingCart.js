@@ -16,8 +16,8 @@ const getCart = (payload) => ({
     payload
 })
 
-export const loadCart = (id) => async dispatch => {
-    const response = await fetch(`/api/shopping_carts/${id}`)
+export const loadCart = (userId) => async dispatch => {
+    const response = await fetch(`/api/shopping_carts/${userId}`)
 
     if (response.ok) {
         const cart = await response.json();
@@ -29,7 +29,7 @@ export const addItem = (item) => async dispatch => {
     const res = await fetch('/api/shopping_carts/add_cart_item', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({shopping_cart_id: item.shopping_cart_id, product_id: item.product_id, quantity: 1})
+        body: JSON.stringify({shopping_cart_id: item.shopping_cart_id, product_id: item.product_id, quantity: item.quantity})
     })
     if(res.ok) {
         const item = await res.json();
@@ -86,10 +86,11 @@ const shoppingCartReducer = (state = {}, action) => {
 
     switch(action.type) {
         case GETCART: {
-            return {
+            newState = {
                 ...state,
-                cartItems: action.payload
-            }
+                ...action.payload
+            };
+            return newState;
         }
         default: return state;
     }

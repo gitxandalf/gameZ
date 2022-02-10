@@ -91,7 +91,7 @@ function ShoppingCart() {
                             Quantity: {item.quantity}
                         </li>
                         <li>
-                            Price: {currProduct.price}
+                            Price: {currProduct.price * item.quantity} ({currProduct.price} each)
                         </li>
                         <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
                     </ul>)

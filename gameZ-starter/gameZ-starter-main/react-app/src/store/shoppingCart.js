@@ -67,10 +67,11 @@ export const editItem = (item) => async dispatch => {
 }
 
 export const checkoutCart = (shoppingCart) => async dispatch => {
+    console.log('SHOPPINGCART', shoppingCart)
     const res = await fetch('/api/shopping_carts/checkout_cart', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({id: shoppingCart.id})
+        body: JSON.stringify(shoppingCart)
     })
 
     if(res.ok) {

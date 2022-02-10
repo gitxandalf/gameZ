@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { checkoutCart, editItem, loadCart, removeItem } from '../../store/shoppingCart'
 
 function Checkout() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const history = useHistory();
   const sessionUser = useSelector(state => state?.session?.user);
   const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
   const [loaded, setLoaded] = useState(false);
@@ -11,8 +13,9 @@ function Checkout() {
   const [deleteItemId, setDeleteItemId] = useState('');
 
   useEffect(() => {
-    if(loaded) dispatch(loadCart(currShoppingCart.user_id));
-    setLoaded(true);
+    dispatch(loadCart(sessionUser.id))
+      .then(() => setLoaded(true));
+    return () => setLoaded(false);
   }, [dispatch])
 
   const calcTotalPrice = shoppingCart => {
@@ -39,10 +42,11 @@ function Checkout() {
 
     const item = {
         cart_item_id: e.target.id,
-        quantity: e.target.value
+        quantity: e.target.value,
+        user_id: sessionUser.id
     }
     dispatch(editItem(item))
-    dispatch(loadCart(currShoppingCart.user_id))
+    dispatch(loadCart(sessionUser.id))
   }
 
   const handleDelete = (e) => {
@@ -54,7 +58,7 @@ function Checkout() {
     }
 
     if(deleteAlert && e.target.value === 'DELETETHISITEM') {
-        dispatch(removeItem(deleteItemId));
+        dispatch(removeItem({cart_item_id: deleteItemId, user_id: sessionUser.id}));
     }
 
     setDeleteAlert(false);
@@ -63,8 +67,10 @@ function Checkout() {
   }
 
   const handleCheckout = () => {
+    const currShoppingCartId = currShoppingCart.id
     dispatch(checkoutCart(currShoppingCart));
     dispatch(loadCart(sessionUser.id));
+    history.push(`/shoppingCart/${currShoppingCartId}/orderDetails`);
   }
 
   return (
@@ -122,7 +128,7 @@ function Checkout() {
               </ul>
             )
           })}
-          <button onClick={handleCheckout}>Confirm Checkout</button>
+          <button onClick={handleCheckout} disabled={currShoppingCart.cart_items.length === 0 ? true : false}>Confirm Checkout</button>
         </div>}
     </>
   )

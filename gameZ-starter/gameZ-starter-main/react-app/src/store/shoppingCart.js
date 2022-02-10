@@ -32,22 +32,20 @@ export const addItem = (item) => async dispatch => {
         body: JSON.stringify({shopping_cart_id: item.shopping_cart_id, product_id: item.product_id, quantity: item.quantity})
     })
     if(res.ok) {
-        const item = await res.json();
-        dispatch(loadCart(item.shopping_cart_id));
+        dispatch(loadCart(item.user_id));
         return "ok";
     }
 }
 
-export const removeItem = (cart_item_id) => async dispatch => {
+export const removeItem = (cart_item) => async dispatch => {
     const res = await fetch('/api/shopping_carts/delete_cart_item', {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({cart_item_id})
+        body: JSON.stringify({cart_item_id: cart_item.cart_item_id})
     })
 
     if(res.ok) {
-        const item = await res.json();
-        dispatch(loadCart(item.shopping_cart_id));
+        dispatch(loadCart(cart_item.user_id));
         return "ok";
     }
 }
@@ -60,14 +58,12 @@ export const editItem = (item) => async dispatch => {
     })
 
     if(res.ok) {
-        const item = await res.json();
-        dispatch(loadCart(item.shopping_cart_id));
+        dispatch(loadCart(item.user_id));
         return "ok";
     }
 }
 
 export const checkoutCart = (shoppingCart) => async dispatch => {
-    console.log('SHOPPINGCART', shoppingCart)
     const res = await fetch('/api/shopping_carts/checkout_cart', {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -76,7 +72,7 @@ export const checkoutCart = (shoppingCart) => async dispatch => {
 
     if(res.ok) {
         const newCart = await res.json();
-        dispatch(loadCart(newCart.id));
+        dispatch(loadCart(newCart.user_id));
         return "ok";
     }
 

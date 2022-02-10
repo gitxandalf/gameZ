@@ -19,7 +19,6 @@ def shopping_carts():
 @login_required
 def shopping_cart(user_id):
   current_shopping_cart = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == False).first()
-  print('NONETYPE ===>', current_shopping_cart == None)
   past_shopping_carts = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == True)
   return {
     'current_shopping_cart': {} if current_shopping_cart == None else current_shopping_cart.to_dict(),
@@ -67,7 +66,6 @@ def edit_item():
 def checkout_cart():
   data = request.json
   new_cart = ShoppingCart(user_id = data['user_id'])
-  print('NEW CART =====>', new_cart.to_dict())
   shopping_cart = db.session.query(ShoppingCart).get(data['id'])
   shopping_cart.checked_out = True
   db.session.add(new_cart)

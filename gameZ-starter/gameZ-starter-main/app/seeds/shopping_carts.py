@@ -6,10 +6,16 @@ def seed_shopping_carts():
     shopping_cart = ShoppingCart(
         user_id=1, checked_out=False)
     shopping_cart2 = ShoppingCart(
-        user_id=2, checked_out=True)
+        user_id=1, checked_out=True)
+    shopping_cart3 = ShoppingCart(
+        user_id=1, checked_out=True)
+    shopping_cart4 = ShoppingCart(
+        user_id=2, checked_out=False)
 
     db.session.add(shopping_cart)
     db.session.add(shopping_cart2)
+    db.session.add(shopping_cart3)
+    db.session.add(shopping_cart4)
 
     db.session.commit()
 

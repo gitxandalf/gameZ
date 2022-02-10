@@ -9,16 +9,13 @@ class ShoppingCart(db.Model):
     checked_out = db.Column(db.Boolean, nullable=False, default=False)
     user = db.relationship(
         "User", back_populates="shopping_cart", cascade="all")
-    cart_item = db.relationship(
-        "CartItem", back_populates="shopping_cart", cascade="all, delete-orphan")
+    cart_items = db.relationship(
+        "CartItem", back_populates="shopping_cart", order_by="CartItem.created_at", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
             'id': self.id,
-            'checked_out': self.checked_out
+            'checked_out': self.checked_out,
+            'cart_items': [cart_item.to_dict() for cart_item in self.cart_items],
+            'user_id': self.user_id
         }
-
-
-# SELECT user_id, checked_out, cart_items.product_id
-# FROM shopping_carts
-# INNERJOIN cart_items ON shopping_carts.id = cart_items.shopping_cart_id

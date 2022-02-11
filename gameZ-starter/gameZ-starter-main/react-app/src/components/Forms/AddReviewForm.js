@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import "./EditProductForm.css"
 import { postReview } from '../../store/review';
-
+import "./GlobalForm.css"
 
 
 
@@ -32,8 +32,11 @@ const AddReviewForm = ({ productId }) => {
         } else {
             setDisplayErrors(true);
         }
+
         if (review) {
             history.push(`/products/${productId}`)
+            setTitle("")
+            setContent("")
         }
     }
 
@@ -53,29 +56,36 @@ const AddReviewForm = ({ productId }) => {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                < h2 > Write a review </h2>
-                <div>
-                    <label> Title </label>
+                <h2 id="review-form-h2">Write a review</h2>
+                <div className='input-div'>
+                    <label className='input-label required-field'>Title </label>
                     <input
+                        className='review-title-input'
                         type='text'
                         name='title'
+                        required
                         onChange={updateTitle}
                         value={title}
                     ></input>
                 </div>
-                <div>
-                    <label> Review </label>
+                <div className='input-div'>
+                    <label className='input-label required-field'>Review </label>
                     <textarea
-                        className='text-area'
+                        className='review-text-area'
                         type='text'
                         name='content'
                         required
-                        disabled={errors.length > 0}
                         onChange={updateContent}
                         value={content}
                     ></textarea>
                 </div>
-                <button type='submit'> Submit </button>
+                <div id="">
+
+                </div>
+                <button 
+                className="review-submit-btn"
+                // disabled={errors.length > 0}
+                type='submit'> Submit </button>
             </form>
         </div>
     )

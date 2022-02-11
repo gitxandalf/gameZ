@@ -2,15 +2,32 @@ footer {
     height: 50px;
     background-color: black;
     display: flex;
-    justify-content: space-around;
-    padding: 0 300px
+    justify-content: center;
 }
 
 .footer-links {
     font-size: 15px;
     color: white;
     font-weight: 300;
-    align-items: center;
     padding-top: 12px;
 }
 
+#footer {
+    position:fixed;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+}
+
+.input-label {
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    line-height: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+}
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+}

@@ -63,21 +63,22 @@ const EditReviewForm = ({ products }) => {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                < h2 > Write a review </h2>
-                <div>
-                    <label> Title </label>
+                <h2 id="review-form-h2"> Edit review </h2>
+                <div className='input-div'>
+                    <label className='input-label'> Title </label>
                     <input
+                        className='review-title-input'
                         type='text'
                         name='title'
                         onChange={updateTitle}
                         value={title}
                     ></input>
                 </div>
-                <div>
-                    <label> Review </label>
+                <div className='input-div'> 
+                    <label className='input-label'> Review </label>
                     <textarea
                         type='text'
-                        className='text-area'
+                        className='review-text-area'
                         name='content'
                         required
                         disabled={errors.length > 0}
@@ -85,7 +86,7 @@ const EditReviewForm = ({ products }) => {
                         value={content}
                     ></textarea>
                 </div>
-                <button type='submit'> Submit </button>
+                <button className="review-submit-btn" type='submit'> Submit </button>
                 <Link to={`/products/${productId}`}>Cancel</Link>
             </form>
         </div>

@@ -7,6 +7,7 @@ import AddReviewForm from '../Forms/AddReviewForm';
 import { getReviews, removeReview } from '../../store/review';
 import { getCategories } from '../../store/category'
 import { addItem, editItem, loadCart } from '../../store/shoppingCart';
+import "../Forms/GlobalForm.css"
 
 function ProductDetail({ products }) {
     const history = useHistory()
@@ -100,12 +101,12 @@ function ProductDetail({ products }) {
                                 <p id="username-p-line">{stateUsers[review.user_id].username}</p>
                             </div>
 
-                            <p>Title: {review?.title}</p>
-                            <p>Content: {review?.content}</p>
+                            <p className="title-p">Title: {review?.title}</p>
+                            <p className="content-p">{review?.content}</p>
                             {user &&
                                 <>
-                                    <NavLink hidden={review?.user_id !== user.id} to={`/reviews/${review?.id}/edit-reviews`} value={review?.id} className="edit">Edit</NavLink>
-                                    <button hidden={review?.user_id !== user.id} className="delete" value={review?.id} onClick={handleReviewDelete} type="submit">Delete</button>
+                                    <NavLink hidden={review?.user_id !== user.id} to={`/reviews/${review?.id}/edit-reviews`} value={review?.id} className="edit-btn">Edit</NavLink>
+                                    <button hidden={review?.user_id !== user.id} className="delete-btn" value={review?.id} onClick={handleReviewDelete} type="submit">Delete</button>
                                 </>
                             }
                         </div>
@@ -132,8 +133,8 @@ function ProductDetail({ products }) {
                                 <button type='submit'>Add to cart</button>
                             </form>
                         </div>}
-                    <NavLink hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} className="edit">Edit</NavLink>
-                    <button hidden={user?.id === product?.user_id ? false : true} className="delete" value={product?.id} onClick={handleDelete} type="submit">Delete</button>
+                    <NavLink className="edit-btn" hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} >Edit</NavLink>
+                    <button className="delete-btn" hidden={user?.id === product?.user_id ? false : true} value={product?.id} onClick={handleDelete} type="submit">Delete</button>
                 </div>
                
             </div>

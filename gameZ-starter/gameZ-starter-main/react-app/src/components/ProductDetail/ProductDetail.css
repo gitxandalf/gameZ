@@ -8,7 +8,6 @@
 #product-detail-div {
     display: flex;
     flex-direction: row;
-    border: 5px solid blue;
     margin: 2% 10%;
 }
 
@@ -19,7 +18,6 @@
 }
 
 #left-detail-div {
-    border: 5px solid purple;
     width: 70%;
 }
 
@@ -58,6 +56,7 @@
     margin-left: 2%;
     font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
     font-weight: 300;
+    font-size: 18px;
 }
 
 #line-div-gray {
@@ -68,6 +67,7 @@
 
 #review-content-div {
     margin-left: 2%;
+    margin-bottom: 15px;
 }
 
 #user-profile-image {
@@ -89,4 +89,25 @@
     font-size: 13px;
     line-height: 18px;
     color: #B5B5B5;
+}
+
+
+.title-p {
+    margin-left: 55px;
+}
+
+.content-p {
+    margin-left: 55px;
+    /* border: thin solid black; */
+    text-align: justify;
+    width: 600px;
+    height: 58px;
+    overflow-wrap: break-word;
+    inline-size: 600px;
+
+    display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical; 
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

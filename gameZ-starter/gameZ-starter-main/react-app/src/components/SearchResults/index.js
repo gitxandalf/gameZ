@@ -4,9 +4,9 @@ import { Link, useParams } from 'react-router-dom';
 import { getCategory, getCategories } from '../../store/category';
 import { getProducts } from '../../store/product';
 import { loadCart } from '../../store/shoppingCart';
-import "./CategoryDetail.css"
+import "./SearchResults.css"
 
-function CategoryDetail() {
+function SearchResults({products, categories}) {
     const dispatch = useDispatch()
 
     const allCategories = useSelector(state => state?.category?.entries)
@@ -14,23 +14,20 @@ function CategoryDetail() {
     const allUsers = useSelector(state => state?.product?.usersEntries)
     const sessionUser = useSelector(state => state?.session?.user);
 
-    const { categoryId } = useParams();
-
     useEffect(() => {
         dispatch(getCategories())
-        dispatch(getCategory(categoryId))
         dispatch(getProducts())
-
-    }, [dispatch, categoryId])
+        dispatch(loadCart(sessionUser.id))
+    }, [dispatch])
 
     return (
         <div>
             <div className='category-detail'>
                 <div id="category-title-div">
-                    <h1 id="category-h1"> {allCategories[`${categoryId - 1}`]?.name} Games</h1>
+                    <h1 id="category-h1">Search Results</h1>
                 </div>
-                <h2 id="slogan-cat-pg">Find something you love</h2>
-                <div className='product-links'>{allProducts?.filter(product => product?.category_id === parseInt(categoryId)).map((product) => (
+                <h2 id="slogan-cat-pg">Search Results</h2>
+                <div className='product-links'>{products && products?.map((product) => (
                     <div id="each-product-category" key={product?.id}>
                         <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>
                         <div id="category-product-info">
@@ -47,4 +44,4 @@ function CategoryDetail() {
         </div>
     );
 }
-export default CategoryDetail;
+export default SearchResults;

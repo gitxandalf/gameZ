@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import AddProductForm from './components/Forms/AddProductForm';
-import NavBar from './components/NavBar/index.js';
+import NavBar, { queriedProducts, queriedCategorys } from './components/NavBar/index.js';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -19,8 +19,8 @@ import { getProducts } from './store/product';
 import EditReviewForm from './components/Forms/EditReviewForm';
 import PageNotFound from './components/PageNotFound';
 import Checkout from './components/Checkout';
+import SearchResults from './components/SearchResults';
 import OrderDetails from './components/OrderDetails';
-
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -94,9 +94,14 @@ function App() {
           <EditReviewForm products={products} />
         </Route>
 
+        <Route path='/search-results' exact={true} >
+          <SearchResults products={queriedProducts} categories={queriedCategorys}/>
+        </Route>
+
         <Route path='/' exact={true} >
           <HomePage />
         </Route>
+
 
         <Route>
           <PageNotFound />

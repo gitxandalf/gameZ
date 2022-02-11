@@ -10,7 +10,7 @@ const EditProductForm = ({ products }) => {
     const history = useHistory();
     const dispatch = useDispatch();
     const { productId } = useParams();
-
+    let updatedProduct;
     const product = products.find(product => product.id === +productId)
 
     const user = useSelector(state => state.session.user);
@@ -21,22 +21,29 @@ const EditProductForm = ({ products }) => {
     const [price, setPrice] = useState(product?.price)
     const [description, setDescription] = useState(product?.description);
     const [errors, setErrors] = useState([]);
+    const [displayErrors, setDisplayErrors] = useState(false);
 
     useEffect(() => {
         const errors = [];
-        if (!categoryId) errors.push("Please select a category.")
-        if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less than 50 characters.")
-        if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url must be less than 255 characters.")
-        if (!price || typeof price === "number") errors.push("Please provide a valid price.")
+        if (!categoryId) errors.push("Please select a category")
+        if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
+        if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
+        if (!price) errors.push("Please provide a valid price")
+        if (price <= 0) errors.push("You want to make money, right? Enter a price greater than 0.")
 
-        setErrors(errors)
+        if (errors) setErrors(errors)
+
     }, [categoryId, name, imageUrl, price, description])
 
     const onSubmit = async (e) => {
 
         e.preventDefault();
 
-        const updatedProduct = await dispatch(updateProduct({ userId: user.id, id: parseInt(productId), categoryId, name, imageUrl, price, description }));
+        if (errors.length === 0 ){
+            updatedProduct = await dispatch(updateProduct({ userId: user.id, id: parseInt(productId), categoryId, name, imageUrl, price, description }));
+        } else {
+            setDisplayErrors(true);
+        }
 
         if (updatedProduct) {
             history.push(`/products/${product?.id}`)
@@ -68,7 +75,7 @@ const EditProductForm = ({ products }) => {
         <div id="edit-product-div">
             <form className="edit-product-form" onSubmit={onSubmit}>
                 <div>
-                    {errors && errors?.map((error, ind) => (
+                    {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
@@ -123,12 +130,12 @@ const EditProductForm = ({ products }) => {
                         type='text'
                         name='description'
                         required
-                      
+
                         onChange={updateDescription}
                         value={description}
                     ></textarea>
                 </div>
-                <button 
+                <button
                 // disabled={errors.length > 0}
                 type='submit'>Sell This Updated Game!</button>
                 <Link to={`/products/${productId}`}>Cancel</Link>

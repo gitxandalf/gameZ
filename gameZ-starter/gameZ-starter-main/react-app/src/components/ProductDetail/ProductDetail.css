@@ -13,7 +13,6 @@
 
 
 #right-detail-div {
-    border: 3px solid green;
     width: 30%;
 }
 
@@ -130,4 +129,9 @@
 #product-price-p {
     font-size: 30px;
     line-height: 36px;
+}
+
+#right-detail-div,
+#left-detail-div {
+    margin-bottom: 200px;
 }

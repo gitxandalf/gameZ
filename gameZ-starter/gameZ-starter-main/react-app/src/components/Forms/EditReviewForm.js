@@ -6,9 +6,6 @@ import "./EditProductForm.css"
 import { getReviews, postReview } from '../../store/review';
 import { updateReview } from '../../store/review';
 
-
-
-
 const EditReviewForm = ({ products }) => {
     const history = useHistory()
     const dispatch = useDispatch()
@@ -19,37 +16,36 @@ const EditReviewForm = ({ products }) => {
     const review = reviews.find(review => review?.id === +reviewId)
     const oneProduct = products?.find(product => review?.product_id === product?.id)
 
-    const [errors, setErrors] = useState([])
-    const [title, setTitle] = useState(review?.title)
-    const [content, setContent] = useState(review?.content)
+    const [errors, setErrors] = useState([]);
+    const [displayErrors, setDisplayErrors] = useState(false);
+    const [title, setTitle] = useState(review?.title);
+    const [content, setContent] = useState(review?.content);
 
     useEffect(() => {
         dispatch(getReviews())
-    }, [])
-    
-    let productId = oneProduct?.id
-    //     useEffect(() => {
-    //         const errors = []
+    }, []);
 
-    //         // if (!categoryId) errors.push("Please select a category")
-    //         // if (name?.length > 50 | | name?.length <= 0) errors.push("Name must be less 50 characters")
-    //         // if (imageUrl?.length > 255 | | imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
-    //         // if (!price | | typeof price == = "number") errors.push("Please provide a valid price")
-    //         setErrors(errors)
-    //     }, [title, content])
+    let productId = oneProduct?.id
+
+    useEffect(() => {
+        const errors = []
+        if (title.length > 50) errors.push("Titles must be less than 50 characters")
+        setErrors(errors)
+    }, [title]);
 
     let editedReview;
     const onSubmit = async (e) => {
         e.preventDefault()
-        if (user) {
+        if (user && errors.length === 0) {
             editedReview = await dispatch(updateReview({ reviewId, productId, title, content, userId: user.id }))
+        } else {
+            setDisplayErrors(true);
         }
         if (editedReview) {
 
             history.push(`/products/${productId}`)
         }
     }
-
 
     const updateTitle = (e) => {
         setTitle(e.target.value)
@@ -59,30 +55,30 @@ const EditReviewForm = ({ products }) => {
         setContent(e.target.value)
     }
 
-
     return (
         <div id="reivew-product-div">
             <form className="review-product-form" onSubmit={onSubmit}>
                 <div>
-                    {errors && errors?.map((error, ind) => (
+                    {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                < h2 > Write a review </h2>
-                <div>
-                    <label> Title </label>
+                <h2 id="review-form-h2"> Edit review </h2>
+                <div className='input-div'>
+                    <label className='input-label'> Title </label>
                     <input
+                        className='review-title-input'
                         type='text'
                         name='title'
                         onChange={updateTitle}
                         value={title}
                     ></input>
                 </div>
-                <div>
-                    <label> Review </label>
+                <div className='input-div'> 
+                    <label className='input-label'> Review </label>
                     <textarea
                         type='text'
-                        className='text-area'
+                        className='review-text-area'
                         name='content'
                         required
                         disabled={errors.length > 0}
@@ -90,7 +86,7 @@ const EditReviewForm = ({ products }) => {
                         value={content}
                     ></textarea>
                 </div>
-                <button type='submit'> Submit </button>
+                <button className="review-submit-btn" type='submit'> Submit </button>
                 <Link to={`/products/${productId}`}>Cancel</Link>
             </form>
         </div>

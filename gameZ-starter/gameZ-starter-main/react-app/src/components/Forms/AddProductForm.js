@@ -1,48 +1,47 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import "./AddProductForm.css"
 import { postProduct } from '../../store/product'
 
 const AddProductForm = () => {
     const history = useHistory()
+    const dispatch = useDispatch();
 
-    const [errors, setErrors] = useState([]);
     const [categoryId, setCategoryId] = useState('1');
     const [name, setName] = useState('')
     const [imageUrl, setImageUrl] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('');
-
+    const [errors, setErrors] = useState([]);
+    const [displayErrors, setDisplayErrors] = useState(false);
     const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
-        if (user) {
+        if (user && errors.length === 0) {
             product = await dispatch(postProduct({ userId: user.id, categoryId, name, imageUrl, price, description }));
+        } else {
+            setDisplayErrors(true);
         }
         if (product) {
-
             history.push(`/products/${product.id}`);
         }
     };
 
-    // useEffect(() => {
-    //     const errors = [];
-    //     if (!categoryId) errors.push("Please select a category")
-    //     if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
-    //     if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
-    //     if (!price) errors.push("Please provide a valid price")
-    //     if (price < 0) errors.push("You want to make money, right?")
+    useEffect(() => {
+        const errors = [];
+        if (!categoryId) errors.push("Please select a category")
+        if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
+        if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
+        if (!price) errors.push("Please provide a valid price")
+        if (price <= 0) errors.push("You want to make money, right? Enter a price greater than 0.")
 
-    //     if (product.errors) setErrors(errors)
+        if (errors) setErrors(errors)
 
-    // }, [categoryId, name, imageUrl, price, description])
+    }, [categoryId, name, imageUrl, price, description])
 
     let product;
-
 
     const updateCategory = (e) => {
         setCategoryId(e.target.value);
@@ -69,7 +68,7 @@ const AddProductForm = () => {
         <div id="add-product-div">
             <form className="add-product-form" onSubmit={onSubmit}>
                 <div className='add-product-errors'>
-                    {errors && errors?.map((error, ind) => (
+                    {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>

@@ -13,26 +13,24 @@ const AddReviewForm = ({ productId }) => {
     const dispatch = useDispatch()
 
     const [errors, setErrors] = useState([])
+    const [displayErrors, setDisplayErrors] = useState(false);
     const [title, setTitle] = useState('')
     const [content, setContent] = useState('')
     const user = useSelector(state => state.session.user)
 
-    // useEffect(() => {
-    //     const errors = []
-
-    //     if (!title) errors.push("Please provide a title")
-    //     if (title?.length > 50 || title?.length <= 0) errors.push("Name must be less 50 characters")
-    //     if (!content) errors.push("Please provide a review")
-    //     setErrors(errors)
-    
-    // }, [title, content])
-
+        useEffect(() => {
+            const errors = []
+            if (title.length > 50) errors.push("Titles must be less than 50 characters")
+            setErrors(errors)
+        }, [title])
 
     let review;
     const onSubmit = async (e) => {
         e.preventDefault()
-        if (user) {
+        if (user && errors.length === 0) {
             review = await dispatch(postReview({ productId, title, content, userId: user.id }))
+        } else {
+            setDisplayErrors(true);
         }
 
         if (review) {
@@ -42,7 +40,6 @@ const AddReviewForm = ({ productId }) => {
         }
     }
 
-
     const updateTitle = (e) => {
         setTitle(e.target.value)
     }
@@ -51,12 +48,11 @@ const AddReviewForm = ({ productId }) => {
         setContent(e.target.value)
     }
 
-
     return (
         <div id="reivew-product-div">
             <form className="review-product-form" onSubmit={onSubmit}>
                 <div>
-                    {errors && errors?.map((error, ind) => (
+                    {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>

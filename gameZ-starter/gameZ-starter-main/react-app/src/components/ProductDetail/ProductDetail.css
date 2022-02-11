@@ -111,3 +111,23 @@
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
+#developer-name {
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+#product-name {
+    font-family: "Guardian-EgypTT",Charter,"Charter Bitstream",Cambria,"Noto Serif Light","Droid Serif",Georgia,serif;
+    font-weight: 300;
+    letter-spacing: 0.35px;
+    font-size: 20px;
+    line-height: 32px;
+}
+
+#product-price-p {
+    font-size: 30px;
+    line-height: 36px;
+}

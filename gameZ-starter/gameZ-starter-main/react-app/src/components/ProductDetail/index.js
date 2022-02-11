@@ -124,10 +124,10 @@ function ProductDetail({ products }) {
                 </div>
 
                 <div id="right-detail-div">
-                    <h2>Name: {product?.name}</h2>
-                    <p>Developer: {stateUsers[product?.user_id]?.username}</p>
+                    <p id="developer-name">{stateUsers[product?.user_id]?.username}</p>
+                    <h2 id="product-name">{product?.name}</h2>
                     <p>Category: {category[product?.category_id - 1]?.name}</p>
-                    <p>Price: {`$${product?.price}`}</p>
+                    <p id="product-price-p"> {`$${product?.price}`}</p>
                     <p>Description: {product?.description}</p>
                     {!(product?.user_id === user?.id) &&
                         <div>

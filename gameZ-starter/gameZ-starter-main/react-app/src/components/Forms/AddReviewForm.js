@@ -1,10 +1,10 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import "./EditProductForm.css"
 import { postReview } from '../../store/review';
-
+import "./GlobalForm.css"
 
 
 
@@ -17,15 +17,16 @@ const AddReviewForm = ({ productId }) => {
     const [content, setContent] = useState('')
     const user = useSelector(state => state.session.user)
 
-    //     useEffect(() => {
-    //         const errors = []
+    // useEffect(() => {
+    //     const errors = []
 
-    //         // if (!categoryId) errors.push("Please select a category")
-    //         // if (name?.length > 50 | | name?.length <= 0) errors.push("Name must be less 50 characters")
-    //         // if (imageUrl?.length > 255 | | imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
-    //         // if (!price | | typeof price == = "number") errors.push("Please provide a valid price")
-    //         setErrors(errors)
-    //     }, [title, content])
+    //     if (!title) errors.push("Please provide a title")
+    //     if (title?.length > 50 || title?.length <= 0) errors.push("Name must be less 50 characters")
+    //     if (!content) errors.push("Please provide a review")
+    //     setErrors(errors)
+    
+    // }, [title, content])
+
 
     let review;
     const onSubmit = async (e) => {
@@ -33,9 +34,11 @@ const AddReviewForm = ({ productId }) => {
         if (user) {
             review = await dispatch(postReview({ productId, title, content, userId: user.id }))
         }
-        if (review) {
 
+        if (review) {
             history.push(`/products/${productId}`)
+            setTitle("")
+            setContent("")
         }
     }
 
@@ -57,29 +60,36 @@ const AddReviewForm = ({ productId }) => {
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                < h2 > Write a review </h2>
-                <div>
-                    <label> Title </label>
+                <h2 id="review-form-h2">Write a review</h2>
+                <div className='input-div'>
+                    <label className='input-label required-field'>Title </label>
                     <input
+                        className='review-title-input'
                         type='text'
                         name='title'
+                        required
                         onChange={updateTitle}
                         value={title}
                     ></input>
                 </div>
-                <div>
-                    <label> Review </label>
+                <div className='input-div'>
+                    <label className='input-label required-field'>Review </label>
                     <textarea
-                        className='text-area'
+                        className='review-text-area'
                         type='text'
                         name='content'
                         required
-                        disabled={errors.length > 0}
                         onChange={updateContent}
                         value={content}
                     ></textarea>
                 </div>
-                <button type='submit'> Submit </button>
+                <div id="">
+
+                </div>
+                <button 
+                className="review-submit-btn"
+                // disabled={errors.length > 0}
+                type='submit'> Submit </button>
             </form>
         </div>
     )

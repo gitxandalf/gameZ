@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editItem, loadCart, removeItem } from '../../store/shoppingCart'
 import { getCategories } from '../../store/category';
-// import ShoppingCartItems from './shopping-cart-items';
 import './ShoppingCart.css'
 
 function ShoppingCart() {
@@ -14,7 +13,6 @@ function ShoppingCart() {
     const [deleteAlert, setDeleteAlert] = useState(false);
     const sessionUser = useSelector(state => state?.session?.user)
     const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
-    const products = useSelector(state => state?.product?.entries);
     let price = 0;
 
     const quantities = [
@@ -37,11 +35,6 @@ function ShoppingCart() {
     }, [dispatch]);
 
     const handleInput = (e) => {
-        // e.preventDefault();
-        // if(e.target.value <= 0) {
-        //     e.target.value = 1;
-        // }
-        console.log('E', e.target)
         const item = {
             cart_item_id: e.target.id,
             quantity: e.target.value,
@@ -81,7 +74,6 @@ function ShoppingCart() {
                 const currProduct = item.product;
                 price += currProduct.price * item.quantity;
                 return (
-                    // <ShoppingCartItems props={{item, sessionUser}} />
                     <ul>
                         <li>
                             ProductImage: {currProduct.image_url}
@@ -100,14 +92,6 @@ function ShoppingCart() {
                             Description: {currProduct.description}
                         </li>
                         <li>
-                            {/* <input
-                                key={item.quantity}
-                                id={item.id}
-                                className='quantity-input'
-                                type='number'
-                                placeholder={item.quantity}
-                                value={item.quantity}
-                                onChange={handleInput}></input> */}
                             <select
                                 key={item.quantity}
                                 id={item.id}

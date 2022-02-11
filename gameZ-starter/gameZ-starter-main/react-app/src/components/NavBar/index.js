@@ -31,7 +31,6 @@ const NavBar = () => {
 
   useEffect(() => {
     setPathName(window.location.pathname);
-    console.log(pathName);
     window.scrollTo(0,0);
     if(pathName !== '/search-results'){
       queriedProducts = '';

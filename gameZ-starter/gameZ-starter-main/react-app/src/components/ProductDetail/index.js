@@ -15,7 +15,6 @@ function ProductDetail({ products }) {
     const allReviews = useSelector(state => state?.review.entries)
     const user = useSelector(state => state?.session?.user);
     const [itemQuantity, setItemQuantity] = useState(1);
-    const [quantityAlert, setQuantityAlert] = useState(false);
 
     const { productId } = useParams();
 
@@ -141,11 +140,6 @@ function ProductDetail({ products }) {
                     {!(product?.user_id === user?.id) &&
                         <div>
                             <form onSubmit={handleSubmit}>
-                                {/* <input
-                                    className='quantity-input'
-                                    type='number'
-                                    value={itemQuantity}
-                                    onChange={(e) => setItemQuantity(e.target.value)}></input> */}
                                 <select
                                     onChange={e => setItemQuantity(e.target.value)}
                                 >

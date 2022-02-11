@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { checkoutCart, editItem, loadCart, removeItem } from '../../store/shoppingCart'
-import ShoppingCartItems from '../ShoppingCart/shopping-cart-items';
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -111,7 +110,6 @@ function Checkout() {
           {currShoppingCart.cart_items.map(item => {
             const currProduct = item.product;
             return (
-              // <ShoppingCartItems props={{item, sessionUser}} />
               <ul>
                 <li>
                     ProductImage: {currProduct.image_url}
@@ -130,14 +128,6 @@ function Checkout() {
                     Description: {currProduct.description}
                 </li>
                 <li>
-                    {/* <input
-                        key={item.quantity}
-                        id={item.id}
-                        className='quantity-input'
-                        type='number'
-                        placeholder={item.quantity}
-                        defaultValue={item.quantity}
-                        onInput={handleInput}></input> */}
                     <select
                         key={item.quantity}
                         id={item.id}

@@ -14,7 +14,7 @@ function ProductDetail({ products }) {
     const dispatch = useDispatch()
     const allReviews = useSelector(state => state?.review.entries)
     const user = useSelector(state => state?.session?.user);
-    const [itemQuantity, setItemQuantity] = useState(1)
+    const [itemQuantity, setItemQuantity] = useState(1);
 
     const { productId } = useParams();
 
@@ -53,6 +53,7 @@ function ProductDetail({ products }) {
             history.push('/login')
             return;
         };
+
         const newCartItem = {
             shopping_cart_id: currShoppingCart.id,
             product_id: product.id,
@@ -61,8 +62,15 @@ function ProductDetail({ products }) {
         }
         for(let i = 0; i < currShoppingCart.cart_items.length; i++) {
             const cartItem = currShoppingCart.cart_items[i];
+
             if(cartItem.product.id === newCartItem.product_id) {
-                const newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
+                let newQuantity;
+                if((cartItem.quantity + parseInt(newCartItem.quantity, 10)) > 10) {
+                    newQuantity = 10;
+                } else {
+                    newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
+                }
+
                 dispatch(editItem({
                     cart_item_id: cartItem.id,
                     quantity: newQuantity,
@@ -84,15 +92,15 @@ function ProductDetail({ products }) {
         <div >
             <div id="product-detail-div">
 
-                <div id="left-detail-div">    
+                <div id="left-detail-div">
                     <img id="product-image" src={`${product?.image_url}`} alt='Product-Details' />
                     <>{filteredReviews.length > 1 ? < h2 className='review-label'>{filteredReviews.length} reviews</h2> : '' }</>
                     <>{filteredReviews.length === 1 ? <h2 className='review-label'>{filteredReviews.length} review</h2>: '' }</>
                     <>{ filteredReviews.length === 0 ? < h2 className='review-label'>Be the first to Review!</h2> : ''}</>
-                    
-                   
-                    
-                    
+
+
+
+
                     <div id="product-review-heading">
                         <h4 id="product-review-h4">Buyers are raving! </h4>
                         <p id="product-review-p"> Multiple people gave positive reviews to this shop in the past 7 days.</p>
@@ -120,7 +128,7 @@ function ProductDetail({ products }) {
                     ))}
 
                     {user && !(product?.user_id === user?.id) &&
-                        <AddReviewForm productId={productId} />}                    
+                        <AddReviewForm productId={productId} />}
                 </div>
 
                 <div id="right-detail-div">
@@ -132,18 +140,27 @@ function ProductDetail({ products }) {
                     {!(product?.user_id === user?.id) &&
                         <div>
                             <form onSubmit={handleSubmit}>
-                                <input
-                                    className='quantity-input'
-                                    type='number'
-                                    value={itemQuantity}
-                                    onChange={(e) => setItemQuantity(e.target.value)}></input>
+                                <select
+                                    onChange={e => setItemQuantity(e.target.value)}
+                                >
+                                    <option value={1}>1</option>
+                                    <option value={2}>2</option>
+                                    <option value={3}>3</option>
+                                    <option value={4}>4</option>
+                                    <option value={5}>5</option>
+                                    <option value={6}>6</option>
+                                    <option value={7}>7</option>
+                                    <option value={8}>8</option>
+                                    <option value={9}>9</option>
+                                    <option value={10}>10</option>
+                                </select>
                                 <button type='submit'>Add to cart</button>
                             </form>
                         </div>}
                     <NavLink className="edit-btn" hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} >Edit</NavLink>
                     <button className="delete-btn" hidden={user?.id === product?.user_id ? false : true} value={product?.id} onClick={handleDelete} type="submit">Delete</button>
                 </div>
-               
+
             </div>
         </div>
     );

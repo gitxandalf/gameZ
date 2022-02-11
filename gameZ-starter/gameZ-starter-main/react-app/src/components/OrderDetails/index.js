@@ -1,30 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { loadCart } from '../../store/shoppingCart'
 
 function OrderDetails() {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
   const { checkedOutCartId } = useParams();
   const sessionUser = useSelector(state => state?.session?.user);
-  const pastShoppingCarts = useSelector(state => state?.shoppingCart?.past_shopping_carts)
+  const checkedOutCart = location.state
   const [loaded, setLoaded] = useState(false);
   let orderTotal = 0;
 
   useEffect(() => {
     dispatch(loadCart(sessionUser.id))
-      .then(() => pastShoppingCarts.length ? setLoaded(true) : setLoaded(false))
+      .then(() => setLoaded(true))
     return () => setLoaded(false);
   }, [dispatch]);
 
   return (
     <>
-      {loaded && pastShoppingCarts.length &&
+      {loaded && checkedOutCart &&
         <div>
           <div>Thank You For Your Purchase!</div>
           <div>Order confirmation number #{checkedOutCartId}</div>
-          {pastShoppingCarts
-            .find(cart => cart.id === parseInt(checkedOutCartId, 10))
+          {checkedOutCart
             .cart_items
             .map(item => {
               const product = item.product
@@ -43,6 +44,8 @@ function OrderDetails() {
           <div>
             Order Total: ${orderTotal}
           </div>
+
+          <button onClick={() => history.push('/')}>Continue Shopping</button>
         </div>}
     </>
   )

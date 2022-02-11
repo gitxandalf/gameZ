@@ -66,11 +66,15 @@ function Checkout() {
     return
   }
 
+
   const handleCheckout = () => {
     const currShoppingCartId = currShoppingCart.id
     dispatch(checkoutCart(currShoppingCart));
     dispatch(loadCart(sessionUser.id));
-    history.push(`/shoppingCart/${currShoppingCartId}/orderDetails`);
+    history.push({
+      pathname: `/shoppingCart/${currShoppingCartId}/orderDetails`,
+      state: currShoppingCart
+    });
   }
 
   return (

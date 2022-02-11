@@ -20,6 +20,7 @@ import EditReviewForm from './components/Forms/EditReviewForm';
 import PageNotFound from './components/PageNotFound';
 import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
+import OrderDetails from './components/OrderDetails';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -71,6 +72,10 @@ function App() {
 
         <ProtectedRoute path='/shoppingCart/:id/checkout' exact={true} >
           <Checkout />
+        </ProtectedRoute>
+
+        <ProtectedRoute path='/shoppingCart/:checkedOutCartId/orderDetails' exact={true} >
+          <OrderDetails />
         </ProtectedRoute>
 
         <Route path='/products/:productId/edit-product'>

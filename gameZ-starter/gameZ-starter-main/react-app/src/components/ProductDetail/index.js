@@ -28,6 +28,7 @@ function ProductDetail({ products }) {
         dispatch(getCategories())
         dispatch(getProduct(productId))
         dispatch(getReviews())
+        if(user) dispatch(loadCart(user.id))
     }, [dispatch, productId])
 
     const handleDelete = (e) => {
@@ -47,10 +48,15 @@ function ProductDetail({ products }) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        if(!user) {
+            history.push('/login')
+            return;
+        };
         const newCartItem = {
             shopping_cart_id: currShoppingCart.id,
             product_id: product.id,
-            quantity: itemQuantity
+            quantity: itemQuantity,
+            user_id: currShoppingCart.user_id
         }
         for(let i = 0; i < currShoppingCart.cart_items.length; i++) {
             const cartItem = currShoppingCart.cart_items[i];
@@ -58,7 +64,8 @@ function ProductDetail({ products }) {
                 const newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
                 dispatch(editItem({
                     cart_item_id: cartItem.id,
-                    quantity: newQuantity
+                    quantity: newQuantity,
+                    user_id: currShoppingCart.user_id
                 }));
                 setItemQuantity(1)
                 history.push(`/shoppingCart/${currShoppingCart.id}`)
@@ -79,16 +86,17 @@ function ProductDetail({ products }) {
             <p>Category: {category[product?.category_id - 1]?.name}</p>
             <p>Price: {`$${product?.price}`}</p>
             <p>Description: {product?.description}</p>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <input
-                        className='quantity-input'
-                        type='number'
-                        value={itemQuantity}
-                        onChange={(e) => setItemQuantity(e.target.value)}></input>
-                    <button type='submit'>Add to cart</button>
-                </form>
-            </div>
+            {!(product?.user_id === user?.id) &&
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <input
+                            className='quantity-input'
+                            type='number'
+                            value={itemQuantity}
+                            onChange={(e) => setItemQuantity(e.target.value)}></input>
+                        <button type='submit'>Add to cart</button>
+                    </form>
+                </div>}
             <NavLink hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} className="edit">Edit</NavLink>
             <button hidden={user?.id === product?.user_id ? false : true} className="delete" value={product?.id} onClick={handleDelete} type="submit">Delete</button>
             <h2>Review</h2>

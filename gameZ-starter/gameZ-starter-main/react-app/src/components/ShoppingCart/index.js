@@ -10,13 +10,14 @@ function ShoppingCart() {
     const [loaded, setLoaded] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
+    const sessionUser = useSelector(state => state?.session?.user)
     const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
     const products = useSelector(state => state?.product?.entries);
     let price = 0;
 
     useEffect(() => {
-        if(loaded) dispatch(loadCart(currShoppingCart.user_id));
-        setLoaded(true);
+        dispatch(loadCart(sessionUser.id))
+            .then(() => setLoaded(true));
     }, [dispatch]);
 
     const handleInput = (e) => {
@@ -27,10 +28,11 @@ function ShoppingCart() {
 
         const item = {
             cart_item_id: e.target.id,
-            quantity: e.target.value
+            quantity: e.target.value,
+            user_id: sessionUser.id
         }
         dispatch(editItem(item))
-        dispatch(loadCart(currShoppingCart.user_id))
+        dispatch(loadCart(sessionUser.id))
     }
     const handleDelete = (e) => {
         e.preventDefault();
@@ -41,7 +43,7 @@ function ShoppingCart() {
         }
 
         if(deleteAlert && e.target.value === 'DELETETHISITEM') {
-            dispatch(removeItem(deleteItemId));
+            dispatch(removeItem({cart_item_id: deleteItemId, user_id: sessionUser.id}));
         }
 
         setDeleteAlert(false);
@@ -86,12 +88,12 @@ function ShoppingCart() {
                                 className='quantity-input'
                                 type='number'
                                 placeholder={item.quantity}
-                                defaultValue={item.quantity}
-                                onInput={handleInput}></input>
+                                value={item.quantity}
+                                onChange={handleInput}></input>
                             Quantity: {item.quantity}
                         </li>
                         <li>
-                            Price: {currProduct.price}
+                            Price: {currProduct.price * item.quantity} ({currProduct.price} each)
                         </li>
                         <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
                     </ul>)
@@ -99,10 +101,11 @@ function ShoppingCart() {
             <li>
                 Cart Total: {price}
             </li>
-            <button onClick={(e) => {
-                e.preventDefault()
-                history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
-            }}>Checkout</button>
+            {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&
+                <button onClick={(e) => {
+                    e.preventDefault()
+                    history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
+                }}>Checkout</button>}
         </div>
     )
 }

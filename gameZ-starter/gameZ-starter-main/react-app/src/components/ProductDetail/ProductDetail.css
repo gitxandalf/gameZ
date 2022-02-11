@@ -1,9 +1,70 @@
 #product-image {
-    height: 500px;
-    width: 650px;
+    height: 1000px;
+    width: 100%;
+    margin-left: 2%;
 }
+
 
 #product-detail-div {
-    padding: 15%;
+    display: flex;
+    flex-direction: row;
+    border: 5px solid blue;
+    margin: 2% 10%;
 }
 
+
+#right-detail-div {
+    border: 5px solid green;
+    width: 30%;
+}
+
+#left-detail-div {
+    border: 5px solid purple;
+    width: 70%;
+}
+
+.review-label {
+    margin: 30px 0 25px 2%;
+    font-family: "Guardian-EgypTT",Charter,"Charter Bitstream",Cambria,"Noto Serif Light","Droid Serif",Georgia,serif;
+    font-weight: 300;
+    letter-spacing: 0.35px;
+}
+
+#product-review-h4 {
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    line-height: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    display: inline;
+    margin: 0;
+    margin-right: 3px;
+}
+
+#product-review-p {
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    margin: 0;
+}
+
+#product-review-heading {
+    margin-left: 2%;
+    display: flex;
+}
+
+#product-review-h5 {
+    margin-left: 2%;
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    font-weight: 300;
+}
+
+#line-div-gray {
+    border-bottom: 3px solid rgb(222,222,222);
+    margin: 0 2%;
+}
+
+#review-content-div {
+    margin-left: 2%;
+}

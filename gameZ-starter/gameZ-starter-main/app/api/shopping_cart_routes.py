@@ -18,10 +18,10 @@ def shopping_carts():
 @shopping_cart_routes.route('/<int:user_id>')
 @login_required
 def shopping_cart(user_id):
-  current_shopping_cart = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == False)
+  current_shopping_cart = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == False).first()
   past_shopping_carts = ShoppingCart.query.filter(user_id == ShoppingCart.user_id, ShoppingCart.checked_out == True)
   return {
-    'current_shopping_cart': current_shopping_cart[0].to_dict(),
+    'current_shopping_cart': {} if current_shopping_cart == None else current_shopping_cart.to_dict(),
     'past_shopping_carts': [past_shopping_cart.to_dict() for past_shopping_cart in past_shopping_carts]
   }
 
@@ -65,9 +65,9 @@ def edit_item():
 @login_required
 def checkout_cart():
   data = request.json
+  new_cart = ShoppingCart(user_id = data['user_id'])
   shopping_cart = db.session.query(ShoppingCart).get(data['id'])
   shopping_cart.checked_out = True
-  new_cart = ShoppingCart(user_id = shopping_cart.user_id)
   db.session.add(new_cart)
   db.session.commit()
   return new_cart.to_dict()

@@ -23,13 +23,17 @@ const NavBar = () => {
   const allCategories = useSelector(state => state?.category?.entries)
   const allProducts = useSelector(state => state?.products?.entries)
   const [preview, setPreview] = useState(false)
+  const [pathName, setPathName] = useState(window.location.pathname);
 
   useEffect(() => {
     if(sessionUser) dispatch(loadCart(sessionUser.id));
   }, [dispatch, sessionUser])
 
   useEffect(() => {
-    if(window.location.pathname !== '/search-results'){
+    setPathName(window.location.pathname);
+    console.log(pathName);
+    window.scrollTo(0,0);
+    if(pathName !== '/search-results'){
       queriedProducts = '';
       queriedCategorys = '';
     }

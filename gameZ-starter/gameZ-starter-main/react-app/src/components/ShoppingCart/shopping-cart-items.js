@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import Select from 'react-select'
 import { editItem, loadCart, removeItem } from '../../store/shoppingCart';
 
 function ShoppingCartItems({props}) {
@@ -9,22 +10,40 @@ function ShoppingCartItems({props}) {
   const [itemQuantity, setItemQuantity] = useState(item.quantity);
   const [deleteItemId, setDeleteItemId] = useState('');
   const [deleteAlert, setDeleteAlert] = useState(false);
+  const quantities = [
+    {label: 1, value: 1},
+    {label: 2, value: 2},
+    {label: 3, value: 3},
+    {label: 4, value: 4},
+    {label: 5, value: 5},
+    {label: 6, value: 6},
+    {label: 7, value: 7},
+    {label: 8, value: 8},
+    {label: 9, value: 9},
+    {label: 10, value: 10}
+  ];
+
+  useEffect(() => {
+    dispatch(loadCart(sessionUser.id))
+  }, [dispatch, itemQuantity])
+
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    let newQuantity = parseInt(itemQuantity, 10);
-    if(newQuantity <= 0 || typeof newQuantity !== 'number' || isNaN(newQuantity)) {
-      newQuantity = item.quantity
-      setItemQuantity(item.quantity)
-    };
+    // e.preventDefault();
+    // let newQuantity = parseInt(itemQuantity, 10);
+    // if(newQuantity <= 0 || typeof newQuantity !== 'number' || isNaN(newQuantity)) {
+    //   newQuantity = item.quantity
+    //   setItemQuantity(item.quantity)
+    // };
 
     const editedItem = {
         cart_item_id: item.id,
-        quantity: newQuantity,
+        quantity: e.value,
         user_id: sessionUser.id
     }
     dispatch(editItem(editedItem))
     dispatch(loadCart(sessionUser.id))
+    // setItemQuantity(e.target.value)
   }
 
   const handleDelete = (e) => {
@@ -39,10 +58,15 @@ function ShoppingCartItems({props}) {
         dispatch(removeItem({cart_item_id: deleteItemId, user_id: sessionUser.id}));
     }
 
+    console.log('Item.quantity - BEFORE =', item.quantity, 'GAME =', item.product.name)
+    console.log('itemQuantity State - BEFORE =', itemQuantity, 'GAME =', item.product.name)
+    dispatch(loadCart(sessionUser.id))
+    console.log('Item.quantity - AFTER =', item.quantity)
+    console.log('itemQuantity State - AFTER =', itemQuantity)
     setDeleteAlert(false);
     setDeleteItemId('');
     return
-}
+  }
 
   return (
     <>
@@ -70,17 +94,33 @@ function ShoppingCartItems({props}) {
               Description: {currProduct.description}
           </li>
           <li>
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
               <input
-                  key={item.quantity}
                   id={item.id}
                   className='quantity-input'
                   type='number'
                   placeholder={item.quantity}
-                  value={itemQuantity}
+                  value={parseInt(itemQuantity, 10)}
                   onChange={e => setItemQuantity(e.target.value)}
-                  onBlur={handleSubmit}></input>
-            </form>
+                  ></input>
+            </form> */}
+              {/* <select
+                value={itemQuantity}
+                onChange={handleSubmit}
+                >
+                {quantities.map(quantity => {
+                  return (
+                    <option
+                      key={quantity}
+                    >{quantity}</option>
+                  )
+                })}
+              </select> */}
+              <form onSubmit={handleSubmit}>
+                <Select options={quantities} onChange={e => handleSubmit(e)}>
+
+                </Select>
+              </form>
               Quantity: {item.quantity}
           </li>
           <li>

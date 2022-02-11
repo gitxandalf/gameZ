@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { checkoutCart, editItem, loadCart, removeItem } from '../../store/shoppingCart'
+import ShoppingCartItems from '../ShoppingCart/shopping-cart-items';
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -11,6 +12,19 @@ function Checkout() {
   const [loaded, setLoaded] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
+
+  const quantities = [
+    {label: 1, value: 1},
+    {label: 2, value: 2},
+    {label: 3, value: 3},
+    {label: 4, value: 4},
+    {label: 5, value: 5},
+    {label: 6, value: 6},
+    {label: 7, value: 7},
+    {label: 8, value: 8},
+    {label: 9, value: 9},
+    {label: 10, value: 10}
+  ];
 
   useEffect(() => {
     dispatch(loadCart(sessionUser.id))
@@ -97,6 +111,7 @@ function Checkout() {
           {currShoppingCart.cart_items.map(item => {
             const currProduct = item.product;
             return (
+              // <ShoppingCartItems props={{item, sessionUser}} />
               <ul>
                 <li>
                     ProductImage: {currProduct.image_url}
@@ -115,14 +130,27 @@ function Checkout() {
                     Description: {currProduct.description}
                 </li>
                 <li>
-                    <input
+                    {/* <input
                         key={item.quantity}
                         id={item.id}
                         className='quantity-input'
                         type='number'
                         placeholder={item.quantity}
                         defaultValue={item.quantity}
-                        onInput={handleInput}></input>
+                        onInput={handleInput}></input> */}
+                    <select
+                        key={item.quantity}
+                        id={item.id}
+                        onChange={handleInput}
+                    >
+                        {quantities.map(opt => {
+                            return (
+                                <option
+                                    selected={item.quantity === opt.value ? true : false}
+                                    value={opt.value}>{opt.label}</option>
+                            )
+                        })}
+                    </select>
                     Quantity: {item.quantity}
                 </li>
                 <li>

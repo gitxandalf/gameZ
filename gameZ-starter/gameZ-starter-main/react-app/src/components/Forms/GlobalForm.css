@@ -27,4 +27,20 @@
     border-radius: 15px;
 }
 
+#review-form-h2 {
+    font-size: 20px;
+    line-height: 28px;
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    font-weight: 500;
+}
 
+.required-field::after {
+    content: "*";
+    color: rgb(217, 10, 10);
+}
+
+ /* input:required {
+    background-color: #FDDCD8;
+    border-color: rgba(166, 26, 46, 0.35);
+    transition: all 200ms ease-in;
+    } */

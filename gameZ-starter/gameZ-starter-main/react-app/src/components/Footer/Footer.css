@@ -18,3 +18,16 @@ footer {
     z-index: 1;
     width: 100%;
 }
+
+.input-label {
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    line-height: 18px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1px;
+}
+
+.input-div {
+    display: flex;
+    flex-direction: column;
+}

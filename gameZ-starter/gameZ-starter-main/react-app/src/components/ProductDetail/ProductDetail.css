@@ -63,8 +63,30 @@
 #line-div-gray {
     border-bottom: 3px solid rgb(222,222,222);
     margin: 0 2%;
+    margin-bottom: 30px;
 }
 
 #review-content-div {
     margin-left: 2%;
+}
+
+#user-profile-image {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 5px 15px 0 0;
+}
+
+#user-info-review {
+    display: flex;
+    justify-content: column;
+}
+
+#username-p-line {
+    border-bottom: #595959 1px solid;
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 18px;
+    color: #B5B5B5;
 }

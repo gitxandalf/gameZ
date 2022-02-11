@@ -83,19 +83,23 @@ function ProductDetail({ products }) {
 
                 <div id="left-detail-div">    
                     <img id="product-image" src={`${product?.image_url}`} alt='Product-Details' />
-
-                    <h2 className='review-label'>{allReviews.length} reviews</h2>
+                    <h2 className='review-label'>{allReviews.filter(review => review?.product_id === parseInt(productId)).length} reviews</h2>
+                    
                     <div id="product-review-heading">
                         <h4 id="product-review-h4">Buyers are raving! </h4>
                         <p id="product-review-p"> Multiple people gave positive reviews to this shop in the past 7 days.</p>
                     </div>
+
                     <h5 id="product-review-h5">Reviews for this item</h5>
                     <div id="line-div-gray"></div>
 
                     {allReviews && allReviews?.filter(review => review?.product_id === parseInt(productId)).map(review => (
                         <div id="review-content-div">
-                            <p>{stateUsers[review.user_id].username}</p>
-                            <img src={`${stateUsers[review.user_id]?.image_url}`} alt='user' />
+                            <div id='user-info-review'>
+                                <img id="user-profile-image" src={`${stateUsers[review.user_id]?.image_url}`} alt='user' />
+                                <p id="username-p-line">{stateUsers[review.user_id].username}</p>
+                            </div>
+
                             <p>Title: {review?.title}</p>
                             <p>Content: {review?.content}</p>
                             {user &&

@@ -63,34 +63,31 @@ const NavBar = () => {
   const handleSearch = async (e) => {
     e.preventDefault();
     const searchQuery = search;
-    searchProductResponse = await fetch(`/api/search/products/${searchQuery}`).then((res => res.json())).catch((error => history.push('/error-page')));
-    if (searchProductResponse){
-      const queryProductResponse = searchProductResponse;
-      queriedProducts = queryProductResponse.products;
-      if(window.location.pathname === '/search-results') {
-        history.push('/')
-        history.push('/search-results');
-      }
-      history.push('/search-results');
-    };
 
-    searchCategoryResponse = await fetch(`/api/search/categories/${searchQuery}`).then((res => res.json())).catch((error => history.push('/error-page')));
-    if (searchCategoryResponse){
-      const queryCategoryResponse = searchCategoryResponse;
-      queriedCategorys = queryCategoryResponse.products;
-      if(window.location.pathname === '/search-results') {
-        history.push('/')
-        history.push('/search-results');
+
+    searchCategoryResponse = await fetch(`/api/search/categories/${searchQuery}`).then((res => res.json()));
+    if (searchCategoryResponse.categories[0]){
+    if (allCategories.find(category => searchCategoryResponse.categories[0].name === category.name)){
+      history.push(`/categories/${searchCategoryResponse.categories[0].id}/products`)
       }
-      history.push('/search-results');
+    } else {
+      searchProductResponse = await fetch(`/api/search/products/${searchQuery}`).then((res => res.json()));
+          if (searchProductResponse){
+            const queryProductResponse = searchProductResponse;
+            queriedProducts = queryProductResponse.products;
+            if(window.location.pathname === '/search-results') {
+              history.push('/')
+              history.push('/search-results');
+            }
+            history.push('/search-results');
+          };
+      }
     }
-  }
 
   return (
     <nav>
 
       <div id="nav-div">
-
 
         <div id="nav-search">
           <Link to='/' exact={true} activeClassName='active'>
@@ -107,7 +104,6 @@ const NavBar = () => {
               onChange={e => setSearch(e.target.value)}
             />
           </form>
-
           <ul id="nav-ul">
             <li id='add-product' className='nav-li'>
               {sessionUser &&
@@ -127,17 +123,10 @@ const NavBar = () => {
                   Sign Up
                 </NavLink>}
             </li>
-            {/* <li className='nav-li'>
-            {sessionUser &&
-              <NavLink to='/users' exact={true} activeClassName='active'>
-              Users
-              </NavLink>}
-            </li> */}
             <li id='logout' className='nav-li'>
               {sessionUser &&
                 <LogoutButton />}
             </li>
-
             <li id='cart-icon' className='nav-li'>
               {sessionUser &&
                 <img

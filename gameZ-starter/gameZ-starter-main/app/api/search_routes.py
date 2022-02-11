@@ -1,3 +1,5 @@
+from nis import cat
+from typing import List
 from flask import Blueprint
 from sqlalchemy import func
 from app.models import Product, Category
@@ -6,8 +8,10 @@ search_routes = Blueprint('search', __name__)
 
 @search_routes.route('/categories/<search_query>')
 def category_search(search_query):
-    products = Product.query.join(Category).filter(func.lower(Category.name).like(f'%{search_query.lower()}%') == func.lower(search_query).like(f'%{search_query.lower()}%'))
-    return {'products': [product.to_dict() for product in products]}
+    categories = Category.query.filter(func.lower(Category.name) == func.lower(search_query))
+    return {'categories': [category.to_dict() for category in categories]}
+
+
 
 @search_routes.route('/products/<search_query>')
 def product_search(search_query):

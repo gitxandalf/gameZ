@@ -64,6 +64,7 @@ const AddReviewForm = ({ productId }) => {
                 <div className='input-div'>
                     <label className='input-label required-field'>Title </label>
                     <input
+                        className='review-title-input'
                         type='text'
                         name='title'
                         required
@@ -74,7 +75,7 @@ const AddReviewForm = ({ productId }) => {
                 <div className='input-div'>
                     <label className='input-label required-field'>Review </label>
                     <textarea
-                        className='text-area'
+                        className='review-text-area'
                         type='text'
                         name='content'
                         required
@@ -82,7 +83,11 @@ const AddReviewForm = ({ productId }) => {
                         value={content}
                     ></textarea>
                 </div>
+                <div id="">
+
+                </div>
                 <button 
+                className="review-submit-btn"
                 // disabled={errors.length > 0}
                 type='submit'> Submit </button>
             </form>

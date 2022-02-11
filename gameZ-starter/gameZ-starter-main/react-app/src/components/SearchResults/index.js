@@ -6,7 +6,7 @@ import { getProducts } from '../../store/product';
 import { loadCart } from '../../store/shoppingCart';
 import "./SearchResults.css"
 
-function SearchResults({products, categories}) {
+function SearchResults({ products, categories }) {
     const dispatch = useDispatch()
 
     const allCategories = useSelector(state => state?.category?.entries)
@@ -17,7 +17,7 @@ function SearchResults({products, categories}) {
     useEffect(() => {
         dispatch(getCategories())
         dispatch(getProducts())
-        dispatch(loadCart(sessionUser.id))
+        if (sessionUser) dispatch(loadCart(sessionUser.id))
     }, [dispatch])
 
     return (

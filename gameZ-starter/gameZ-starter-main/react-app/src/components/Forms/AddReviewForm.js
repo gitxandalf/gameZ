@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import "./EditProductForm.css"
@@ -17,15 +17,16 @@ const AddReviewForm = ({ productId }) => {
     const [content, setContent] = useState('')
     const user = useSelector(state => state.session.user)
 
-    //     useEffect(() => {
-    //         const errors = []
+    useEffect(() => {
+        const errors = []
 
-    //         // if (!categoryId) errors.push("Please select a category")
-    //         // if (name?.length > 50 | | name?.length <= 0) errors.push("Name must be less 50 characters")
-    //         // if (imageUrl?.length > 255 | | imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
-    //         // if (!price | | typeof price == = "number") errors.push("Please provide a valid price")
-    //         setErrors(errors)
-    //     }, [title, content])
+//         // if (!categoryId) errors.push("Please select a category")
+//         // if (name?.length > 50 | | name?.length <= 0) errors.push("Name must be less 50 characters")
+//         // if (imageUrl?.length > 255 | | imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
+//         // if (!price | | typeof price == = "number") errors.push("Please provide a valid price")
+//         setErrors(errors)
+    
+    }, [title, content])
 
     let review;
     const onSubmit = async (e) => {
@@ -34,8 +35,9 @@ const AddReviewForm = ({ productId }) => {
             review = await dispatch(postReview({ productId, title, content, userId: user.id }))
         }
         if (review) {
-
             history.push(`/products/${productId}`)
+            setTitle("")
+            setContent("")
         }
     }
 

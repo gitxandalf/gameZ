@@ -2,15 +2,19 @@ footer {
     height: 50px;
     background-color: black;
     display: flex;
-    justify-content: space-around;
-    padding: 0 300px
+    justify-content: center;
 }
 
 .footer-links {
     font-size: 15px;
     color: white;
     font-weight: 300;
-    align-items: center;
     padding-top: 12px;
 }
 
+#footer {
+    position:fixed;
+    bottom: 0;
+    z-index: 1;
+    width: 100%;
+}

@@ -78,13 +78,20 @@ function ProductDetail({ products }) {
         history.push(`/shoppingCart/${currShoppingCart.id}`)
     }
 
+    const filteredReviews = allReviews.filter(review => review?.product_id === parseInt(productId))
+
     return (
         <div >
             <div id="product-detail-div">
 
                 <div id="left-detail-div">    
                     <img id="product-image" src={`${product?.image_url}`} alt='Product-Details' />
-                    <h2 className='review-label'>{allReviews.filter(review => review?.product_id === parseInt(productId)).length} reviews</h2>
+                    <>{filteredReviews.length > 1 ? < h2 className='review-label'>{filteredReviews.length} reviews</h2> : '' }</>
+                    <>{filteredReviews.length === 1 ? <h2 className='review-label'>{filteredReviews.length} review</h2>: '' }</>
+                    <>{ filteredReviews.length === 0 ? < h2 className='review-label'>Be the first to Review!</h2> : ''}</>
+                    
+                   
+                    
                     
                     <div id="product-review-heading">
                         <h4 id="product-review-h4">Buyers are raving! </h4>

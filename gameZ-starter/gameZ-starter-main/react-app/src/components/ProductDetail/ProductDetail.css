@@ -8,7 +8,7 @@
 #product-detail-div {
     display: flex;
     flex-direction: row;
-    margin: 2% 10%;
+    margin: 2% 18%;
 }
 
 
@@ -74,7 +74,7 @@
     height: 40px;
     width: 40px;
     border-radius: 50%;
-    margin: 5px 15px 0 0;
+    margin: 6px 15px 0 0;
 }
 
 #user-info-review {

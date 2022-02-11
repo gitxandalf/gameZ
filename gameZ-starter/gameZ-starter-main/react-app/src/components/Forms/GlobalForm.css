@@ -1,0 +1,31 @@
+
+
+.delete-btn,
+.edit-btn {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    color: black;
+    font-size: 13px;
+    line-height: 1.4;
+    min-height: 36px;
+    font-weight: 500;
+    min-width: 36px;
+    padding: 9px 15px;
+    font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+    margin: 0 15px 10px 0;
+}
+
+.edit-btn {
+    padding: 11px 16px;
+}
+
+.delete-btn:hover,
+.edit-btn:hover {
+    transition: transform 200ms cubic-bezier(0.345, 0.115, 0.135, 1.42),opacity 150ms ease-out;
+    background-color: rgba(128, 128, 128, .1);
+    border-radius: 15px;
+}
+
+
+

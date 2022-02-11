@@ -82,6 +82,7 @@ const EditReviewForm = ({ products }) => {
                     <label> Review </label>
                     <textarea
                         type='text'
+                        className='text-area'
                         name='content'
                         required
                         disabled={errors.length > 0}

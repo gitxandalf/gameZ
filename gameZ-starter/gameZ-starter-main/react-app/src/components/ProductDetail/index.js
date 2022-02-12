@@ -116,13 +116,13 @@ function ProductDetail({ products }) {
                                 <p id="username-p-line">{stateUsers[review.user_id].username}</p>
                             </div>
 
-                            <p className="title-p">Title: {review?.title}</p>
+                            <p className="title-p">{review?.title}</p>
                             <p className="content-p">{review?.content}</p>
                             {user &&
-                                <>
+                                <div id="edit-delete-div">
                                     <NavLink hidden={review?.user_id !== user.id} to={`/reviews/${review?.id}/edit-reviews`} value={review?.id} className="edit-btn">Edit</NavLink>
                                     <button hidden={review?.user_id !== user.id} className="delete-btn" value={review?.id} onClick={handleReviewDelete} type="submit">Delete</button>
-                                </>
+                                </div>
                             }
                         </div>
                     ))}
@@ -132,9 +132,10 @@ function ProductDetail({ products }) {
                 </div>
 
                 <div id="right-detail-div">
+                    <p id="developer-heading">Developer</p>
                     <p id="developer-name">{stateUsers[product?.user_id]?.username}</p>
                     <h2 id="product-name">{product?.name}</h2>
-                    <p>Category: {category[product?.category_id - 1]?.name}</p>
+                    <p id ="category-label">Category: {category[product?.category_id - 1]?.name}</p>
                     <p id="product-price-p"> {`$${product?.price}`}</p>
                     <p>Description: {product?.description}</p>
                     {!(product?.user_id === user?.id) &&
@@ -159,6 +160,7 @@ function ProductDetail({ products }) {
                         </div>}
                     <NavLink className="edit-btn" hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} >Edit</NavLink>
                     <button className="delete-btn" hidden={user?.id === product?.user_id ? false : true} value={product?.id} onClick={handleDelete} type="submit">Delete</button>
+                 
                 </div>
 
             </div>

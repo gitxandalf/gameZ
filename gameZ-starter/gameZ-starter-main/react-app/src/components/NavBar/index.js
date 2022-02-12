@@ -4,7 +4,7 @@ import { NavLink, Link, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import "./NavBar.css"
-import logo from '../../images/logo.png'
+import Game from '../../images/Game.png'
 import ShoppingCart from '../ShoppingCart';
 import ShoppingCartPreview from '../ShoppingCartPreview/ShoppingCartPreview';
 import shoppingCartIcon from '../../images/shopping-cart.png'
@@ -94,47 +94,61 @@ const NavBar = () => {
 
         <div id="nav-search">
           <Link to='/' exact={true} activeClassName='active'>
-            <img id="nav-logo" alt="logo" src={logo} />
+            <img id="nav-logo" alt="logo" src={Game} />
           </Link>
-          <form onSubmit={handleSearch}>
-            <label htmlFor='search'>Search</label>
-            <input
-              id="search-input"
-              name='search'
-              type='text'
-              placeholder='Search'
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
+          <form id="search-form" onSubmit={handleSearch}>
+            <div id="search-div">
+            <div id="search-div-under">
+              <input
+                id="search-input"
+                name='search'
+                type='text'
+                placeholder='Search games'
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              /> 
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            </div>
           </form>
           <ul id="nav-ul">
             <li id='add-product' className='nav-li'>
               {sessionUser &&
-                <NavLink to='/products/add-product' exact={true} activeClassName='active'>
+                <NavLink className="list-a" to='/products/add-product' exact={true} activeClassName='active'>
                   List a Game
                 </NavLink>}
             </li>
+
+
+            {!sessionUser &&
             <li id='login' className='nav-li'>
-              {!sessionUser &&
                 <NavLink to='/login' exact={true} activeClassName='active'>
-                  Login
-                </NavLink>}
-            </li>
+                  Log in
+                </NavLink>
+            </li>}
+
+            {!sessionUser &&
             <li id='sign-up' className='nav-li'>
-              {!sessionUser &&
                 <NavLink to='/sign-up' exact={true} activeClassName='active'>
-                  Sign Up
-                </NavLink>}
-            </li>
-            <li id='logout' className='nav-li'>
-              {sessionUser &&
-                <LogoutButton />}
-            </li>
-            <li id='cart-icon' className='nav-li'>
+                  Sign up
+                </NavLink>
+            </li>}
+
+
+            {sessionUser &&
+              <li id='logout' className='nav-li'>
+                  <LogoutButton />
+              </li>}
+
+
+            <li id='cart-icon' className='nav-li list-a'>
               {sessionUser &&
                 <img
                   src={shoppingCartIcon}
-                  onClick={handleClick} />}
+                  onClick={handleClick}
+                  alt="cart"
+                  className='list-a'
+                  />}
             </li>
             {preview && <ShoppingCartPreview />}
           </ul>
@@ -142,11 +156,12 @@ const NavBar = () => {
       </div>
 
       <div className='nav-categories'>
-        <div className='nav-category-links'>{allCategories && allCategories?.map((category) => (
-          <div key={category?.id}>
-            <Link key={category?.id + 1} to={`/categories/${category?.id}/products`}>{category?.name}</Link>
+        <div className='nav-category-links'>{allCategories && allCategories?.map((category) => {
+          if(category?.id)return(
+            <div key={category?.id}>
+              <NavLink activeClassName='active' key={category?.id + 1} to={`/categories/${category?.id}/products`}>{category?.name}</NavLink>
           </div>
-        ))}
+      )})}
         </div>
       </div>
 

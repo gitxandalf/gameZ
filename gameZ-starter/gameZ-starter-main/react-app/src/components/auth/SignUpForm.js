@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import "./SignUpForm.css"
 
-const SignUpForm = () => {
+const SignUpForm = ({setSearch}) => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [imageUrl, setImageUrl] = useState('')
@@ -16,6 +16,10 @@ const SignUpForm = () => {
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    setSearch('');
+  }, [])
+
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
@@ -25,7 +29,7 @@ const SignUpForm = () => {
       }
     }
   };
- 
+
   const updateUsername = (e) => {
     setUsername(e.target.value);
   };

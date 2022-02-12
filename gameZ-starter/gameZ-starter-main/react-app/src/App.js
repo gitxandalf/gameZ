@@ -25,6 +25,7 @@ import { getReviews } from './store/review';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.entries)
   const reviews = useSelector((state) => state.review.entries)
@@ -45,16 +46,16 @@ function App() {
   return (
     <BrowserRouter>
 
-      <NavBar />
+      <NavBar search={search} setSearch={setSearch}/>
 
       <Switch>
 
-        <Route path='/login' exact={true}>
-          <LoginForm />
+        <Route path='/login' exact={true} >
+          <LoginForm setSearch={setSearch}/>
         </Route>
 
         <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+          <SignUpForm setSearch={setSearch}/>
         </Route>
 
         <ProtectedRoute path='/users' exact={true} >
@@ -66,7 +67,7 @@ function App() {
         </ProtectedRoute>
 
         <ProtectedRoute path='/products/add-product' exact={true} >
-          <AddProductForm products={products} />
+          <AddProductForm products={products} setSearch={setSearch}/>
         </ProtectedRoute>
 
         <ProtectedRoute path='/shoppingCart/:id' exact={true} >

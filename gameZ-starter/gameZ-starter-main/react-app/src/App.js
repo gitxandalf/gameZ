@@ -21,16 +21,19 @@ import PageNotFound from './components/PageNotFound';
 import Checkout from './components/Checkout';
 import SearchResults from './components/SearchResults';
 import OrderDetails from './components/OrderDetails';
+import { getReviews } from './store/review';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.entries)
-
+  const reviews = useSelector((state) => state.review.entries)
+  console.log(reviews);
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());
       await dispatch(getProducts());
+      await dispatch(getReviews());
       setLoaded(true);
     })();
   }, [dispatch]);
@@ -91,7 +94,7 @@ function App() {
         </Route>
 
         <Route path='/reviews/:reviewId/edit-reviews' exact={true} >
-          <EditReviewForm products={products} />
+          <EditReviewForm products={products} reviews={reviews} />
         </Route>
 
         <Route path='/search-results' exact={true} >

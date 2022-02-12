@@ -24,7 +24,7 @@ def validation_errors_to_error_messages(validation_errors):
 # GET ALL REVIEWS
 
 
-@review_routes.route('')
+@review_routes.route('/')
 def reviews():
     # GET Route for all reviews
     users = User.query.all()

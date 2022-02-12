@@ -14,7 +14,7 @@ const addCategory = (category) => ({
 
 
 export const getCategories = () => async dispatch => {
-    const response = await fetch(`/api/categories`);
+    const response = await fetch(`/api/categories/`);
 
     if (response.ok) {
         const list = await response.json();

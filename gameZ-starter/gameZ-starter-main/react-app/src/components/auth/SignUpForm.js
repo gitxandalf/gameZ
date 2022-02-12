@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import "./SignUpForm.css"
+import "../Forms/GlobalForm.css"
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -49,14 +50,18 @@ const SignUpForm = () => {
   return (
     <div id="sign-up-div">
       <form className="sign-up-form" onSubmit={onSignUp}>
-        <div>
+        <div className="each-error-div">
           {errors.map((error, ind) => (
             <div key={ind}>{error}</div>
           ))}
         </div>
-        <div>
-          <label>User Name</label>
+        <h2 id="form-h2">Sign up</h2>
+        <div className='input-div'>
+          <label
+          className='input-label required-field'
+          >User Name</label>
           <input
+            className='title-input'
             type='text'
             name='username'
             onChange={updateUsername}
@@ -64,8 +69,11 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>Image Url</label>
+          <label
+            className='input-label required-field'
+          >Image Url</label>
           <input
+            className='title-input'
             type='text'
             name='image_url'
             onChange={(e)=> setImageUrl(e.target.value)}
@@ -73,8 +81,11 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>First Name</label>
+          <label
+            className='input-label required-field'
+          >First Name</label>
           <input
+            className='title-input'
             type='text'
             name='first_name'
             onChange={(e) => setFirstName(e.target.value)}
@@ -82,8 +93,12 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>Last Name</label>
+          <label
+            className='input-label required-field'
+          >Last Name</label>
           <input
+
+            className='title-input'
             type='text'
             name='last_name'
             onChange={(e) => setLastName(e.target.value)}
@@ -91,8 +106,11 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>Email</label>
+          <label
+            className='input-label required-field'
+          >Email</label>
           <input
+            className='title-input'
             type='text'
             name='email'
             onChange={updateEmail}
@@ -100,8 +118,11 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>Password</label>
+          <label
+            className='input-label required-field'
+          >Password</label>
           <input
+            className='title-input'
             type='password'
             name='password'
             onChange={updatePassword}
@@ -109,16 +130,23 @@ const SignUpForm = () => {
           ></input>
         </div>
         <div>
-          <label>Repeat Password</label>
+          <label
+            className='input-label required-field'
+          >Repeat Password</label>
           <input
+            className='title-input'
+            className='title-input'
             type='password'
             name='repeat_password'
             onChange={updateRepeatPassword}
             value={repeatPassword}
-            required={true}
           ></input>
         </div>
-        <button type='submit'>Sign Up</button>
+
+        <div className="form-btn-login">
+          <button id="login-btn" type='submit'>Sign Up</button>
+        </div>
+
       </form>
     </div>
   );

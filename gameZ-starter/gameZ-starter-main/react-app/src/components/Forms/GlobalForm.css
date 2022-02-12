@@ -19,7 +19,7 @@
 .edit-btn {
     padding: 11px 16px;
 }
-
+ 
 .delete-btn:hover,
 .edit-btn:hover {
     transition: transform 200ms cubic-bezier(0.345, 0.115, 0.135, 1.42),opacity 150ms ease-out;
@@ -34,28 +34,24 @@
     font-weight: 500;
 }
 
-.required-field::after {
+/* .required-field::after{
     content: "*";
     color: rgb(217, 10, 10);
-}
+} */
 
 
     .text-area,
     .title-input {
-        appearance: none;
-        background: #FFFFFF;
         box-shadow: 0 1px 4px 0 rgb(34 34 34 / 10%) inset;
         border-color: rgba(34, 34, 34, 0.15);
         border-style: solid;
         border-width: 1px;
         border-radius: 6px;
         color: #222222;
-        display: block;
         font-family: inherit;
         font-size: 16px;
         line-height: 28px;
         height: 10px;
-        outline: none;
         padding-top: 9px;
         padding-bottom: 9px;
         padding-left: 12px;
@@ -70,7 +66,7 @@
         height: 50px;
       
     }
-
+    .sign-up-form,
     form.style-form {
         border: 2px solid rgb(222,222,222);
         padding: 20px;
@@ -86,6 +82,8 @@
     justify-content: center;
     }
 
+    #demo-btn,
+    #login-btn,
     .submit-btn {
         border-radius: 24px;
         font-size: 12px;
@@ -98,24 +96,48 @@
         text-align: center;
         border: none !important;
     }
-
+    #demo-btn:hover,
+    #login-btn:hover,
     .submit-btn:hover{
         background-color: rgba(158, 158, 158, .5);
     }
 
-    
+    #demo-btn,
     #login-btn {
-       margin-bottom: ;
+        margin-bottom: 10px;
+        text-align: center;
+        align-self: center;
+        width: 350px;
     }
 
-    #demo-btn {
-        position: absolute;
-    }
-
+    .sign-up-form,
     .login-div-style {
         border: 2px solid rgb(222,222,222);
         padding: 20px;
         border-radius: 24px;
-        padding-bottom: 40px;
         margin-top: 10%;
+        width: 300px;
+        height: 300px;
+    }
+
+    .sign-up-form {
+        height: 590px;
+        /* height: initial !important; */
+        overflow: initial !important;
+    }
+
+    .form-btn-login {
+        display: flex;
+        justify-content: center;
+    }
+    #sign-up-div,
+    #login-form-div {
+        display: flex;
+        justify-content: center;
+    }
+
+  
+    .each-error-div {
+        font-size: 12px;
+        color:rgb(217, 10, 10);
     }

@@ -1,7 +1,8 @@
 #product-image {
-    height: 1000px;
-    width: 100%;
+    height: 616px;
+    width: 535px;
     margin-left: 2%;
+    border: 8px solid orange;
 }
 
 
@@ -100,6 +101,8 @@
 
 .title-p {
     margin-left: 55px;
+    font-size: 16px;
+    font-weight: 900;
 }
 
 .content-p {
@@ -110,7 +113,7 @@
     height: 58px;
     overflow-wrap: break-word;
     inline-size: 600px;
-
+    font-weight: 300;
     display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical; 

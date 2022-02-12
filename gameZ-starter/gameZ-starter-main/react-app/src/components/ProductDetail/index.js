@@ -108,7 +108,7 @@ function ProductDetail({ products }) {
                                 <p id="username-p-line">{stateUsers[review.user_id].username}</p>
                             </div>
 
-                            <p className="title-p">Title: {review?.title}</p>
+                            <p className="title-p">{review?.title}</p>
                             <p className="content-p">{review?.content}</p>
                             {user &&
                                 <div id="edit-delete-div">

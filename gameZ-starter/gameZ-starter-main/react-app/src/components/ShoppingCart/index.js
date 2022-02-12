@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { editItem, loadCart, removeItem } from '../../store/shoppingCart'
+import { getCategories } from '../../store/category';
 import './ShoppingCart.css'
 
 function ShoppingCart() {
@@ -12,20 +13,28 @@ function ShoppingCart() {
     const [deleteAlert, setDeleteAlert] = useState(false);
     const sessionUser = useSelector(state => state?.session?.user)
     const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
-    const products = useSelector(state => state?.product?.entries);
     let price = 0;
+
+    const quantities = [
+        {label: 1, value: 1},
+        {label: 2, value: 2},
+        {label: 3, value: 3},
+        {label: 4, value: 4},
+        {label: 5, value: 5},
+        {label: 6, value: 6},
+        {label: 7, value: 7},
+        {label: 8, value: 8},
+        {label: 9, value: 9},
+        {label: 10, value: 10}
+      ];
 
     useEffect(() => {
         dispatch(loadCart(sessionUser.id))
             .then(() => setLoaded(true));
+        dispatch(getCategories())
     }, [dispatch]);
 
     const handleInput = (e) => {
-        e.preventDefault();
-        if(e.target.value <= 0) {
-            e.target.value = 1;
-        }
-
         const item = {
             cart_item_id: e.target.id,
             quantity: e.target.value,
@@ -34,6 +43,7 @@ function ShoppingCart() {
         dispatch(editItem(item))
         dispatch(loadCart(sessionUser.id))
     }
+
     const handleDelete = (e) => {
         e.preventDefault();
         if(!deleteAlert) {
@@ -82,21 +92,27 @@ function ShoppingCart() {
                             Description: {currProduct.description}
                         </li>
                         <li>
-                            <input
+                            <select
                                 key={item.quantity}
                                 id={item.id}
-                                className='quantity-input'
-                                type='number'
-                                placeholder={item.quantity}
-                                value={item.quantity}
-                                onChange={handleInput}></input>
+                                onChange={handleInput}
+                            >
+                                {quantities.map(opt => {
+                                    return (
+                                        <option
+                                            selected={item.quantity === opt.value ? true : false}
+                                            value={opt.value}>{opt.label}</option>
+                                    )
+                                })}
+                            </select>
                             Quantity: {item.quantity}
                         </li>
                         <li>
                             Price: {currProduct.price * item.quantity} ({currProduct.price} each)
                         </li>
                         <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
-                    </ul>)
+                    </ul>
+                )
             })}
             <li>
                 Cart Total: {price}

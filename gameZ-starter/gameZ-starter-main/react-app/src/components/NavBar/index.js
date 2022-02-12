@@ -23,13 +23,16 @@ const NavBar = () => {
   const allCategories = useSelector(state => state?.category?.entries)
   const allProducts = useSelector(state => state?.products?.entries)
   const [preview, setPreview] = useState(false)
+  const [pathName, setPathName] = useState(window.location.pathname);
 
   useEffect(() => {
-    if(sessionUser) dispatch(loadCart(sessionUser.id));
+    if (sessionUser) dispatch(loadCart(sessionUser.id));
   }, [dispatch, sessionUser])
 
   useEffect(() => {
-    if(window.location.pathname !== '/search-results'){
+    setPathName(window.location.pathname);
+    window.scrollTo(0, 0);
+    if (pathName !== pathName) {
       queriedProducts = '';
       queriedCategorys = '';
     }
@@ -43,7 +46,7 @@ const NavBar = () => {
     dispatch(getProducts())
 
     const closeMenu = (e) => {
-      if(e.target.className === 'shopping-cart-preview' || e.target.parentNode.className === 'shopping-cart-preview') return
+      if (e.target.className === 'shopping-cart-preview' || e.target.parentNode.className === 'shopping-cart-preview') return
       setPreview(false);
     };
 
@@ -66,23 +69,23 @@ const NavBar = () => {
 
 
     searchCategoryResponse = await fetch(`/api/search/categories/${searchQuery}`).then((res => res.json()));
-    if (searchCategoryResponse.categories[0]){
-    if (allCategories.find(category => searchCategoryResponse.categories[0].name === category.name)){
-      history.push(`/categories/${searchCategoryResponse.categories[0].id}/products`)
+    if (searchCategoryResponse.categories[0]) {
+      if (allCategories.find(category => searchCategoryResponse.categories[0].name === category.name)) {
+        history.push(`/categories/${searchCategoryResponse.categories[0].id}/products`)
       }
     } else {
       searchProductResponse = await fetch(`/api/search/products/${searchQuery}`).then((res => res.json()));
-          if (searchProductResponse){
-            const queryProductResponse = searchProductResponse;
-            queriedProducts = queryProductResponse.products;
-            if(window.location.pathname === '/search-results') {
-              history.push('/')
-              history.push('/search-results');
-            }
-            history.push('/search-results');
-          };
-      }
+      if (searchProductResponse) {
+        const queryProductResponse = searchProductResponse;
+        queriedProducts = queryProductResponse.products;
+        if (window.location.pathname === '/search-results') {
+          history.push('/')
+          history.push('/search-results');
+        }
+        history.push('/search-results');
+      };
     }
+  }
 
   return (
     <nav>

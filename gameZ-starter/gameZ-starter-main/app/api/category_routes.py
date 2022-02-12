@@ -5,7 +5,7 @@ category_routes = Blueprint(
     'categories', __name__)
 
 
-@category_routes.route('/')
+@category_routes.route('')
 def categories():
     # Route to GET all available Categories
     categories = Category.query.all()

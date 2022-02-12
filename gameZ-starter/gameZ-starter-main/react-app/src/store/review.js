@@ -26,7 +26,7 @@ const deleteReview = review => ({
 })
 
 export const getReviews = () => async dispatch => {
-    const response = await fetch(`/api/reviews/`)
+    const response = await fetch(`/api/reviews`)
 
     if (response.ok) {
         const list = await response.json()

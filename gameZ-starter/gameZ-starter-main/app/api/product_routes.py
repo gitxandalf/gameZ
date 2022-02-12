@@ -19,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@product_routes.route('/')
+@product_routes.route('')
 def products():
     # GET Route for all products regardless of category
     # At top of page, should be a NavLink to Categories (page listing each category)

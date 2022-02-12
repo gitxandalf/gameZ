@@ -4,7 +4,7 @@ import { NavLink, Link, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import "./NavBar.css"
-import logo from '../../images/logo.png'
+import Game from '../../images/Game.png'
 import ShoppingCart from '../ShoppingCart';
 import ShoppingCartPreview from '../ShoppingCartPreview/ShoppingCartPreview';
 import shoppingCartIcon from '../../images/shopping-cart.png'
@@ -91,18 +91,22 @@ const NavBar = () => {
 
         <div id="nav-search">
           <Link to='/' exact={true} activeClassName='active'>
-            <img id="nav-logo" alt="logo" src={logo} />
+            <img id="nav-logo" alt="logo" src={Game} />
           </Link>
-          <form onSubmit={handleSearch}>
-            <label htmlFor='search'>Search</label>
-            <input
-              id="search-input"
-              name='search'
-              type='text'
-              placeholder='Search'
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-            />
+          <form id="search-form" onSubmit={handleSearch}>
+            <div id="search-div">
+            <div id="search-div-under">
+              <input
+                id="search-input"
+                name='search'
+                type='text'
+                placeholder='Search games'
+                value={search}
+                onChange={e => setSearch(e.target.value)}
+              /> 
+                <button id="search-btn"><i class="fas fa-search"></i></button>
+            </div>
+            </div>
           </form>
           <ul id="nav-ul">
             <li id='add-product' className='nav-li'>

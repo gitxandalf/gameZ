@@ -13,10 +13,93 @@
 }
 
 #search-input {
-    height: 30px;
-    width: 300px;
+    height: 40px;
+    width: 500px;
     border-radius: 15px;
-    text-align: center;
+    padding-left: 30px;
+    border-top-left-radius: 96px;
+    border-bottom-left-radius: 96px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+    box-shadow: none;
+    background: #555555;
+    flex: 1;
+    /* transition: border 200ms ease-out,background 200ms ease-out; */
+    appearance: none;
+    font-family: inherit;
+    font-size: 16px;
+    height: 29px;
+    outline: none;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    min-width: 0;
+    margin-bottom: 0 !important;
+    flex-grow: 12;
+    border-color: var(--eerie);
+    color: whitesmoke;
+    border: none !important;
+}
+
+#search-input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: whitesmoke;
+  opacity: .6;
+}
+
+#search-div-under,
+#search-div {
+    display: flex;
+    align-items: center;
+}
+
+#search-btn {
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 96px;
+    border-bottom-right-radius: 96px;
+    height: 47px;
+    border-right-width: 2px;
+    box-shadow: none;
+    border-left:none;
+    /* padding-left: 18px;
+    padding-top: 9px;
+    padding-bottom: 9px; */
+    padding: 0;
+    flex: 2;
+    background: #555555;
+    transition: border 200ms ease-out,background 200ms ease-out;
+    border-color: var(--eerie);
+    align-items: center;
+    justify-content: center;
+    color: whitesmoke;
+    border: none !important;
+}
+#search-btn:hover {
+    background: #999999;
+} 
+
+#search-btn:hover > .fa-search{
+    color: whitesmoke !important;
+} 
+
+
+
+
+
+.fa-search {
+    color: whitesmoke;
+    opacity: .6;
+    margin: 0;
+}
+
+.fa-search:hover {
+    color: white !important;
+}
+
+ 
+
+#search-form {
+    border-color: transparent;
 }
 
 #nav-search {
@@ -30,7 +113,7 @@
 
 nav {
     width: 100%;
-    background-color: black;
+    background-color:#1B1B1B ;
 }
 
 /* .active {
@@ -47,8 +130,8 @@ a {
 
 #nav-logo {
  /* justify-content: flex-end; */
- height: 90px;
- width: 130px;
+ height: 180px;
+ width: 180px;
  margin-left: 25px;
  /* margin-top: 25px; */
 }
@@ -110,7 +193,7 @@ font-size: 15px;
     background: none;
     border: none;
     color: white;
-    background-color: black; /* Green */
+    background-color: var(--eerie); /* Green */
     border: 2px solid white;
     padding: 6px 9px;
     text-align: center;

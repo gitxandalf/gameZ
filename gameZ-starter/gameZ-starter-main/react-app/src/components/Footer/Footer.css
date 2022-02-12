@@ -1,6 +1,6 @@
 footer {
     height: 50px;
-    background-color: black;
+    background-color: var(--eerie);
     display: flex;
     justify-content: center;
 }

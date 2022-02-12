@@ -23,6 +23,7 @@ const EditReviewForm = ({ products }) => {
 
     useEffect(() => {
         dispatch(getReviews())
+        window.scrollTo(0,0);
     }, []);
 
     let productId = oneProduct?.id
@@ -74,7 +75,7 @@ const EditReviewForm = ({ products }) => {
                         value={title}
                     ></input>
                 </div>
-                <div className='input-div'> 
+                <div className='input-div'>
                     <label className='input-label'> Review </label>
                     <textarea
                         type='text'

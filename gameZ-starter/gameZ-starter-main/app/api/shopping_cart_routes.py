@@ -9,7 +9,7 @@ from datetime import datetime
 
 shopping_cart_routes = Blueprint('shopping_carts', __name__)
 
-@shopping_cart_routes.route('/')
+@shopping_cart_routes.route('')
 @login_required
 def shopping_carts():
   shopping_carts = ShoppingCart.query.all()

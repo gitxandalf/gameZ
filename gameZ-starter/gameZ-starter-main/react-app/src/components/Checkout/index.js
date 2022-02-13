@@ -155,10 +155,10 @@ function Checkout() {
                       </div>
                       <div className='cart-item-price'>
                           <div className='item-price-total'>
-                              ${currProduct.price * item.quantity}
+                              {`$${Number.parseFloat(currProduct.price * item.quantity).toFixed(2)}`}
                           </div>
                           <div className='item-price-each'>
-                              (${currProduct.price} each)
+                              {`($${Number.parseFloat(currProduct.price).toFixed(2)} each)`}
                           </div>
                       </div>
                     </li>

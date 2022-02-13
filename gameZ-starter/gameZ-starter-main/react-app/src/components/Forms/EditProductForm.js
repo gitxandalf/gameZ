@@ -136,7 +136,6 @@ const EditProductForm = ({ products }) => {
                         type='text'
                         name='description'
                         required
-
                         onChange={updateDescription}
                         value={description}
                     ></textarea>

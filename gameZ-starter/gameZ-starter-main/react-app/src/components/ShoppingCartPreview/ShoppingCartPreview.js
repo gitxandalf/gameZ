@@ -15,11 +15,11 @@ function ShoppingCartPreview(){
                 return (<li>
                     Product Name: {currProduct.name}
                     Quantity: {item.quantity}
-                    Price: {currProduct.price}
+                    Price: {`$${Number.parseFloat(currProduct.price).toFixed(2)}`}
                 </li>)
             })}
             <li>
-                Cart Total: {price}
+                Cart Total: {`$${Number.parseFloat(price).toFixed(2)}`}
             </li>
             <button><NavLink to={`/shoppingCart/${currShoppingCart.id}`}>More Details</NavLink></button>
         </div>

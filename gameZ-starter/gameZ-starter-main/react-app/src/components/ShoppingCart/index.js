@@ -108,14 +108,14 @@ function ShoppingCart() {
                             Quantity: {item.quantity}
                         </li>
                         <li>
-                            Price: {currProduct.price * item.quantity} ({currProduct.price} each)
+                            Price: {`$${Number.parseFloat(currProduct.price * item.quantity).toFixed(2)}`} ({`${Number.parseFloat(currProduct.price).toFixed(2)}`} each)
                         </li>
                         <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
                     </ul>
                 )
             })}
             <li>
-                Cart Total: {price}
+                Cart Total: {`$${Number.parseFloat(price).toFixed(2)}`}
             </li>
             {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&
                 <button onClick={(e) => {

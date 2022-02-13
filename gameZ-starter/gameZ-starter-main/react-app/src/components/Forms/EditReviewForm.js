@@ -56,18 +56,18 @@ const EditReviewForm = ({ products }) => {
     }
 
     return (
-        <div id="reivew-product-div">
-            <form className="review-product-form" onSubmit={onSubmit}>
+        <div id="edit-reivew-product-div">
+            <form className="style-form-edit" onSubmit={onSubmit}>
                 <div>
                     {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <h2 id="review-form-h2"> Edit review </h2>
+                <h2 id="form-h2"> Edit review </h2>
                 <div className='input-div'>
                     <label className='input-label'> Title </label>
                     <input
-                        className='review-title-input'
+                        className='title-input'
                         type='text'
                         name='title'
                         onChange={updateTitle}
@@ -78,7 +78,7 @@ const EditReviewForm = ({ products }) => {
                     <label className='input-label'> Review </label>
                     <textarea
                         type='text'
-                        className='review-text-area'
+                        className='text-area'
                         name='content'
                         required
                         disabled={errors.length > 0}
@@ -86,8 +86,15 @@ const EditReviewForm = ({ products }) => {
                         value={content}
                     ></textarea>
                 </div>
-                <button className="review-submit-btn" type='submit'> Submit </button>
-                <Link to={`/products/${productId}`}>Cancel</Link>
+
+                <div className='submit-btn-div'>
+                    <button className="submit-btn" type='submit'> Submit </button>
+                </div>
+               
+                <div className='submit-btn-div'>
+                    <Link className="submit-btn" to={`/products/${productId}`}>Cancel</Link>
+                </div>
+
             </form>
         </div>
     )

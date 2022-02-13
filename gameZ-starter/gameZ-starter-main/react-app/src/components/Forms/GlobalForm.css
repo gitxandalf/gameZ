@@ -96,20 +96,25 @@
         text-align: center;
         border: none !important;
     }
+
+
     #demo-btn:hover,
     #login-btn:hover,
     .submit-btn:hover{
         background-color: rgba(158, 158, 158, .5);
     }
-
+    .submit-btn,
     #demo-btn,
     #login-btn {
         margin-bottom: 10px;
         text-align: center;
         align-self: center;
         width: 350px;
+        background-color: var(--skyGray);
+        color: black;
     }
-
+   
+    .style-form-edit,
     .sign-up-form,
     .login-div-style {
         border: 2px solid rgb(222,222,222);
@@ -119,7 +124,8 @@
         width: 300px;
         height: 300px;
     }
-
+   
+   
     .sign-up-form {
         height: 590px;
         /* height: initial !important; */
@@ -130,12 +136,15 @@
         display: flex;
         justify-content: center;
     }
+
+    #edit-reivew-product-div,
     #sign-up-div,
     #login-form-div {
         display: flex;
         justify-content: center;
     }
 
+ 
   
     .each-error-div {
         font-size: 12px;

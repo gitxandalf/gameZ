@@ -144,6 +144,7 @@ function ProductDetail({ products }) {
                         <div>
                             <form onSubmit={handleSubmit}>
                                 <select
+                                    id="select-detail-pg"
                                     onChange={e => setItemQuantity(e.target.value)}
                                 >
                                     <option value={1}>1</option>
@@ -157,7 +158,7 @@ function ProductDetail({ products }) {
                                     <option value={9}>9</option>
                                     <option value={10}>10</option>
                                 </select>
-                                <button type='submit'>Add to cart</button>
+                                <button id="add-to-cart-btn-detail" type='submit'>Add to cart</button>
                             </form>
                         </div>}
                     <NavLink className="edit-btn" hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} >Edit</NavLink>

@@ -156,3 +156,34 @@
     max-width: 90% !important;
     margin-left: 2%;
 }
+
+
+#select-detail-pg {
+    -webkit-appearance: none;
+    appearance: none;
+    text-align: center;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 7px 5px;
+    box-shadow: 0 1px 6px 0 var(--skyGray);
+    border: 1px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-left: 20px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+#add-to-cart-btn-detail {
+    border: none;
+    background: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    align-self: flex-end;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #6230C5;
+    color: white;
+    border-radius: 10px;
+}

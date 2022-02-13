@@ -8,8 +8,11 @@ import "./HomePage.css"
 function HomePage() {
     const dispatch = useDispatch()
 
+    const allProducts = useSelector(state => state?.product?.entries)
     const allCategories = useSelector(state => state.category.entries)
     const sessionUser = useSelector(state => state.session.user);
+
+    console.log("ALL PRODS", allProducts[0]?.id)
 
     useEffect(() => {
         dispatch(getCategories())
@@ -18,6 +21,42 @@ function HomePage() {
 
     return (
         <div id="home-page">
+            <div className='home-header-bg'></div>
+            <p className='home-header'>Games Our Authors Love!</p>
+            <div className='games-we-love'>
+                <figure className='games-we-love-figure'>
+                    <Link className="games-we-love-link" key={allProducts[0]?.id} to={`/products/1`}><img key={allProducts[0]?.id} className='games-we-love-image' src={allProducts[0]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/1`}>Subnautica: Below Zero</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[1]?.id} to={`/products/2`}><img key={allProducts[1]?.id} className='games-we-love-image' src={allProducts[1]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/2`}>Valheim</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[2]?.id} to={`/products/3`}><img key={allProducts[2]?.id} className='games-we-love-image' src={allProducts[2]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/3`}>Darkest Dungeon</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[3]?.id} to={`/products/4`}><img key={allProducts[3]?.id} className='games-we-love-image' src={allProducts[3]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/4`}>Black Book</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[4]?.id} to={`/products/5`}><img key={allProducts[4]?.id} className='games-we-love-image' src={allProducts[4]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/5`}>Kenshi</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[5]?.id} to={`/products/6`}><img key={allProducts[5]?.id} className='games-we-love-image' src={allProducts[5]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/6`}>Loop Hero</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[6]?.id} to={`/products/7`}><img key={allProducts[6]?.id} className='games-we-love-image' src={allProducts[6]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/7`}>Children of Morta</Link></figcaption>
+                </figure>
+                <figure>
+                    <Link className="games-we-love-link" key={allProducts[7]?.id} to={`/products/8`}><img key={allProducts[7]?.id} className='games-we-love-image' src={allProducts[7]?.image_url}></img></Link>
+                    <figcaption className='fig-caption'><Link to={`/products/8`}>The Falconeer</Link></figcaption>
+                </figure>
+            </div>
 
             <div className='site-info-header'>
                 <h2>What is GameZ?</h2>
@@ -58,7 +97,7 @@ function HomePage() {
                 <a href="https://github.com/gitxandalf/gameZ/blob/main/README.md">Go to Help Center</a>
             </div>
 
-        </div>
+        </div >
     );
 }
 export default HomePage;

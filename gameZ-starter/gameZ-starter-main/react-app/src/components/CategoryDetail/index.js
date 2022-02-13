@@ -29,7 +29,7 @@ function CategoryDetail() {
                 <div id="category-title-div">
                     <h1 id="category-h1"> {allCategories[`${categoryId - 1}`]?.name} Games</h1>
                 </div>
-                <h2 id="slogan-cat-pg">Find something you love</h2>
+                {/* <h2 id="slogan-cat-pg">Find something you love</h2> */}
                 <div className='product-links'>{allProducts?.filter(product => product?.category_id === parseInt(categoryId)).map((product) => (
                     <div id="each-product-category" key={product?.id}>
                         <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>

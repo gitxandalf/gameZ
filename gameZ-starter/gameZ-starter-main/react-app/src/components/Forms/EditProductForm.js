@@ -73,15 +73,17 @@ const EditProductForm = ({ products }) => {
 
     return (
         <div id="edit-product-div">
-            <form className="edit-product-form" onSubmit={onSubmit}>
-                <div>
+            <form className="style-form-edit" onSubmit={onSubmit}>
+                <div className='each-error-div'>
                     {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <div>
-                    <label>Category</label>
+                <h2 id="form-h2"> Edit game </h2>
+                <div className='input-div'>
+                    <label className='input-label'>Category</label>
                     <select
+                        className='select-input'
                         type='dropdown'
                         name='category'
                         required
@@ -95,9 +97,10 @@ const EditProductForm = ({ products }) => {
                         <option value="6">Fighting</option>
                     </select>
                 </div>
-                <div>
-                    <label>Name</label>
+                <div className='input-div'>
+                    <label className='input-label'>Name</label>
                     <input
+                        className='title-input'
                         type='text'
                         name='name'
                         required
@@ -105,9 +108,10 @@ const EditProductForm = ({ products }) => {
                         value={name}
                     ></input>
                 </div>
-                <div>
-                    <label>Image Url</label>
+                <div className='input-div'>
+                    <label className='input-label'>Image Url</label>
                     <input
+                        className='title-input'
                         type='text'
                         name='image_url'
                         required
@@ -115,18 +119,20 @@ const EditProductForm = ({ products }) => {
                         value={imageUrl}
                     ></input>
                 </div>
-                <div>
-                    <label>Price</label>
+                <div className='input-div'>
+                    <label className='input-label'>Price</label>
                     <input
+                        className='title-input'
                         type='number'
                         name='price'
                         onChange={updatePrice}
                         value={price}
                     ></input>
                 </div>
-                <div>
-                    <label>Description</label>
+                <div className='input-div'>
+                    <label className='input-label'>Description</label>
                     <textarea
+                        className='text-area'
                         type='text'
                         name='description'
                         required
@@ -135,10 +141,17 @@ const EditProductForm = ({ products }) => {
                         value={description}
                     ></textarea>
                 </div>
-                <button
-                // disabled={errors.length > 0}
-                type='submit'>Sell This Updated Game!</button>
-                <Link to={`/products/${productId}`}>Cancel</Link>
+                <div className='submit-btn-div'>
+                    <button
+                    className="submit-btn"
+                    // disabled={errors.length > 0}
+                    type='submit'>Sell This Updated Game!</button>
+                </div>
+
+                <div className='submit-btn-div'>
+                    <Link className="submit-btn" to={`/products/${productId}`}>Cancel</Link>
+                </div>
+
             </form>
         </div>
     );

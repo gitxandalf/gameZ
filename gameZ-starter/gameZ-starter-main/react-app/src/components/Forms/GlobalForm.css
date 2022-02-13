@@ -137,7 +137,7 @@
     .sign-up-form,
     .login-div-style {
         border: 2px solid rgb(222,222,222);
-        padding: 20px;
+        padding: 20px; 
         border-radius: 24px;
         margin-top: 5%;
         width: 300px;
@@ -165,7 +165,7 @@
     }
 
     .style-form-edit {
-        height: 530px;
+        height: 580px;
     }
  
   

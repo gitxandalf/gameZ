@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { loadCart } from '../../store/shoppingCart'
+import './OrderDetails.css';
 
 function OrderDetails() {
   const dispatch = useDispatch();
@@ -19,33 +20,61 @@ function OrderDetails() {
     return () => setLoaded(false);
   }, [dispatch]);
 
+  const totalCartItems = (shoppingCart) => {
+    let total = 0;
+    shoppingCart?.cart_items?.forEach(item => {
+        total += item.quantity
+    });
+    return total;
+  }
+
   return (
     <>
       {loaded && checkedOutCart &&
         <div>
-          <div>Thank You For Your Purchase!</div>
-          <div>Order confirmation number #{checkedOutCartId}</div>
-          {checkedOutCart
-            .cart_items
-            .map(item => {
-              const product = item.product
-              orderTotal += (product.price * item.quantity)
-              return (
-                <div>
-                  <div>
-                    {product.name} x{item.quantity}
-                  </div>
-                  <div>
-                    ${product.price * item.quantity}
-                  </div>
-                </div>
-              )
-            })}
-          <div>
-            Order Total: ${orderTotal}
+          <div id='order-details-header'>
+            <div>Thank You For Your Purchase!</div>
+            <div className='order-details-confirmation'>Order confirmation number #{checkedOutCartId}</div>
           </div>
-
-          <button onClick={() => history.push('/')}>Continue Shopping</button>
+          <div className='order-details-details'>
+            {checkedOutCart
+              .cart_items
+              .map(item => {
+                const product = item.product
+                orderTotal += (product.price * item.quantity)
+                return (
+                  <div className='order-details-item'>
+                    <div className='order-details-name'>
+                      {product.name}
+                    </div>
+                    <div>
+                      x{item.quantity}
+                    </div>
+                    <div className='order-details-cost'>
+                      <div className='details-cost-total'>
+                        ${product.price * item.quantity}
+                      </div>
+                      <div>
+                        (${product.price} each)
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
+            <div className='order-details-total'>
+              {checkedOutCart && checkedOutCart.cart_items &&
+                <div>
+                  Order Total ({totalCartItems(checkedOutCart)} items)
+                </div>}
+              <div>
+                ${orderTotal}
+              </div>
+            </div>
+            <button
+              className='continue-shopping'
+              onClick={() => history.push('/')}
+              >Continue Shopping</button>
+          </div>
         </div>}
     </>
   )

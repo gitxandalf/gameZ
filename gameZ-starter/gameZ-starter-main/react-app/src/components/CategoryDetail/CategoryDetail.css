@@ -57,9 +57,9 @@
     margin: 0;
 }
 
-.title-product-cat {
+.name-cat-detail {
     font-weight: 400;
-    font-size: 14px;
+    font-size: 23px !important;
     margin-top: 6px;
 }
 .username-product-cat,

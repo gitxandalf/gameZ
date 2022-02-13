@@ -45,7 +45,7 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 #### Alexander Gangemi:
 • What I found to be the most difficult was integrating a Python bases backend into a React / JavaScript frontend and troubleshooting the connection throughout development.
 
-• A simple example of this is this snippet from our backend `category_routes.py` module that was tied to the frontend module in the Redux store at `category.js`:
+• A simple example of this is this snippet from our backend api routes > `category_routes.py` module that was tied to the frontend module in the Redux store at `category.js`:
 
 
 

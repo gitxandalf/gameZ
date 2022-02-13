@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { checkoutCart, editItem, loadCart, removeItem } from '../../store/shoppingCart'
+import { getCategories } from '../../store/category';
 import './Checkout.css';
 
 function Checkout() {
@@ -9,6 +10,8 @@ function Checkout() {
   const history = useHistory();
   const sessionUser = useSelector(state => state?.session?.user);
   const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
+  const products = useSelector(state => state?.product);
+  const categories = useSelector(state => state?.category?.entries);
   const [loaded, setLoaded] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
@@ -29,6 +32,7 @@ function Checkout() {
   useEffect(() => {
     dispatch(loadCart(sessionUser.id))
       .then(() => setLoaded(true));
+    dispatch(getCategories())
     return () => setLoaded(false);
   }, [dispatch])
 
@@ -95,63 +99,90 @@ function Checkout() {
     <>
       {currShoppingCart && currShoppingCart.cart_items &&
         <div>
-          <h1>CHECKOUT</h1>
-          <div>
-            Order summary
-            <div>
-              Order Total ({calcTotalItems(currShoppingCart)} items): {calcTotalPrice(currShoppingCart)}
+          <div className='cart-total-items'>Double check your order details</div>
+          {deleteAlert &&
+            <div className='cart-remove-item'>
+                <div className='remove-item-text'>Are you sure you want to delete this item from your cart?</div>
+                <div className='remove-item-buttons'>
+                  <button className='confirm-remove' onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
+                  <button className='reject-remove' onClick={handleDelete} value={false}>No</button>
+                </div>
+            </div>}
+          <div className='shopping-cart-all'>
+            <div className='shopping-cart-listings'>
+              {currShoppingCart && currShoppingCart?.cart_items?.map(item => {
+                const currProduct = item.product;
+                return (
+                  <ul className='cart-item-ul'>
+                    <li className='cart-item-developer'>
+                      {products.usersEntries[currProduct.user_id].username}
+                    </li>
+                    <li className='cart-item-details'>
+                      <div className='item-details-image'>
+                          <img src={currProduct.image_url}/>
+                      </div>
+                      <div className='item-details-all'>
+                        <div className='item-details-name'>
+                            {currProduct.name}
+                        </div>
+                        <div className='item-details-category'>
+                            {categories?.find(category => category.id === currProduct.category_id)?.name}
+                        </div>
+                        <div className='item-details-description'>
+                            {currProduct.description}
+                        </div>
+                        <button
+                          id={item.id}
+                          className='item-details-remove'
+                          onClick={handleDelete}
+                          disabled={deleteAlert ? true : false}
+                          >Remove</button>
+                      </div>
+                      <div className='cart-item-select'>
+                          <select
+                              key={item.quantity}
+                              id={item.id}
+                              onChange={handleInput}
+                          >
+                              {quantities.map(opt => {
+                                  return (
+                                      <option
+                                          selected={item.quantity === opt.value ? true : false}
+                                          value={opt.value}>{opt.label}</option>
+                                  )
+                              })}
+                          </select>
+                      </div>
+                      <div className='cart-item-price'>
+                          <div className='item-price-total'>
+                              ${currProduct.price * item.quantity}
+                          </div>
+                          <div className='item-price-each'>
+                              (${currProduct.price} each)
+                          </div>
+                      </div>
+                    </li>
+                  </ul>
+                )
+              })}
+            </div>
+            <div className='shopping-cart-checkout'>
+              <div className='cart-checkout-panel'>
+                <div className='checkout-panel-title'>
+                  Order summary
+                </div>
+                <div className='checkout-panel-details'>
+                  <div>
+                    Order Total ({calcTotalItems(currShoppingCart)} items)
+                  </div>
+                  <div>
+                    ${calcTotalPrice(currShoppingCart)}
+                  </div>
+                </div>
+                <button onClick={handleCheckout} disabled={currShoppingCart.cart_items.length === 0 ? true : false}>Confirm Checkout</button>
+              </div>
             </div>
           </div>
-          {deleteAlert &&
-            <div>
-                <p>Are you sure you want to delete this item from your cart?</p>
-                <button onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
-                <button onClick={handleDelete} value={false}>No</button>
-            </div>}
-          {currShoppingCart.cart_items.map(item => {
-            const currProduct = item.product;
-            return (
-              <ul>
-                <li>
-                    ProductImage: {currProduct.image_url}
-                </li>
-                <li>
-                    Product Name: {currProduct.name}
-                </li>
-                <li>
-                    Category: {currProduct.category_id}
-                </li>
-                <li>
-                    UserImageUrl /
-                    User: {currProduct.user_id}
-                </li>
-                <li>
-                    Description: {currProduct.description}
-                </li>
-                <li>
-                    <select
-                        key={item.quantity}
-                        id={item.id}
-                        onChange={handleInput}
-                    >
-                        {quantities.map(opt => {
-                            return (
-                                <option
-                                    selected={item.quantity === opt.value ? true : false}
-                                    value={opt.value}>{opt.label}</option>
-                            )
-                        })}
-                    </select>
-                    Quantity: {item.quantity}
-                </li>
-                <li>
-                    Price: {currProduct.price * item.quantity} ({currProduct.price} each)
-                </li>
-                <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
-              </ul>
-            )
-          })}
-          <button onClick={handleCheckout} disabled={currShoppingCart.cart_items.length === 0 ? true : false}>Confirm Checkout</button>
         </div>}
     </>
   )

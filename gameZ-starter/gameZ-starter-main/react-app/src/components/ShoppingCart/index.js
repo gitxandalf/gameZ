@@ -133,10 +133,11 @@ function ShoppingCart() {
                                     </div>
                                     <div className='cart-item-price'>
                                         <div className='item-price-total'>
-                                            ${currProduct.price * item.quantity}
+                                            {`$${Number.parseFloat(currProduct.price * item.quantity).toFixed(2)}`}
                                         </div>
                                         <div className='item-price-each'>
-                                            (${currProduct.price} each)
+                                           
+                                            ({`$${Number.parseFloat(currProduct.price).toFixed(2)}`} each)
                                         </div>
                                     </div>
                                 </li>
@@ -152,7 +153,7 @@ function ShoppingCart() {
                                     Total ({totalCartItems(currShoppingCart)} items)
                                 </div>
                                 <div>
-                                    ${price}
+                                    {`$${Number.parseFloat(price).toFixed(2)}`}
                                 </div>
                             </div>
                             {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&

@@ -97,7 +97,7 @@ const EditProductForm = ({ products }) => {
             <form className="style-form-edit" onSubmit={onSubmit}>
                 <div className='each-error-div'>
                     {displayErrors && errors?.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{`* ${error}`}</div>
                     ))}
                 </div>
                 <h2 id="form-h2"> Edit game </h2>
@@ -143,6 +143,7 @@ const EditProductForm = ({ products }) => {
                 <div className='input-div'>
                     <label className='input-label'>Price</label>
                     <input
+                        required
                         className='title-input'
                         type='number'
                         name='price'

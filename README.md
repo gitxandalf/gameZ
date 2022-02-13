@@ -1,4 +1,4 @@
-# GameZ
+# [GameZ](https://gamez-aa.herokuapp.com/)
 
 • is an [Etsy](https://etsy.com/) clone made by [Alexander Gangemi](https://www.linkedin.com/in/alexander-gangemi/), [Eric Cortez](https://www.linkedin.com/in/eric-cortez-0101/), [Jesse Brooks](https://www.linkedin.com/in/jesse-brooks-8a6718229/) and [Suhayl Khan](https://www.linkedin.com/in/suhayl-khan-48601a193/) for the purpose of course work in [App Academy](https://www.appacademy.io/) and for use as an addition to their professional portfolios. All content is for private, non-commerical, non-profit use.
 
@@ -8,9 +8,9 @@
 
 Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML / JSX | CSS | React | Redux | Heroku
 
-## Development Image of Categories Page
+## Development Image of Home Page
 ### We, the creators, do not own nor claim ownership of any listed product images, product names or product descriptions. All listed prices are null as there is no way to provide or accept payment on the site. 
-![This is an image](https://i.imgur.com/tXDbMTs.png)
+![This is an image](https://i.imgur.com/xRXYUr1.png)
 
 ## In order to run this application...
 

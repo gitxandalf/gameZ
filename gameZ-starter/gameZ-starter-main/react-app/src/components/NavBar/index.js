@@ -146,6 +146,7 @@ const NavBar = ({search, setSearch}) => {
 
             <div className='shopping-cart-container'
             onClick={handleClick}>
+
             <li id='cart-icon' className='nav-li list-a'>
               {sessionUser &&
                 <img

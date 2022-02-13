@@ -136,6 +136,7 @@ const AddProductForm = ({setSearch}) => {
                     className='input-label'
                     >Price</label>
                     <input
+                        required
                         className='title-input'
                         placeholder='Name your price'
                         type='number'

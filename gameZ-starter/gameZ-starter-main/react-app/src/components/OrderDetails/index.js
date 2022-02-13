@@ -52,10 +52,10 @@ function OrderDetails() {
                     </div>
                     <div className='order-details-cost'>
                       <div className='details-cost-total'>
-                        ${product.price * item.quantity}
+                        {`$${Number.parseFloat(product.price * item.quantity).toFixed(2)}`}
                       </div>
                       <div>
-                        (${product.price} each)
+                        {`($${Number.parseFloat(product.price).toFixed(2)} each)`}
                       </div>
                     </div>
                   </div>

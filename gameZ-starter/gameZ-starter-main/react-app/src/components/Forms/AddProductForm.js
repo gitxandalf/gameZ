@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import "./AddProductForm.css"
 import { postProduct } from '../../store/product'
 
-const AddProductForm = () => {
+const AddProductForm = ({setSearch}) => {
     const history = useHistory()
     const dispatch = useDispatch();
 
@@ -31,6 +31,10 @@ const AddProductForm = () => {
         }
     };
 
+
+    useEffect(() => {
+        setSearch('');
+    }, [])
 
     useEffect(() => {
         const errors = [];

@@ -9,7 +9,7 @@
 Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML / JSX | CSS | React | Redux | Heroku
 
 ## Development Image of Categories Page
-### We, the creators, do not own nor claim ownership of any listed product images.
+### We, the creators, do not own nor claim ownership of any listed product images, product names or product descriptions. All listed prices are null as there is no way to take or accept payment on the site. 
 ![This is an image](https://i.imgur.com/tXDbMTs.png)
 
 ## In order to run this application...
@@ -78,6 +78,6 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 #### Suhayl Khan:
 
 ## Fair Use Disclaimer:
-Our site contains product images that are not authorized for use by their respective owners. This site constitutes a fair-use of any copyrighted material as provided for in [section 107 of the US copyright law](https://codes.findlaw.com/us/title-17-copyrights/17-usc-sect-107.html). "GameZ" by Alexander Gangemi, Eric Cortez, Jesse Brooks and Suhayl Khan is an educational project made by students who enjoy video games and are inspired by them.
+Our site contains product images, product names and product descriptions that are not authorized for use by their respective owners. This site constitutes a fair-use of any copyrighted material as provided for in [section 107 of the US copyright law](https://codes.findlaw.com/us/title-17-copyrights/17-usc-sect-107.html). "GameZ" by Alexander Gangemi, Eric Cortez, Jesse Brooks and Suhayl Khan is an educational project made by students who enjoy video games and are inspired by them.
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a> - permitting non-commerical sharing with attribution.

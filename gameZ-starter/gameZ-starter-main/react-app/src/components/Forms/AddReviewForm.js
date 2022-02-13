@@ -50,17 +50,17 @@ const AddReviewForm = ({ productId }) => {
 
     return (
         <div id="reivew-product-div">
-            <form className="review-product-form" onSubmit={onSubmit}>
+            <form className="style-form" onSubmit={onSubmit}>
                 <div>
                     {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <h2 id="review-form-h2">Write a review</h2>
+                <h2 id="form-h2">Write a review</h2>
                 <div className='input-div'>
                     <label className='input-label required-field'>Title </label>
                     <input
-                        className='review-title-input'
+                        className='title-input'
                         type='text'
                         name='title'
                         required
@@ -71,7 +71,7 @@ const AddReviewForm = ({ productId }) => {
                 <div className='input-div'>
                     <label className='input-label required-field'>Review </label>
                     <textarea
-                        className='review-text-area'
+                        className='text-area'
                         type='text'
                         name='content'
                         required
@@ -82,10 +82,12 @@ const AddReviewForm = ({ productId }) => {
                 <div id="">
 
                 </div>
-                <button 
-                className="review-submit-btn"
-                // disabled={errors.length > 0}
-                type='submit'> Submit </button>
+                <div className='submit-btn-div'>
+                    <button 
+                    className="submit-btn"
+                    // disabled={errors.length > 0}
+                    type='submit'> Submit </button>
+                </div>
             </form>
         </div>
     )

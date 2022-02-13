@@ -18,15 +18,16 @@ function ShoppingCartPreview(){
                             {currProduct.name}
                         </div>
                         <div className='preview-listing-price'>
-                            ${currProduct.price} <span>x {item.quantity}</span>
+                           {`$${Number.parseFloat(currProduct.price).toFixed(2)}`} <span>x {item.quantity}</span>
                         </div>
                     </div>
                 )
             })}
             <div id='cart-preview-total'>
-                Cart Total: ${price}
+                Cart Total: {`$${Number.parseFloat(price).toFixed(2)}`}
             </div>
             <button id='cart-preview-button'><NavLink to={`/shoppingCart/${currShoppingCart.id}`}>More Details</NavLink></button>
+
         </div>
     )
 };

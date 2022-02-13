@@ -82,6 +82,7 @@ function ShoppingCart() {
                     <button onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
                     <button onClick={handleDelete} value={false}>No</button>
                 </div>}
+
             <div id='shopping-cart-all'>
                 <div id='shopping-cart-listings'>
                     {currShoppingCart && currShoppingCart.cart_items?.map(item => {

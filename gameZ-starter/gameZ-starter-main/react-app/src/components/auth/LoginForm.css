@@ -13,19 +13,19 @@ body {
     margin: 0;
 } */
 
-form {
+/* form {
     border: 1px solid gray;
     margin: 5% 0;
     height: 25%;
     border-radius: 5px;
-}
+} */
 
 #login-form-div {
   padding: 0 25%;
 }
 
 
-.login-form {
+/* .login-form {
     padding: 5% 15%;
     align-items: center;
-}
+} */

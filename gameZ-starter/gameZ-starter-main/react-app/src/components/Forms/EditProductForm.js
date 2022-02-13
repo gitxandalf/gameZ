@@ -12,7 +12,6 @@ const EditProductForm = ({ products }) => {
     const { productId } = useParams();
     let updatedProduct;
     const product = products.find(product => product.id === +productId)
-
     const user = useSelector(state => state.session.user);
 
     const [categoryId, setCategoryId] = useState(product?.category_id);
@@ -22,15 +21,33 @@ const EditProductForm = ({ products }) => {
     const [description, setDescription] = useState(product?.description);
     const [errors, setErrors] = useState([]);
     const [displayErrors, setDisplayErrors] = useState(false);
+   
+    const uniqueName = (currName, products) => {
+        for (let i = 0; i < products.length; i++) {
+                let currProduct = products[i]
+            if (currProduct.name === name) {
+                if (currProduct.id === +productId){
+                    return false;
+                } else {
+                    return true; 
+                }
+            }
+        }
+    }
+
 
     useEffect(() => {
         const errors = [];
+        if (name === " " || name === "  ") errors.push("Please provide a valid name")
         if (!categoryId) errors.push("Please select a category")
         if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
+        //Unique error handel 
+        if (name && uniqueName(name, products)) errors.push("Game name already exists")
         if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
+        if (!imageUrl?.includes("http" || "https")) errors.push("Please provide a valid image Url")
         if (!price) errors.push("Please provide a valid price")
         if (price <= 0) errors.push("You want to make money, right? Enter a price greater than 0.")
-
+        if (description === " " || description === "  ") errors.push("Please provide a description")
         if (errors) setErrors(errors)
 
     }, [categoryId, name, imageUrl, price, description])
@@ -77,15 +94,17 @@ const EditProductForm = ({ products }) => {
 
     return (
         <div id="edit-product-div">
-            <form className="edit-product-form" onSubmit={onSubmit}>
-                <div>
+            <form className="style-form-edit" onSubmit={onSubmit}>
+                <div className='each-error-div'>
                     {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{error}</div>
                     ))}
                 </div>
-                <div>
-                    <label>Category</label>
+                <h2 id="form-h2"> Edit game </h2>
+                <div className='input-div'>
+                    <label className='input-label'>Category</label>
                     <select
+                        className='select-input'
                         type='dropdown'
                         name='category'
                         required
@@ -99,9 +118,10 @@ const EditProductForm = ({ products }) => {
                         <option value="6">Fighting</option>
                     </select>
                 </div>
-                <div>
-                    <label>Name</label>
+                <div className='input-div'>
+                    <label className='input-label'>Name</label>
                     <input
+                        className='title-input'
                         type='text'
                         name='name'
                         required
@@ -109,9 +129,10 @@ const EditProductForm = ({ products }) => {
                         value={name}
                     ></input>
                 </div>
-                <div>
-                    <label>Image Url</label>
+                <div className='input-div'>
+                    <label className='input-label'>Image Url</label>
                     <input
+                        className='title-input'
                         type='text'
                         name='image_url'
                         required
@@ -119,30 +140,38 @@ const EditProductForm = ({ products }) => {
                         value={imageUrl}
                     ></input>
                 </div>
-                <div>
-                    <label>Price</label>
+                <div className='input-div'>
+                    <label className='input-label'>Price</label>
                     <input
+                        className='title-input'
                         type='number'
                         name='price'
                         onChange={updatePrice}
                         value={price}
                     ></input>
                 </div>
-                <div>
-                    <label>Description</label>
+                <div className='input-div'>
+                    <label className='input-label'>Description</label>
                     <textarea
+                        className='text-area'
                         type='text'
                         name='description'
                         required
-
                         onChange={updateDescription}
                         value={description}
                     ></textarea>
                 </div>
-                <button
-                // disabled={errors.length > 0}
-                type='submit'>Sell This Updated Game!</button>
-                <Link to={`/products/${productId}`}>Cancel</Link>
+                <div className='submit-btn-div'>
+                    <button
+                    className="submit-btn"
+                    // disabled={errors.length > 0}
+                    type='submit'>Sell This Updated Game!</button>
+                </div>
+
+                <div className='submit-btn-div'>
+                    <Link className="submit-btn" to={`/products/${productId}`}>Cancel</Link>
+                </div>
+
             </form>
         </div>
     );

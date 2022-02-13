@@ -83,11 +83,11 @@
 }
 #search-btn:hover {
     background: #999999;
-} 
+}
 
 #search-btn:hover > .fa-search{
     color: whitesmoke !important;
-} 
+}
 
 
 
@@ -103,7 +103,7 @@
     color: white !important;
 }
 
- 
+
 
 #search-form {
     border-color: transparent;
@@ -226,8 +226,8 @@ ul {
      list-style-type: none;
 }
 
-/* 
-#login, 
+/*
+#login,
 #sign-up {
     padding: 0;
 } */
@@ -241,3 +241,12 @@ ul {
     color: #6230C5;
     transition: 0.15s;
 }
+
+#cart-icon {
+    cursor: pointer;
+}
+
+/* #cart-icon:hover {
+    border-bottom: 5px solid #6230C5;
+    transition: 0.15s;
+} */

@@ -15,10 +15,10 @@ import { getProducts } from '../../store/product';
 let queriedProducts;
 let queriedCategorys;
 
-const NavBar = () => {
+const NavBar = ({search, setSearch}) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   const sessionUser = useSelector(state => state?.session?.user);
   const allCategories = useSelector(state => state?.category?.entries)
   const allProducts = useSelector(state => state?.products?.entries)
@@ -37,6 +37,10 @@ const NavBar = () => {
       queriedCategorys = '';
     }
   }, [dispatch, sessionUser, window.location.pathname])
+
+  useEffect(() => {
+    if (window.location.pathname !== '/search-results') setSearch('');
+  }, [window.location.pathname])
 
   useEffect(() => {
     if (!sessionUser) setPreview(false);
@@ -106,7 +110,7 @@ const NavBar = () => {
                 placeholder='Search games'
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-              /> 
+              />
                 <button id="search-btn"><i class="fas fa-search"></i></button>
             </div>
             </div>

@@ -3,16 +3,16 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link, useHistory, useParams } from 'react-router-dom';
 import "./EditProductForm.css"
-import { getReviews, postReview } from '../../store/review';
+import { getReviews } from '../../store/review';
 import { updateReview } from '../../store/review';
 
-const EditReviewForm = ({ products }) => {
+const EditReviewForm = ({ products, reviews }) => {
     const history = useHistory()
     const dispatch = useDispatch()
     const { reviewId } = useParams()
 
     const user = useSelector(state => state.session.user)
-    const reviews = useSelector(state => state.review.entries)
+    // const reviews = useSelector(state => state.review.entries)
     const review = reviews.find(review => review?.id === +reviewId)
     const oneProduct = products?.find(product => review?.product_id === product?.id)
 
@@ -30,7 +30,9 @@ const EditReviewForm = ({ products }) => {
 
     useEffect(() => {
         const errors = []
-        if (title.length > 50) errors.push("Titles must be less than 50 characters")
+        if (title){
+            if (title.length > 50) errors.push("Titles must be less than 50 characters")
+        }
         setErrors(errors)
     }, [title]);
 

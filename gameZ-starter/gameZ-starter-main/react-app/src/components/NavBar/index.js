@@ -144,6 +144,12 @@ const NavBar = ({search, setSearch}) => {
                   <LogoutButton />
               </li>}
 
+            {sessionUser &&
+              <li id='logout' className='nav-li user-info'>
+                <p id="username">{`Welcome, ${sessionUser?.username}!`}</p>
+              
+              </li>}
+
 
             <li id='cart-icon' className='nav-li list-a'>
               {sessionUser &&

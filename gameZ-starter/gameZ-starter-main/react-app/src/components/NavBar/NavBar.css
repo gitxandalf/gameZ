@@ -250,3 +250,20 @@ ul {
     border-bottom: 5px solid #6230C5;
     transition: 0.15s;
 } */
+
+.user-info {
+    color: white
+    /* display: flex;
+    background-color: white;
+    opacity: .7;
+    border-radius: 50%;
+    border: 0 solid transparent;
+    height: 40px;
+    width: 40px;
+    justify-content: center;
+    padding: .5px !important; */
+}
+
+/* #username  {
+    border-bottom: .5 solid purple;
+} */

@@ -64,7 +64,7 @@ const EditReviewForm = ({ products, reviews }) => {
 
     return (
         <div id="edit-reivew-product-div">
-            <form className="style-form-edit" onSubmit={onSubmit}>
+            <form className="style-form-edit edit-review" onSubmit={onSubmit}>
                 <div className='each-error-div'>
                     {displayErrors && errors?.map((error, ind) => (
                         <div key={ind}>{`* ${error}`}</div>

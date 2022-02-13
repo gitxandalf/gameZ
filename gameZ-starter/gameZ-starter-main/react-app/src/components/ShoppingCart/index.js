@@ -74,18 +74,20 @@ function ShoppingCart() {
     return (
         <div>
             {currShoppingCart && currShoppingCart.cart_items &&
-                <div id='cart-total-items'>{totalCartItems(currShoppingCart)} items in your cart</div>}
+                <div className='cart-total-items'>{totalCartItems(currShoppingCart)} items in your cart</div>}
 
             {deleteAlert &&
-                <div>
-                    <p>Are you sure you want to delete this item from your cart?</p>
-                    <button onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
-                    <button onClick={handleDelete} value={false}>No</button>
+                <div className='cart-remove-item'>
+                    <div className='remove-item-text'>Are you sure you want to delete this item from your cart?</div>
+                    <div className='remove-item-buttons'>
+                        <button className='confirm-remove' onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
+                        <button className='reject-remove' onClick={handleDelete} value={false}>No</button>
+                    </div>
                 </div>}
 
-            <div id='shopping-cart-all'>
-                <div id='shopping-cart-listings'>
-                    {currShoppingCart && currShoppingCart.cart_items?.map(item => {
+            <div className='shopping-cart-all'>
+                <div className='shopping-cart-listings'>
+                    {currShoppingCart && currShoppingCart?.cart_items?.map(item => {
                         const currProduct = item.product;
                         price += currProduct.price * item.quantity;
                         return (
@@ -144,10 +146,10 @@ function ShoppingCart() {
                     })}
                 </div>
                 {currShoppingCart && currShoppingCart.cart_items &&
-                    <div id='shopping-cart-checkout'>
-                        <div id='cart-checkout-panel'>
-                            <div id='checkout-panel-details'>
-                                <div id='panel-details-'>
+                    <div className='shopping-cart-checkout'>
+                        <div className='cart-checkout-panel'>
+                            <div className='checkout-panel-details'>
+                                <div>
                                     Total ({totalCartItems(currShoppingCart)} items)
                                 </div>
                                 <div>

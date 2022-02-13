@@ -24,7 +24,7 @@
 }
 .image-link:hover {
     transition: margin-right 2s ease-in-out;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); 
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     /* width: 255px; */
     box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 8px 20px 0 rgba(0, 0, 0, 0.19);
     text-align: center;
@@ -41,7 +41,7 @@
     display: flex;
     margin: 2% 6%;
     padding: 0;
-    flex-direction: row !important; 
+    flex-direction: row !important;
     flex-wrap: wrap !important;
     justify-content: center;
     row-gap: 25px;
@@ -64,7 +64,7 @@
 }
 .username-product-cat,
 .description-product-cat {
-   font-weight: 200; 
+   font-weight: 200;
    font-size: 14px;
 }
 

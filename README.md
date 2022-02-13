@@ -9,7 +9,7 @@
 Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML / JSX | CSS | React | Redux | Heroku
 
 ## Development Image of Categories Page
-### We, the creators, do not own nor claim ownership of any listed product images, product names or product descriptions. All listed prices are null as there is no way to take or accept payment on the site. 
+### We, the creators, do not own nor claim ownership of any listed product images, product names or product descriptions. All listed prices are null as there is no way to provide or accept payment on the site. 
 ![This is an image](https://i.imgur.com/tXDbMTs.png)
 
 ## In order to run this application...

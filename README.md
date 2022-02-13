@@ -1,4 +1,4 @@
-# GameZ
+# [GameZ](https://gamez-aa.herokuapp.com/)
 
 • is an [Etsy](https://etsy.com/) clone made by [Alexander Gangemi](https://www.linkedin.com/in/alexander-gangemi/), [Eric Cortez](https://www.linkedin.com/in/eric-cortez-0101/), [Jesse Brooks](https://www.linkedin.com/in/jesse-brooks-8a6718229/) and [Suhayl Khan](https://www.linkedin.com/in/suhayl-khan-48601a193/) for the purpose of course work in [App Academy](https://www.appacademy.io/) and for use as an addition to their professional portfolios. All content is for private, non-commerical, non-profit use.
 

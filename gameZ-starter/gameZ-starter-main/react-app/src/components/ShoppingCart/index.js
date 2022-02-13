@@ -77,10 +77,12 @@ function ShoppingCart() {
                 <div id='cart-total-items'>{totalCartItems(currShoppingCart)} items in your cart</div>}
 
             {deleteAlert &&
-                <div>
-                    <p>Are you sure you want to delete this item from your cart?</p>
-                    <button onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
-                    <button onClick={handleDelete} value={false}>No</button>
+                <div id='cart-remove-item'>
+                    <div id='remove-item-text'>Are you sure you want to delete this item from your cart?</div>
+                    <div id='remove-item-buttons'>
+                        <button id='confirm-remove' onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
+                        <button id='reject-remove' onClick={handleDelete} value={false}>No</button>
+                    </div>
                 </div>}
 
             <div id='shopping-cart-all'>
@@ -146,7 +148,7 @@ function ShoppingCart() {
                     <div id='shopping-cart-checkout'>
                         <div id='cart-checkout-panel'>
                             <div id='checkout-panel-details'>
-                                <div id='panel-details-'>
+                                <div>
                                     Total ({totalCartItems(currShoppingCart)} items)
                                 </div>
                                 <div>

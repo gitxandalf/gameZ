@@ -7,21 +7,26 @@ function ShoppingCartPreview(){
     const products = useSelector(state => state?.product?.entries)
     let price = 0;
     return (
-        <div className='shopping-cart-preview'>
-            <h1>Shopping Cart Preview Component</h1>
+        <div id='shopping-cart-preview'>
+            <h1 id='cart-preview-title'>Your Shopping Cart</h1>
             {currShoppingCart.cart_items?.map(item => {
                 const currProduct = item.product;
                 price += currProduct.price * item.quantity;
-                return (<li>
-                    Product Name: {currProduct.name}
-                    Quantity: {item.quantity}
-                    Price: {currProduct.price}
-                </li>)
+                return (
+                    <div className='cart-preview-listing'>
+                        <div className='preview-listing-name'>
+                            {currProduct.name}
+                        </div>
+                        <div className='preview-listing-price'>
+                            ${currProduct.price} <span>x {item.quantity}</span>
+                        </div>
+                    </div>
+                )
             })}
-            <li>
-                Cart Total: {price}
-            </li>
-            <button><NavLink to={`/shoppingCart/${currShoppingCart.id}`}>More Details</NavLink></button>
+            <div id='cart-preview-total'>
+                Cart Total: ${price}
+            </div>
+            <button id='cart-preview-button'><NavLink to={`/shoppingCart/${currShoppingCart.id}`}>More Details</NavLink></button>
         </div>
     )
 };

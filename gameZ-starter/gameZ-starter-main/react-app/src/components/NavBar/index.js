@@ -106,7 +106,7 @@ const NavBar = () => {
                 placeholder='Search games'
                 value={search}
                 onChange={e => setSearch(e.target.value)}
-              /> 
+              />
                 <button id="search-btn"><i class="fas fa-search"></i></button>
             </div>
             </div>

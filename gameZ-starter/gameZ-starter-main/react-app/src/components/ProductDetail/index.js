@@ -12,13 +12,13 @@ import "../Forms/GlobalForm.css"
 function ProductDetail({ products }) {
     const history = useHistory()
     const dispatch = useDispatch()
-    const allReviews = useSelector(state => state?.review.entries)
+    const allReviews = useSelector(state => state?.review?.entries)
     const user = useSelector(state => state?.session?.user);
     const [itemQuantity, setItemQuantity] = useState(1);
 
     const { productId } = useParams();
 
-    const product = products.find(product => product.id === +productId)
+    const product = products.find(product => product?.id === +productId)
     const stateUsers = useSelector(state => state?.product?.usersEntries)
     const category = useSelector(state => state?.category?.entries)
     const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart)
@@ -39,15 +39,17 @@ function ProductDetail({ products }) {
         history.push(`/categories/${product?.category_id}/products`)
     }
 
-    const handleReviewDelete = (e) => {
+
+
+    const handleReviewDelete = async (e) => {
         e.preventDefault();
         const id = parseInt(e.target.value)
-        dispatch(removeReview(id));
+        await dispatch(removeReview(id));
         dispatch(getReviews())
         history.push(`/products/${productId}`)
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
         if(!user) {
             history.push('/login')
@@ -71,7 +73,7 @@ function ProductDetail({ products }) {
                     newQuantity = parseInt(itemQuantity, 10) + cartItem.quantity
                 }
 
-                dispatch(editItem({
+                await dispatch(editItem({
                     cart_item_id: cartItem.id,
                     quantity: newQuantity,
                     user_id: currShoppingCart.user_id
@@ -136,7 +138,7 @@ function ProductDetail({ products }) {
                     <p id="developer-name">{stateUsers[product?.user_id]?.username}</p>
                     <h2 id="product-name">{product?.name}</h2>
                     <p id ="category-label">Category: {category[product?.category_id - 1]?.name}</p>
-                    <p id="product-price-p"> {`$${product?.price}`}</p>
+                    <p id="product-price-p"> {`$${Number.parseFloat(product?.price).toFixed(2) }`}</p>
                     <p>Description: {product?.description}</p>
                     {!(product?.user_id === user?.id) &&
                         <div>

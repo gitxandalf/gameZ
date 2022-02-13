@@ -35,6 +35,10 @@ const EditProductForm = ({ products }) => {
 
     }, [categoryId, name, imageUrl, price, description])
 
+    useEffect(() => {
+        window.scrollTo(0,0);
+    },[])
+
     const onSubmit = async (e) => {
 
         e.preventDefault();

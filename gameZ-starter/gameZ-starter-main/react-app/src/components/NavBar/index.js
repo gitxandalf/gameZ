@@ -22,6 +22,7 @@ const NavBar = ({search, setSearch}) => {
   const sessionUser = useSelector(state => state?.session?.user);
   const allCategories = useSelector(state => state?.category?.entries)
   const allProducts = useSelector(state => state?.products?.entries)
+  const shoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart?.cart_items)
   const [preview, setPreview] = useState(false)
   const [pathName, setPathName] = useState(window.location.pathname);
 
@@ -70,7 +71,6 @@ const NavBar = ({search, setSearch}) => {
   const handleSearch = async (e) => {
     e.preventDefault();
     const searchQuery = search;
-
 
     searchCategoryResponse = await fetch(`/api/search/categories/${searchQuery}`).then((res => res.json()));
     if (searchCategoryResponse.categories[0]) {
@@ -144,16 +144,22 @@ const NavBar = ({search, setSearch}) => {
                   <LogoutButton />
               </li>}
 
-
+            <div className='shopping-cart-container'
+            onClick={handleClick}>
             <li id='cart-icon' className='nav-li list-a'>
               {sessionUser &&
                 <img
                   src={shoppingCartIcon}
-                  onClick={handleClick}
                   alt="cart"
                   className='list-a'
                   />}
+                  <div className='shopping-cart-icon-badge'>
+                    <div className='shopping-cart-icon-badge-text'>
+                    <p>{shoppingCart && shoppingCart.length}</p>
+                    </div>
+                  </div>
             </li>
+            </div>
             {preview && <ShoppingCartPreview />}
           </ul>
         </div>

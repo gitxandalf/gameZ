@@ -65,16 +65,20 @@ const AddProductForm = () => {
 
 
     return (
-        <div id="add-product-div">
-            <form className="add-product-form" onSubmit={onSubmit}>
-                <div className='add-product-errors'>
+        <div id="edit-product-div">
+            <form className="style-form-edit" onSubmit={onSubmit}>
+                <div className='each-error-div'>
                     {displayErrors && errors?.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{`* ${error}`}</div>
                     ))}
                 </div>
-                <div>
-                    <label>Category</label>
+                <h2 id="form-h2"> List a game </h2>
+                <div className='input-div'>
+                    <label
+                    className='input-label'
+                    >Category</label>
                     <select
+                        className='select-input'
                         type='dropdown'
                         name='category'
                         required
@@ -88,9 +92,12 @@ const AddProductForm = () => {
                         <option value="6">Fighting</option>
                     </select>
                 </div>
-                <div>
-                    <label>Name</label>
+                <div className='input-div'>
+                    <label
+                    className='input-label'
+                    >Name</label>
                     <input
+                        className='title-input'
                         placeholder='Your game name'
                         type='text'
                         name='name'
@@ -99,9 +106,12 @@ const AddProductForm = () => {
                         value={name}
                     ></input>
                 </div>
-                <div>
-                    <label>Image Url</label>
+                <div className='input-div'>
+                    <label
+                    className='input-label'
+                    >Image Url</label>
                     <input
+                        className='title-input'
                         placeholder='Image Url'
                         type='text'
                         name='image_url'
@@ -110,9 +120,12 @@ const AddProductForm = () => {
                         value={imageUrl}
                     ></input>
                 </div>
-                <div>
-                    <label>Price</label>
+                <div className='input-div'>
+                    <label
+                    className='input-label'
+                    >Price</label>
                     <input
+                        className='title-input'
                         placeholder='Name your price'
                         type='number'
                         name='price'
@@ -120,8 +133,10 @@ const AddProductForm = () => {
                         value={price}
                     ></input>
                 </div>
-                <div>
-                    <label>Description</label>
+                <div >
+                    <label
+                    className='input-label'
+                    >Description</label>
                     <textarea
                         placeholder='Description'
                         className='text-area'
@@ -133,7 +148,10 @@ const AddProductForm = () => {
                         value={description}
                     ></textarea>
                 </div>
-                <button type='submit'>Sell This Game!</button>
+
+                <div className='submit-btn-div'>
+                    <button className="submit-btn" type='submit'>Sell This Game!</button>
+                </div>
             </form>
         </div>
     );

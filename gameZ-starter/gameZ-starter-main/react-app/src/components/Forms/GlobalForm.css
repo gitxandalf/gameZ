@@ -14,16 +14,18 @@
     padding: 9px 10px;
     font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
     margin: 0 15px 10px 0;
+    border-radius: 30px;
+    background-color: rgba(128, 128, 128, .1);
 }
 
 .edit-btn {
     padding: 11px 16px;
 }
- 
+
 .delete-btn:hover,
 .edit-btn:hover {
+    background-color: var(--skyGray);
     transition: transform 200ms cubic-bezier(0.345, 0.115, 0.135, 1.42),opacity 150ms ease-out;
-    background-color: rgba(128, 128, 128, .1);
     border-radius: 24px;
 }
 
@@ -39,6 +41,23 @@
     color: rgb(217, 10, 10);
 } */
 
+.select-input {
+    box-shadow: 0 1px 4px 0 rgb(34 34 34 / 10%) inset;
+    border-color: rgba(34, 34, 34, 0.15);
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 6px;
+    color: gray;
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 28px;
+    height: 40px;
+    padding-left: 12px;
+    padding-right: 12px;
+    width: 94%;
+    min-width: 0;
+    margin-bottom: 15px; 
+}
 
     .text-area,
     .title-input {
@@ -137,6 +156,7 @@
         justify-content: center;
     }
 
+    #edit-product-div,
     #edit-reivew-product-div,
     #sign-up-div,
     #login-form-div {
@@ -144,6 +164,9 @@
         justify-content: center;
     }
 
+    .style-form-edit {
+        height: 530px;
+    }
  
   
     .each-error-div {

@@ -141,16 +141,24 @@ function ShoppingCart() {
                         )
                     })}
                 </div>
-                <div id='shopping-cart-checkout'>
-                    <div>
-                        Cart Total: {price}
-                    </div>
-                    {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&
-                        <button onClick={(e) => {
-                            e.preventDefault()
-                            history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
-                        }}>Checkout</button>}
-                </div>
+                {currShoppingCart && currShoppingCart.cart_items &&
+                    <div id='shopping-cart-checkout'>
+                        <div id='cart-checkout-panel'>
+                            <div id='checkout-panel-details'>
+                                <div id='panel-details-'>
+                                    Total ({totalCartItems(currShoppingCart)} items)
+                                </div>
+                                <div>
+                                    ${price}
+                                </div>
+                            </div>
+                            {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&
+                                <button onClick={(e) => {
+                                    e.preventDefault()
+                                    history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
+                                }}>Proceed to checkout</button>}
+                        </div>
+                    </div>}
             </div>
         </div>
     )

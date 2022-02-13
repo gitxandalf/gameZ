@@ -74,6 +74,7 @@ const EditReviewForm = ({ products, reviews }) => {
                 <div className='input-div'>
                     <label className='input-label'> Title </label>
                     <input
+                        required
                         className='title-input'
                         type='text'
                         name='title'

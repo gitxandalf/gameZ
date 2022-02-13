@@ -143,6 +143,7 @@ const EditProductForm = ({ products }) => {
                 <div className='input-div'>
                     <label className='input-label'>Price</label>
                     <input
+                        required
                         className='title-input'
                         type='number'
                         name='price'

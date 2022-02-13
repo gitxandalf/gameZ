@@ -11,8 +11,10 @@ function ShoppingCart() {
     const [loaded, setLoaded] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
-    const sessionUser = useSelector(state => state?.session?.user)
+    const sessionUser = useSelector(state => state?.session?.user);
     const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
+    const categories = useSelector(state => state?.category?.entries);
+    const products = useSelector(state => state?.product);
     let price = 0;
 
     const quantities = [
@@ -61,67 +63,95 @@ function ShoppingCart() {
         return
     }
 
+    const totalCartItems = (shoppingCart) => {
+        let total = 0;
+        shoppingCart?.cart_items?.forEach(item => {
+            total += item.quantity
+        });
+        return total;
+    }
+
     return (
         <div>
-            <h1>SHOPPING CART</h1>
+            {currShoppingCart && currShoppingCart.cart_items &&
+                <div id='cart-total-items'>{totalCartItems(currShoppingCart)} items in your cart</div>}
+
             {deleteAlert &&
                 <div>
                     <p>Are you sure you want to delete this item from your cart?</p>
                     <button onClick={handleDelete} value='DELETETHISITEM'>Yes</button>
                     <button onClick={handleDelete} value={false}>No</button>
                 </div>}
-            {currShoppingCart && currShoppingCart.cart_items?.map(item => {
-                const currProduct = item.product;
-                price += currProduct.price * item.quantity;
-                return (
-                    <ul>
-                        <li>
-                            ProductImage: {currProduct.image_url}
-                        </li>
-                        <li>
-                            Product Name: {currProduct.name}
-                        </li>
-                        <li>
-                            Category: {currProduct.category_id}
-                        </li>
-                        <li>
-                            UserImageUrl /
-                            User: {currProduct.user_id}
-                        </li>
-                        <li>
-                            Description: {currProduct.description}
-                        </li>
-                        <li>
-                            <select
-                                key={item.quantity}
-                                id={item.id}
-                                onChange={handleInput}
-                            >
-                                {quantities.map(opt => {
-                                    return (
-                                        <option
-                                            selected={item.quantity === opt.value ? true : false}
-                                            value={opt.value}>{opt.label}</option>
-                                    )
-                                })}
-                            </select>
-                            Quantity: {item.quantity}
-                        </li>
-                        <li>
-                            Price: {currProduct.price * item.quantity} ({currProduct.price} each)
-                        </li>
-                        <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
-                    </ul>
-                )
-            })}
-            <li>
-                Cart Total: {price}
-            </li>
-            {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&
-                <button onClick={(e) => {
-                    e.preventDefault()
-                    history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
-                }}>Checkout</button>}
+            <div id='shopping-cart-all'>
+                <div id='shopping-cart-listings'>
+                    {currShoppingCart && currShoppingCart.cart_items?.map(item => {
+                        const currProduct = item.product;
+                        price += currProduct.price * item.quantity;
+                        return (
+                            <ul className='cart-item-ul'>
+                                <li className='cart-item-developer'>
+                                    {products.usersEntries[currProduct.user_id].username}
+                                </li>
+                                <li className='cart-item-details'>
+                                    <div className='item-details-image'>
+                                        <img src={currProduct.image_url} />
+                                    </div>
+                                    <div className='item-details-all'>
+                                        <div className='item-details-name'>
+                                            {currProduct.name}
+                                        </div>
+                                        <div className='item-details-category'>
+                                            {categories?.find(category => category.id === currProduct.category_id)?.name}
+                                        </div>
+                                        <div className='item-details-description'>
+                                            {currProduct.description}
+                                        </div>
+                                        <button
+                                            id={item.id}
+                                            className='item-details-remove'
+                                            onClick={handleDelete}
+                                            disabled={deleteAlert ? true : false}
+                                            >Remove</button>
+                                    </div>
+                                    <div className='cart-item-select'>
+                                        <select
+                                            key={item.quantity}
+                                            id={item.id}
+                                            onChange={handleInput}
+                                        >
+                                            {quantities.map(opt => {
+                                                return (
+                                                    <option
+                                                        selected={item.quantity === opt.value ? true : false}
+                                                        value={opt.value}>{opt.label}</option>
+                                                )
+                                            })}
+                                        </select>
+                                    </div>
+                                    <div className='cart-item-price'>
+                                        <div className='item-price-total'>
+                                            ${currProduct.price * item.quantity}
+                                        </div>
+                                        <div className='item-price-each'>
+                                            (${currProduct.price} each)
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        )
+                    })}
+                </div>
+                <div id='shopping-cart-checkout'>
+                    <div>
+                        Cart Total: {price}
+                    </div>
+                    {currShoppingCart && currShoppingCart.cart_items && (currShoppingCart.cart_items.length > 0) &&
+                        <button onClick={(e) => {
+                            e.preventDefault()
+                            history.push(`/shoppingCart/${currShoppingCart.id}/checkout`)
+                        }}>Checkout</button>}
+                </div>
+            </div>
         </div>
     )
 }

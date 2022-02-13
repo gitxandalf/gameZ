@@ -2,3 +2,115 @@
   max-width: 360px;
   max-height: 360px;
 } */
+
+#cart-total-items {
+  margin: 2% 11.7%;
+  font-size: 26px;
+}
+
+#shopping-cart-all {
+  margin: 0 6%;
+  /* margin-bottom: 200px; */
+  display: flex;
+  justify-content: space-around;
+}
+
+#shopping-cart-listings {
+  width: 75%;
+}
+
+.cart-item-ul {
+  margin: 0 36px;
+  padding: 0;
+}
+
+.cart-item-developer {
+  font-family: "Graphik Webfont",-apple-system,"Helvetica Neue","Droid Sans",Arial,sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.cart-item-details {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 2fr 6fr 1fr 1fr;
+  border-bottom: 2px solid whitesmoke;
+}
+
+.item-details-image > img {
+  max-width: 85%;
+  border-radius: 10px;
+}
+
+.item-details-name {
+  font-family: "Guardian-EgypTT",Charter,"Charter Bitstream",Cambria,"Noto Serif Light","Droid Serif",Georgia,serif;
+  font-size: 25px;
+}
+
+.item-details-category {
+  font-size: 18px;
+  font-style: italic;
+  color: #414A4C;
+}
+
+.item-details-description {
+  font-size: 14px;
+  color: #414A4C;
+  padding: 10px 0;
+  text-overflow: ellipsis;
+}
+
+.item-details-remove {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #ff7f7f;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.item-details-remove:hover {
+  text-shadow: var(--skyGray) 0 0 2px;
+}
+
+.cart-item-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-item-select > select {
+  appearance: none;
+  text-align: center;
+  width: fit-content;
+  padding: 7px 5px;
+  box-shadow: 0 1px 6px 0 var(--skyGray);
+  border: 1px solid white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.cart-item-select > select:hover {
+  border: 1px solid #414A4C;
+}
+
+.cart-item-price {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.item-price-total {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.item-price-each {
+  color: #414A4C;
+  font-size: 14px;
+}

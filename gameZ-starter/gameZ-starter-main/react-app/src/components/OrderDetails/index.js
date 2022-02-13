@@ -36,13 +36,13 @@ function OrderDetails() {
                     {product.name} x{item.quantity}
                   </div>
                   <div>
-                    ${product.price * item.quantity}
+                    {`$${Number.parseFloat(product.price * item.quantity).toFixed(2)}`}
                   </div>
                 </div>
               )
             })}
           <div>
-            Order Total: ${orderTotal}
+            Order Total: {`$${Number.parseFloat(orderTotal).toFixed(2)}`}
           </div>
 
           <button onClick={() => history.push('/')}>Continue Shopping</button>

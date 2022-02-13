@@ -97,8 +97,8 @@ function Checkout() {
           <h1>CHECKOUT</h1>
           <div>
             Order summary
-            <div>
-              Order Total ({calcTotalItems(currShoppingCart)} items): {calcTotalPrice(currShoppingCart)}
+            <div> 
+              Order Total ({calcTotalItems(currShoppingCart)} items): {`$${Number.parseFloat(calcTotalPrice(currShoppingCart)).toFixed(2)}`}
             </div>
           </div>
           {deleteAlert &&
@@ -143,8 +143,8 @@ function Checkout() {
                     </select>
                     Quantity: {item.quantity}
                 </li>
-                <li>
-                    Price: {currProduct.price * item.quantity} ({currProduct.price} each)
+                <li> 
+                  Price: {`${Number.parseFloat(currProduct.price * item.quantity).toFixed(2)}`} ({`${Number.parseFloat(currProduct.price).toFixed(2)}`} each)
                 </li>
                 <button id={item.id} onClick={handleDelete} disabled={deleteAlert ? true : false}>DELETE</button>
               </ul>

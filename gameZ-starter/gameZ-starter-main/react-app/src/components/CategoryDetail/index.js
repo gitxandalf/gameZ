@@ -38,7 +38,7 @@ function CategoryDetail() {
                                 <p className="product-info-cat name-cat-detail title-product-cat" key={product?.id}>{product?.name}</p>
                                 <p className="product-info-cat username-product-cat" key={product?.id}> Developer - {allUsers[product?.user_id]?.username}</p>
                                 <p id="ellipsis-text" className="product-info-cat description-product-cat" key={product?.id}>{product?.description} </p>
-                                <p className="product-info-cat price-product-cat" key={product?.id}>{`$${product?.price}`}</p>
+                                <p className="product-info-cat price-product-cat" key={product?.id}>{`$${Number.parseFloat(product?.price).toFixed(2)}`}</p>
                             </Link>
                         </div>
                     </div>

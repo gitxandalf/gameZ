@@ -32,9 +32,13 @@ const EditReviewForm = ({ products, reviews }) => {
         const errors = []
         if (title){
             if (title.length > 50) errors.push("Titles must be less than 50 characters")
+            if (title === " " || title === "  ") errors.push("Please provide a title")
+        }
+        if (content) {
+            if (content === " " || content === "  ") errors.push("Please provide content for your review")
         }
         setErrors(errors)
-    }, [title]);
+    }, [title, content]);
 
     let editedReview;
     const onSubmit = async (e) => {
@@ -61,9 +65,9 @@ const EditReviewForm = ({ products, reviews }) => {
     return (
         <div id="edit-reivew-product-div">
             <form className="style-form-edit" onSubmit={onSubmit}>
-                <div>
+                <div className='each-error-div'>
                     {displayErrors && errors?.map((error, ind) => (
-                        <div key={ind}>{error}</div>
+                        <div key={ind}>{`* ${error}`}</div>
                     ))}
                 </div>
                 <h2 id="form-h2"> Edit review </h2>
@@ -84,7 +88,6 @@ const EditReviewForm = ({ products, reviews }) => {
                         className='text-area'
                         name='content'
                         required
-                        disabled={errors.length > 0}
                         onChange={updateContent}
                         value={content}
                     ></textarea>

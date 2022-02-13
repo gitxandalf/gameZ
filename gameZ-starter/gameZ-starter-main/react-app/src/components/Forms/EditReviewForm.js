@@ -22,6 +22,7 @@ const EditReviewForm = ({ products, reviews }) => {
     const [content, setContent] = useState(review?.content);
 
     useEffect(() => {
+        dispatch(getReviews())
         window.scrollTo(0,0);
     }, []);
 

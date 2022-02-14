@@ -9,20 +9,20 @@
 Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML / JSX | CSS | React | Redux | Heroku
 
 ## Development Image of Home Page
-### We, the creators, do not own nor claim ownership of any listed product images, product names or product descriptions. All listed prices are null as there is no way to provide or accept payment on the site. 
+### We, the creators, do not own nor claim ownership of any listed product images, product names or product descriptions. All listed prices are null as there is no way to provide or accept payment on the site.
 ![This is an image](https://i.imgur.com/xRXYUr1.png)
 
 ## In order to run this application...
 
 ### Either:
 
-#### A. Go to [GameZ](https://gamez-aa.herokuapp.com/) in your browser 
+#### A. Go to [GameZ](https://gamez-aa.herokuapp.com/) in your browser
 
-### OR 
+### OR
 
 #### B: Clone / Download this repo and...
 
-•  `npm install` dependencies from the package.json within the frontend directory 
+•  `npm install` dependencies from the package.json within the frontend directory
 
 • `pip install` dependencies from the Pipfile within the backend directory
 
@@ -74,6 +74,9 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 #### Eric Cortez:
 
 #### Jesse Brooks:
+• I found implementing the shopping cart was a more difficult task than what I originally imagined. The goal was to provide the same state across our entire application so that the shopping cart preview could be accessed on any page of the site. Our first implementation ended up being mostly refactored due to significant challenges in accessing redux store state.
+
+• The search feature was fun to implement, we didn't create a redux store for anything related to the search feature but that is something I would change if I were to refactor this in the future. We ended up having to create a controlled input for the search value in our main App.js file so we could pass search, and setSearch as a prop to the rest of the components. Without doing this, not all pages would clear the search bar if you made a search and then navigated to another page.
 
 #### Suhayl Khan:
 

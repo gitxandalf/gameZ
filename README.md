@@ -22,13 +22,25 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 
 #### B: Clone / Download this repo and...
 
+## Installation 
+
+To install GameZ on your local machine please clone the project repository. 
+
+•  `git clone https://github.com/gitxandalf/gameZ.git`
+
+•  `cd gameZ-starter-main/react-app/` change into the frontend directory 
+
 •  `npm install` dependencies from the package.json within the frontend directory 
 
-• `pip install` dependencies from the Pipfile within the backend directory
+•  `cd gameZ-starter-main/` change into the gameZ-starter-main directory 
 
-•  `flask run` within the backend directory under localhost:5000
+•  `pipenv install` dependencies from the Pipfile within the backend directory
 
-•  `npm start` within the frontend directory under localhost:3000
+•  `pipenv shell` to enter the pipenv shell 
+
+•  `flask run` while in the shell and within the backend (gameZ-starter-main/) directory under localhost:5000
+
+•  `npm start` within the frontend directory(gameZ-starter-main/react-app) under localhost:3000
 
 ## Future Features:
 
@@ -72,6 +84,42 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 
 
 #### Eric Cortez:
+
+• Challenge: While implementing the error handling on the edit product form I encountered a challenge as all products must have a unique name. My goal was 
+  to alert users that a game name already existed; while allowing them to make changes to their current user and be able to revert those changes. 
+  Therefore, I created a function to check for unique names against names that existed in the database and also checking the matching name against the product id. 
+
+
+• Highlight: Working with JavaScript (frontend) and Python (backend) for the first time was also challenging at first. But, while working as a team we quickly became conformable 
+  with implementing the functionality and troubleshooting. 
+
+• Below is a code from the edit product component.   
+
+```
+
+    useEffect(() => {
+        const errors = [];
+        const uniqueName = (currName, products) => {
+            for (let i = 0; i < products.length; i++) {
+                    let currProduct = products[i]
+                if (currProduct.name === name) {
+                    if (currProduct.id === +productId){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }
+
+         additional code...
+        //Unique error handel
+        if (name && uniqueName(name, products)) errors.push("Game name already exists")
+        additional code...
+
+    }, [categoryId, name, imageUrl, price, description, products, productId])
+
+```
 
 #### Jesse Brooks:
 

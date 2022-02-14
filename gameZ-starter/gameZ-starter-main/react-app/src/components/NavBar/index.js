@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import "./NavBar.css"
@@ -90,9 +90,9 @@ const NavBar = ({ search, setSearch }) => {
       <div id="nav-div">
 
         <div id="nav-search">
-          <NavLink exact to='/' activeClassName='active'>
+          <Link exact to='/' >
             <img id="nav-logo" alt="logo" src={Game} />
-          </NavLink>
+          </Link>
           <form id="search-form" onSubmit={handleSearch}>
             <div id="search-div">
               <div id="search-div-under">
@@ -173,10 +173,10 @@ const NavBar = ({ search, setSearch }) => {
 
       <div className='nav-categories'>
         <div className='nav-category-links'>{allCategories && allCategories?.map((category) => {
-          if(category?.id) return(
+          if (category?.id) return (
             <div key={category?.id}>
               <NavLink activeClassName='active' key={category?.id + 1} to={`/categories/${category?.id}/products`}>{category?.name}</NavLink>
-          </div>)
+            </div>)
           else return null
         })}
         </div>

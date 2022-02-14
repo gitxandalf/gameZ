@@ -99,7 +99,7 @@ function App() {
         </Route>
 
         <Route exact path='/search-results' >
-          <SearchResults products={queriedProducts} categories={queriedCategorys} />
+          <SearchResults products={queriedProducts} categories={queriedCategorys} search={search}/>
         </Route>
 
         <Route exact path='/' >

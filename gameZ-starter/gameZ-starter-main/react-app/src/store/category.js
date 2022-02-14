@@ -37,8 +37,6 @@ const initialState = {
 };
 
 const categoryReducer = (state = initialState, action) => {
-    let newState;
-
     switch (action.type) {
 
         case LOAD: {

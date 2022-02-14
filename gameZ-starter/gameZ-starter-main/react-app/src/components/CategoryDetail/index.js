@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import { getCategory, getCategories } from '../../store/category';
 import { getProducts } from '../../store/product';
-import { loadCart } from '../../store/shoppingCart';
 import "./CategoryDetail.css"
 
 function CategoryDetail() {
@@ -12,7 +11,6 @@ function CategoryDetail() {
     const allCategories = useSelector(state => state?.category?.entries)
     const allProducts = useSelector(state => state?.product?.entries)
     const allUsers = useSelector(state => state?.product?.usersEntries)
-    const sessionUser = useSelector(state => state?.session?.user);
 
     const { categoryId } = useParams();
 
@@ -32,7 +30,7 @@ function CategoryDetail() {
                 {/* <h2 id="slogan-cat-pg">Find something you love</h2> */}
                 <div className='product-links'>{allProducts?.filter(product => product?.category_id === parseInt(categoryId)).map((product) => (
                     <div id="each-product-category" key={product?.id}>
-                        <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>
+                        <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url} alt='product'></img></Link>
                         <div id="category-product-info">
                             <Link id="info-link-a" key={product?.id} to={`/products/${product?.id}`}>
                                 <p className="product-info-cat name-cat-detail title-product-cat" key={product?.id}>{product?.name}</p>

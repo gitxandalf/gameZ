@@ -12,7 +12,6 @@ const EditReviewForm = ({ products, reviews }) => {
     const { reviewId } = useParams()
 
     const user = useSelector(state => state.session.user)
-    // const reviews = useSelector(state => state.review.entries)
     const review = reviews.find(review => review?.id === +reviewId)
     const oneProduct = products?.find(product => review?.product_id === product?.id)
 
@@ -24,7 +23,7 @@ const EditReviewForm = ({ products, reviews }) => {
     useEffect(() => {
         dispatch(getReviews())
         window.scrollTo(0,0);
-    }, []);
+    }, [dispatch]);
 
     let productId = oneProduct?.id
 
@@ -97,7 +96,7 @@ const EditReviewForm = ({ products, reviews }) => {
                 <div className='submit-btn-div'>
                     <button className="submit-btn" type='submit'> Submit </button>
                 </div>
-               
+
                 <div className='submit-btn-div'>
                     <Link className="submit-btn" to={`/products/${productId}`}>Cancel</Link>
                 </div>

@@ -30,7 +30,7 @@ function ProductDetail({ products }) {
         dispatch(getProduct(productId))
         dispatch(getReviews())
         if(user) dispatch(loadCart(user.id))
-    }, [dispatch, productId])
+    }, [dispatch, productId, user])
 
     const handleDelete = (e) => {
         e.preventDefault();
@@ -163,7 +163,7 @@ function ProductDetail({ products }) {
                         </div>}
                     <NavLink className="edit-btn" hidden={user?.id === product?.user_id ? false : true} to={`/products/${product?.id}/edit-product`} value={product?.id} >Edit</NavLink>
                     <button className="delete-btn" hidden={user?.id === product?.user_id ? false : true} value={product?.id} onClick={handleDelete} type="submit">Delete</button>
-                 
+
                 </div>
 
             </div>

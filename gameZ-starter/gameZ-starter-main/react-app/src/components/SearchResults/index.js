@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
-import { getCategory, getCategories } from '../../store/category';
+import { Link } from 'react-router-dom';
+import { getCategories } from '../../store/category';
 import { getProducts } from '../../store/product';
 import { loadCart } from '../../store/shoppingCart';
 import "./SearchResults.css"
@@ -9,8 +9,6 @@ import "./SearchResults.css"
 function SearchResults({ products, categories, search }) {
     const dispatch = useDispatch()
 
-    const allCategories = useSelector(state => state?.category?.entries)
-    const allProducts = useSelector(state => state?.product?.entries)
     const allUsers = useSelector(state => state?.product?.usersEntries)
     const sessionUser = useSelector(state => state?.session?.user);
 
@@ -18,7 +16,7 @@ function SearchResults({ products, categories, search }) {
         dispatch(getCategories())
         dispatch(getProducts())
         if (sessionUser) dispatch(loadCart(sessionUser.id))
-    }, [dispatch])
+    }, [dispatch, sessionUser])
 
     return (
         <div>
@@ -38,7 +36,7 @@ function SearchResults({ products, categories, search }) {
 
                 <div className='product-links'>{products && products?.map((product) => (
                     <div id="each-product-category" key={product?.id}>
-                        <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>
+                        <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url} alt='product' ></img></Link>
                         <div id="category-product-info">
                             <Link id="info-link-a" key={product?.id} to={`/products/${product?.id}`}>
                                 <p className="product-info-cat name-cat-detail title-product-cat" key={product?.id}>{product?.name}</p>

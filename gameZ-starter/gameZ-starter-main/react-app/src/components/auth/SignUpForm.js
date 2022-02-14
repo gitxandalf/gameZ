@@ -19,7 +19,7 @@ const SignUpForm = ({setSearch}) => {
 
   useEffect(() => {
     setSearch('');
-  }, [])
+  }, [setSearch])
 
   const onSignUp = async (e) => {
     e.preventDefault();
@@ -138,7 +138,6 @@ const SignUpForm = ({setSearch}) => {
             className='input-label required-field'
           >Repeat Password</label>
           <input
-            className='title-input'
             className='title-input'
             type='password'
             name='repeat_password'

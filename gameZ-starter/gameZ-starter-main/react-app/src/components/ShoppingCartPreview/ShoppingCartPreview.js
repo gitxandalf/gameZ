@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom'
 
 function ShoppingCartPreview(){
     const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart)
-    const products = useSelector(state => state?.product?.entries)
     let price = 0;
     return (
         <div id='shopping-cart-preview'>

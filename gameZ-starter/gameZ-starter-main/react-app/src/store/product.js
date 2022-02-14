@@ -19,11 +19,6 @@ const editProduct = product => ({
     product,
 })
 
-const deleteProduct = product => ({
-    type: DELETE_PRODUCT,
-    product,
-})
-
 export const getProducts = () => async dispatch => {
     const response = await fetch(`/api/products/`);
 

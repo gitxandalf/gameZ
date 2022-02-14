@@ -1,11 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link, useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import LogoutButton from '../auth/LogoutButton';
 import { useSelector, useDispatch } from 'react-redux';
 import "./NavBar.css"
 import Game from '../../images/Game.png'
-import ShoppingCart from '../ShoppingCart';
 import ShoppingCartPreview from '../ShoppingCartPreview/ShoppingCartPreview';
 import shoppingCartIcon from '../../images/shopping-cart.png'
 import { loadCart } from '../../store/shoppingCart'
@@ -18,10 +17,8 @@ let queriedCategorys;
 const NavBar = ({ search, setSearch }) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  // const [search, setSearch] = useState("");
   const sessionUser = useSelector(state => state?.session?.user);
   const allCategories = useSelector(state => state?.category?.entries)
-  const allProducts = useSelector(state => state?.products?.entries)
   const shoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart?.cart_items)
   const [preview, setPreview] = useState(false)
   const [pathName, setPathName] = useState(window.location.pathname);
@@ -33,15 +30,11 @@ const NavBar = ({ search, setSearch }) => {
   useEffect(() => {
     setPathName(window.location.pathname);
     window.scrollTo(0, 0);
-    if (pathName !== pathName) {
-      queriedProducts = '';
-      queriedCategorys = '';
-    }
-  }, [dispatch, sessionUser, window.location.pathname])
+  }, [dispatch, sessionUser, pathName])
 
   useEffect(() => {
     if (window.location.pathname !== '/search-results') setSearch('');
-  }, [window.location.pathname])
+  }, [setSearch])
 
   useEffect(() => {
     if (!sessionUser) setPreview(false);
@@ -180,11 +173,11 @@ const NavBar = ({ search, setSearch }) => {
 
       <div className='nav-categories'>
         <div className='nav-category-links'>{allCategories && allCategories?.map((category) => {
-          if (category?.id) return (
+          if(category?.id) return(
             <div key={category?.id}>
               <NavLink activeClassName='active' key={category?.id + 1} to={`/categories/${category?.id}/products`}>{category?.name}</NavLink>
-            </div>
-          )
+          </div>)
+          else return null
         })}
         </div>
       </div>

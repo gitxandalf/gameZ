@@ -17,7 +17,7 @@ const AddProductForm = ({setSearch}) => {
     const [displayErrors, setDisplayErrors] = useState(false);
     const user = useSelector(state => state.session.user);
     const products = useSelector(state => state?.product?.entries);
-    
+
 
     const onSubmit = async (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ const AddProductForm = ({setSearch}) => {
 
     useEffect(() => {
         setSearch('');
-    }, [])
+    }, [setSearch])
 
     useEffect(() => {
         const errors = [];
@@ -50,7 +50,7 @@ const AddProductForm = ({setSearch}) => {
         if (description === " " || description === "  ") errors.push("Please provide a description")
         if (errors) setErrors(errors)
 
-    }, [categoryId, name, imageUrl, price, description])
+    }, [categoryId, name, imageUrl, price, description, products])
 
     let product;
 

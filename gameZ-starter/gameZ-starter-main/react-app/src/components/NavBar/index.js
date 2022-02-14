@@ -118,11 +118,11 @@ const NavBar = ({ search, setSearch }) => {
           <ul id="nav-ul">
 
 
-              {sessionUser &&
-                <li id='logout' className='nav-li user-info'>
-                  <p id="username">{`Welcome, ${sessionUser?.username}`}</p>
-  
-                </li>}
+            {sessionUser &&
+              <li id='logout' className='nav-li user-info'>
+                <p id="username">{`Welcome, ${sessionUser?.username}`}</p>
+
+              </li>}
 
             <li id='add-product' className='nav-li'>
               {sessionUser &&
@@ -154,23 +154,24 @@ const NavBar = ({ search, setSearch }) => {
 
 
             <div className='shopping-cart-container'
-            onClick={handleClick}>
+              onClick={handleClick}>
 
-            <li id='cart-icon' className='nav-li list-a'>
-              {sessionUser &&
-               <>
-                <img
-                  src={shoppingCartIcon}
-                  alt="cart"
-                  className='list-a'
-                  />
+              <li id='cart-icon' className='nav-li list-a'>
+                {sessionUser &&
+                  <>
+                    <img
+                      src={shoppingCartIcon}
+                      alt="cart"
+                      className='list-a'
+                    />
 
-                  <div className='shopping-cart-icon-badge'>
-                    <div className='shopping-cart-icon-badge-text'>
-                    <p>{shoppingCart && shoppingCart.length}</p>
-                  </div>
-                </>}
-            </li>
+                    <div className='shopping-cart-icon-badge'>
+                      <div className='shopping-cart-icon-badge-text'>
+                        <p>{shoppingCart && shoppingCart.length}</p>
+                      </div>
+                    </div>
+                  </>}
+              </li>
             </div>
             {preview && <ShoppingCartPreview />}
           </ul>

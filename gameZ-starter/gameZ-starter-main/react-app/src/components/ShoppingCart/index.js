@@ -8,7 +8,6 @@ import './ShoppingCart.css'
 function ShoppingCart() {
     const dispatch = useDispatch();
     const history = useHistory();
-    const [loaded, setLoaded] = useState(false);
     const [deleteItemId, setDeleteItemId] = useState('');
     const [deleteAlert, setDeleteAlert] = useState(false);
     const sessionUser = useSelector(state => state?.session?.user);
@@ -31,10 +30,9 @@ function ShoppingCart() {
       ];
 
     useEffect(() => {
-        dispatch(loadCart(sessionUser.id))
-            .then(() => setLoaded(true));
-        dispatch(getCategories())
-    }, [dispatch]);
+        dispatch(loadCart(sessionUser.id));
+        dispatch(getCategories());
+    }, [dispatch, sessionUser.id]);
 
     const handleInput = (e) => {
         const item = {
@@ -97,7 +95,7 @@ function ShoppingCart() {
                                 </li>
                                 <li className='cart-item-details'>
                                     <div className='item-details-image'>
-                                        <img src={currProduct.image_url} />
+                                        <img src={currProduct.image_url} alt='product' />
                                     </div>
                                     <div className='item-details-all'>
                                         <div className='item-details-name'>
@@ -136,7 +134,7 @@ function ShoppingCart() {
                                             {`$${Number.parseFloat(currProduct.price * item.quantity).toFixed(2)}`}
                                         </div>
                                         <div className='item-price-each'>
-                                           
+
                                             ({`$${Number.parseFloat(currProduct.price).toFixed(2)}`} each)
                                         </div>
                                     </div>

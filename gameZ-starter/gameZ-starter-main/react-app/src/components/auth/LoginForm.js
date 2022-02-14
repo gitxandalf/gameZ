@@ -15,7 +15,7 @@ const LoginForm = ({setSearch}) => {
 
   useEffect(() => {
     setSearch('');
-  }, [])
+  }, [setSearch])
 
   const onLogin = async (e) => {
     e.preventDefault();
@@ -61,7 +61,7 @@ const LoginForm = ({setSearch}) => {
             />
           </div>
           <div>
-            <label 
+            <label
             className='input-label required-field'
             htmlFor='password'>Password </label>
             <input
@@ -78,7 +78,7 @@ const LoginForm = ({setSearch}) => {
 
           </div>
         </form>
-        <div className="form-btn-login">      
+        <div className="form-btn-login">
           <Demo />
         </div>
       </div>

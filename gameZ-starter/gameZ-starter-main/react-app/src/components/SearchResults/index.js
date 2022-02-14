@@ -6,7 +6,7 @@ import { getProducts } from '../../store/product';
 import { loadCart } from '../../store/shoppingCart';
 import "./SearchResults.css"
 
-function SearchResults({ products, categories }) {
+function SearchResults({ products, categories, search }) {
     const dispatch = useDispatch()
 
     const allCategories = useSelector(state => state?.category?.entries)
@@ -26,6 +26,16 @@ function SearchResults({ products, categories }) {
                 <div id="category-title-div">
                     <h1 id="category-h1">Search Results</h1>
                 </div>
+
+                <div className='no-products'>
+                    {products && products.length === 0 &&
+                        <>
+                            <h1>We couldn't find any results for your search.</h1>
+                            <h4>Try searching for something else instead?</h4>
+                        </>
+                    }
+                </div>
+
                 <div className='product-links'>{products && products?.map((product) => (
                     <div id="each-product-category" key={product?.id}>
                         <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url}></img></Link>

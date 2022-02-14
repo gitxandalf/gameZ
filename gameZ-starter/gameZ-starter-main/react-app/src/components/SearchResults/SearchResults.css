@@ -83,3 +83,10 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.no-products {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

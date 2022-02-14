@@ -139,16 +139,12 @@ const NavBar = ({ search, setSearch }) => {
                 </NavLink>
               </li>}
 
-
             {!sessionUser &&
               <li id='sign-up' className='nav-li'>
                 <NavLink exact to='/sign-up' activeClassName='active'>
                   Sign up
                 </NavLink>
               </li>}
-
-
-
 
             {sessionUser &&
               <li id='logout' className='nav-li'>

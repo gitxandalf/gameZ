@@ -39,10 +39,10 @@ function SearchResults({ products, categories, search }) {
                         <Link id="image-link-a" key={product?.id} to={`/products/${product?.id}`}><img key={product?.id} className='image-link' src={product?.image_url} alt='product' ></img></Link>
                         <div id="category-product-info">
                             <Link id="info-link-a" key={product?.id} to={`/products/${product?.id}`}>
-                                <p className="product-info-cat title-product-cat" key={product?.id}> Title: {product?.name}</p>
-                                <p id="ellipsis-text" className="product-info-cat description-product-cat" key={product?.id}>Description: {product?.description} </p>
+                                <p className="product-info-cat name-cat-detail title-product-cat" key={product?.id}>{product?.name}</p>
+                                <p className="product-info-cat username-product-cat" key={product?.id}> Developer - {allUsers[product?.user_id]?.username}</p>
+                                <p id="ellipsis-text" className="product-info-cat description-product-cat" key={product?.id}>{product?.description} </p>
                                 <p className="product-info-cat price-product-cat" key={product?.id}>{`$${Number.parseFloat(product?.price).toFixed(2)}`}</p>
-                                <p className="product-info-cat username-product-cat" key={product?.id}>{allUsers[product?.user_id]?.username}</p>
                             </Link>
                         </div>
                     </div>

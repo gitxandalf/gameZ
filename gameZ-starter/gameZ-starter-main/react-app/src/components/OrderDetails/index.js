@@ -18,7 +18,7 @@ function OrderDetails() {
     dispatch(loadCart(sessionUser.id))
       .then(() => setLoaded(true))
     return () => setLoaded(false);
-  }, [dispatch]);
+  }, [dispatch, sessionUser.id]);
 
   const totalCartItems = (shoppingCart) => {
     let total = 0;

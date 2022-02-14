@@ -29,7 +29,7 @@ function App() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.entries)
   const reviews = useSelector((state) => state.review.entries)
-  console.log(reviews);
+
   useEffect(() => {
     (async () => {
       await dispatch(authenticate());

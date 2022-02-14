@@ -15,7 +15,7 @@ import { getProducts } from '../../store/product';
 let queriedProducts;
 let queriedCategorys;
 
-const NavBar = ({search, setSearch}) => {
+const NavBar = ({ search, setSearch }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   // const [search, setSearch] = useState("");
@@ -97,22 +97,22 @@ const NavBar = ({search, setSearch}) => {
       <div id="nav-div">
 
         <div id="nav-search">
-          <Link to='/' exact={true} activeClassName='active'>
+          <NavLink exact to='/' activeClassName='active'>
             <img id="nav-logo" alt="logo" src={Game} />
-          </Link>
+          </NavLink>
           <form id="search-form" onSubmit={handleSearch}>
             <div id="search-div">
-            <div id="search-div-under">
-              <input
-                id="search-input"
-                name='search'
-                type='text'
-                placeholder='Search games'
-                value={search}
-                onChange={e => setSearch(e.target.value)}
-              />
-                <button id="search-btn"><i class="fas fa-search"></i></button>
-            </div>
+              <div id="search-div-under">
+                <input
+                  id="search-input"
+                  name='search'
+                  type='text'
+                  placeholder='Search games'
+                  value={search}
+                  onChange={e => setSearch(e.target.value)}
+                />
+                <button id="search-btn"><i className="fas fa-search"></i></button>
+              </div>
             </div>
           </form>
           <ul id="nav-ul">
@@ -126,33 +126,33 @@ const NavBar = ({search, setSearch}) => {
 
             <li id='add-product' className='nav-li'>
               {sessionUser &&
-                <NavLink className="list-a" to='/products/add-product' exact={true} activeClassName='active'>
+                <NavLink className="list-a" exact to='/products/add-product' activeClassName='active'>
                   List a Game
                 </NavLink>}
             </li>
 
 
             {!sessionUser &&
-            <li id='login' className='nav-li'>
-                <NavLink to='/login' exact={true} activeClassName='active'>
+              <li id='login' className='nav-li'>
+                <NavLink exact to='/login' activeClassName='active'>
                   Log in
                 </NavLink>
-            </li>}
+              </li>}
 
 
             {!sessionUser &&
-            <li id='sign-up' className='nav-li'>
-                <NavLink to='/sign-up' exact={true} activeClassName='active'>
+              <li id='sign-up' className='nav-li'>
+                <NavLink exact to='/sign-up' activeClassName='active'>
                   Sign up
                 </NavLink>
-            </li>}
+              </li>}
 
 
 
 
             {sessionUser &&
               <li id='logout' className='nav-li'>
-                  <LogoutButton />
+                <LogoutButton />
               </li>}
 
 
@@ -172,9 +172,7 @@ const NavBar = ({search, setSearch}) => {
                   <div className='shopping-cart-icon-badge'>
                     <div className='shopping-cart-icon-badge-text'>
                     <p>{shoppingCart && shoppingCart.length}</p>
-                    </div>
                   </div>
-                  
                 </>}
             </li>
             </div>
@@ -185,11 +183,12 @@ const NavBar = ({search, setSearch}) => {
 
       <div className='nav-categories'>
         <div className='nav-category-links'>{allCategories && allCategories?.map((category) => {
-          if(category?.id)return(
+          if (category?.id) return (
             <div key={category?.id}>
               <NavLink activeClassName='active' key={category?.id + 1} to={`/categories/${category?.id}/products`}>{category?.name}</NavLink>
-          </div>
-      )})}
+            </div>
+          )
+        })}
         </div>
       </div>
 

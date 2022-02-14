@@ -176,7 +176,7 @@ function Checkout() {
                     Order Total ({calcTotalItems(currShoppingCart)} items)
                   </div>
                   <div>
-                    ${calcTotalPrice(currShoppingCart)}
+                    {`$${Number.parseFloat(calcTotalPrice(currShoppingCart)).toFixed(2)}`}
                   </div>
                 </div>
                 <button onClick={handleCheckout} disabled={currShoppingCart.cart_items.length === 0 ? true : false}>Confirm Checkout</button>

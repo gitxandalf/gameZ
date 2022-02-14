@@ -1,15 +1,4 @@
-const CHECKOUT = '/shoppingCart/CHECKOUT';
-const RESET = '/shoppingCart/RESET';
 const GETCART = '/shoppingCart/GETCART'
-
-const checkout = products => ({
-    type: CHECKOUT,
-    products
-})
-
-const reset = () => ({
-    type: RESET
-})
 
 const getCart = (payload) => ({
     type: GETCART,

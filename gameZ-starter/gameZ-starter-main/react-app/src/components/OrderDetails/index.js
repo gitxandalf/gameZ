@@ -67,7 +67,7 @@ function OrderDetails() {
                   Order Total ({totalCartItems(checkedOutCart)} items)
                 </div>}
               <div>
-                ${orderTotal}
+                {`$${Number.parseFloat(orderTotal).toFixed(2)}`}
               </div>
             </div>
             <button

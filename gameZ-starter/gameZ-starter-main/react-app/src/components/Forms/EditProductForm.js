@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { Redirect, useHistory, useParams, Link } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 import "./EditProductForm.css"
 import { updateProduct } from '../../store/product'
 
@@ -21,27 +21,27 @@ const EditProductForm = ({ products }) => {
     const [description, setDescription] = useState(product?.description);
     const [errors, setErrors] = useState([]);
     const [displayErrors, setDisplayErrors] = useState(false);
-   
-    const uniqueName = (currName, products) => {
-        for (let i = 0; i < products.length; i++) {
-                let currProduct = products[i]
-            if (currProduct.name === name) {
-                if (currProduct.id === +productId){
-                    return false;
-                } else {
-                    return true; 
-                }
-            }
-        }
-    }
+
 
 
     useEffect(() => {
         const errors = [];
+        const uniqueName = (currName, products) => {
+            for (let i = 0; i < products.length; i++) {
+                    let currProduct = products[i]
+                if (currProduct.name === name) {
+                    if (currProduct.id === +productId){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            }
+        }
         if (name === " " || name === "  ") errors.push("Please provide a valid name")
         if (!categoryId) errors.push("Please select a category")
         if (name?.length > 50 || name?.length <= 0) errors.push("Name must be less 50 characters")
-        //Unique error handel 
+        //Unique error handel
         if (name && uniqueName(name, products)) errors.push("Game name already exists")
         if (imageUrl?.length > 255 || imageUrl?.length <= 0) errors.push("Image Url is must be less 255 characters")
         if (!imageUrl?.includes("http" || "https")) errors.push("Please provide a valid image Url")
@@ -50,7 +50,7 @@ const EditProductForm = ({ products }) => {
         if (description === " " || description === "  ") errors.push("Please provide a description")
         if (errors) setErrors(errors)
 
-    }, [categoryId, name, imageUrl, price, description])
+    }, [categoryId, name, imageUrl, price, description, products, productId])
 
     useEffect(() => {
         window.scrollTo(0,0);

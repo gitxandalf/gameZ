@@ -46,39 +46,39 @@ function App() {
   return (
     <BrowserRouter>
 
-      <NavBar search={search} setSearch={setSearch}/>
+      <NavBar search={search} setSearch={setSearch} />
 
       <Switch>
 
-        <Route path='/login' exact={true} >
-          <LoginForm setSearch={setSearch}/>
+        <Route exact path='/login' >
+          <LoginForm setSearch={setSearch} />
         </Route>
 
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm setSearch={setSearch}/>
+        <Route exact path='/sign-up'>
+          <SignUpForm setSearch={setSearch} />
         </Route>
 
-        <ProtectedRoute path='/users' exact={true} >
+        <ProtectedRoute exact path='/users'>
           <UsersList />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/users/:userId' exact={true} >
+        <ProtectedRoute exact path='/users/:userId' >
           <User />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/products/add-product' exact={true} >
-          <AddProductForm products={products} setSearch={setSearch}/>
+        <ProtectedRoute exact path='/products/add-product' >
+          <AddProductForm products={products} setSearch={setSearch} />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/shoppingCart/:id' exact={true} >
+        <ProtectedRoute exact path='/shoppingCart/:id' >
           <ShoppingCart />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/shoppingCart/:id/checkout' exact={true} >
+        <ProtectedRoute exact path='/shoppingCart/:id/checkout' >
           <Checkout />
         </ProtectedRoute>
 
-        <ProtectedRoute path='/shoppingCart/:checkedOutCartId/orderDetails' exact={true} >
+        <ProtectedRoute exact path='/shoppingCart/:checkedOutCartId/orderDetails' >
           <OrderDetails />
         </ProtectedRoute>
 
@@ -86,7 +86,7 @@ function App() {
           <EditProductForm products={products} />
         </Route>
 
-        <Route path='/products/:productId' exact={true} >
+        <Route exact path='/products/:productId' >
           <ProductDetail products={products} />
         </Route>
 
@@ -94,15 +94,15 @@ function App() {
           <CategoryDetail />
         </Route>
 
-        <Route path='/reviews/:reviewId/edit-reviews' exact={true} >
+        <Route exact path='/reviews/:reviewId/edit-reviews' >
           <EditReviewForm products={products} reviews={reviews} />
         </Route>
 
-        <Route path='/search-results' exact={true} >
-          <SearchResults products={queriedProducts} categories={queriedCategorys}/>
+        <Route exact path='/search-results' >
+          <SearchResults products={queriedProducts} categories={queriedCategorys} />
         </Route>
 
-        <Route path='/' exact={true} >
+        <Route exact path='/' >
           <HomePage />
         </Route>
 

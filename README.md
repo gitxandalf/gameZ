@@ -77,6 +77,18 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 
 #### Suhayl Khan:
 
+• I found that building a working and dynamic shopping cart was much harder than I originally thought. A big part of this challenge was finding a way to display all of the shopping cart's contents on a single page in addition to being able to edit/remove a cart item dynamically. 
+
+• What I learned from our various attempts and eventual success was that creating a well-built Redux store is essential to the success of a dynamic feature, such as a shopping cart. After a lot of back-and-forth between the Redux store and `ShoppingCart` component, the following `ShoppingCart` store is what worked best for us:
+
+    shoppingCart:
+        current_shopping_cart:
+            cart_items:
+                [/* list of cartItem objects */]
+            checked_out
+            id
+            user_id
+
 ## Fair Use Disclaimer:
 Our site contains product images, product names and product descriptions (all sourced from [Humble Bundle](https://www.humblebundle.com/)) that are not authorized for use by their respective owners. This site constitutes a fair-use of any copyrighted material as provided for in [section 107 of the US copyright law](https://codes.findlaw.com/us/title-17-copyrights/17-usc-sect-107.html). "GameZ" by Alexander Gangemi, Eric Cortez, Jesse Brooks and Suhayl Khan is an educational project made by students who enjoy video games and are inspired by them.
 

@@ -1,0 +1,70 @@
+#order-details-header {
+  margin: 2% 13.5%;
+  font-size: 26px;
+  text-align: center;
+}
+
+.order-details-confirmation {
+  font-size: 20px;
+  color: #414141;
+}
+
+.order-details-details {
+  display: grid;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 36%;
+}
+
+.order-details-name {
+  font-weight: bold;
+  font-style: italic;
+  font-family: "Guardian-EgypTT",Charter,"Charter Bitstream",Cambria,"Noto Serif Light","Droid Serif",Georgia,serif;
+  font-size: 17px;
+}
+
+.order-details-item {
+  display: grid;
+  grid-template-columns: 6fr 1fr 3fr;
+}
+
+.order-details-item > * {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid whitesmoke;
+}
+
+.order-details-cost {
+  text-align: right;
+}
+
+.details-cost-total {
+  font-weight: bold;
+}
+
+.order-details-total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  color: #414141;
+  padding-top: 10px;
+  padding-bottom: 40px;
+}
+
+.continue-shopping {
+  border: none;
+  background: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  align-self: flex-end;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #6230C5;
+  color: white;
+  border-radius: 10px;
+}
+
+.continue-shopping:hover {
+  box-shadow: 0 1px 20px 0 var(--skyGray);
+  transition: 0.2s;
+}

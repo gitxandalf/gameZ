@@ -290,3 +290,10 @@ ul {
     z-index: 0;
     user-select: none;
 }
+
+
+#username {
+    color: #784ece;
+    font-size: 18px;
+    font-weight: 400;
+}

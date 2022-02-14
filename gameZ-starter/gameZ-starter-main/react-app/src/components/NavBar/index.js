@@ -116,6 +116,14 @@ const NavBar = ({ search, setSearch }) => {
             </div>
           </form>
           <ul id="nav-ul">
+
+
+              {sessionUser &&
+                <li id='logout' className='nav-li user-info'>
+                  <p id="username">{`Welcome, ${sessionUser?.username}`}</p>
+  
+                </li>}
+
             <li id='add-product' className='nav-li'>
               {sessionUser &&
                 <NavLink className="list-a" exact to='/products/add-product' activeClassName='active'>
@@ -138,28 +146,31 @@ const NavBar = ({ search, setSearch }) => {
                 </NavLink>
               </li>}
 
-
             {sessionUser &&
               <li id='logout' className='nav-li'>
                 <LogoutButton />
               </li>}
 
-            <div className='shopping-cart-container'
-              onClick={handleClick}>
 
-              <li id='cart-icon' className='nav-li list-a'>
-                {sessionUser &&
-                  <img
-                    src={shoppingCartIcon}
-                    alt="cart"
-                    className='list-a'
-                  />}
-                <div className='shopping-cart-icon-badge'>
-                  <div className='shopping-cart-icon-badge-text'>
+
+            <div className='shopping-cart-container'
+            onClick={handleClick}>
+
+            <li id='cart-icon' className='nav-li list-a'>
+              {sessionUser &&
+               <>
+                <img
+                  src={shoppingCartIcon}
+                  alt="cart"
+                  className='list-a'
+                  />
+
+                  <div className='shopping-cart-icon-badge'>
+                    <div className='shopping-cart-icon-badge-text'>
                     <p>{shoppingCart && shoppingCart.length}</p>
                   </div>
-                </div>
-              </li>
+                </>}
+            </li>
             </div>
             {preview && <ShoppingCartPreview />}
           </ul>

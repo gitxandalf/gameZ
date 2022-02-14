@@ -1,3 +1,12 @@
+/* .product-links {
+    margin-bottom: 100px;
+    padding-bottom: 100px;
+} */
+
+.category-detail {
+    margin-bottom: 10%;
+}
+
 .product-links a {
     color: black;
 }
@@ -21,6 +30,8 @@
 #image-link-a {
  padding: 0;
  margin: 0;
+ /* margin-bottom: 10%;
+ padding-bottom: 10%; */
 }
 .image-link:hover {
     transition: margin-right 2s ease-in-out;

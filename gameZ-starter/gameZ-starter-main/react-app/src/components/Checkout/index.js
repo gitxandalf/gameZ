@@ -12,7 +12,6 @@ function Checkout() {
   const currShoppingCart = useSelector(state => state?.shoppingCart?.current_shopping_cart);
   const products = useSelector(state => state?.product);
   const categories = useSelector(state => state?.category?.entries);
-  const [loaded, setLoaded] = useState(false);
   const [deleteAlert, setDeleteAlert] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState('');
 
@@ -30,11 +29,9 @@ function Checkout() {
   ];
 
   useEffect(() => {
-    dispatch(loadCart(sessionUser.id))
-      .then(() => setLoaded(true));
-    dispatch(getCategories())
-    return () => setLoaded(false);
-  }, [dispatch])
+    dispatch(loadCart(sessionUser.id));
+    dispatch(getCategories());
+  }, [dispatch, sessionUser.id])
 
   const calcTotalPrice = shoppingCart => {
     let price = 0;
@@ -119,7 +116,7 @@ function Checkout() {
                     </li>
                     <li className='cart-item-details'>
                       <div className='item-details-image'>
-                          <img src={currProduct.image_url}/>
+                          <img src={currProduct.image_url} alt='product' />
                       </div>
                       <div className='item-details-all'>
                         <div className='item-details-name'>

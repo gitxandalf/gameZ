@@ -47,6 +47,7 @@
     row-gap: 25px;
     column-gap: 25px;
     align-items: center;
+    padding-bottom: 50px;
 }
 
 #category-product-info {

@@ -1,14 +1,17 @@
-from .db import db
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 
 class CartItem(db.Model):
     __tablename__ = 'cart_items'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     shopping_cart_id = db.Column(
-        db.Integer, db.ForeignKey("shopping_carts.id"))
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"))
+        db.Integer, db.ForeignKey(add_prefix_for_prod("shopping_carts.id")))
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("products.id")))
     quantity = db.Column(db.Integer, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
 

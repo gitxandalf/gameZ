@@ -26,21 +26,42 @@ Javascript | Python | Node.js | NPM | Flask | SQLAlchemy | Alembic | Git | HTML 
 
 To install GameZ on your local machine please clone the project repository. 
 
-•  `git clone https://github.com/gitxandalf/gameZ.git`
+1 )  `git clone https://github.com/Eric-Cortez/gameZ.git`
 
-•  `cd gameZ-starter-main/react-app/` change into the frontend directory 
+2 ) cd into gameZ 
+    `cd gameZ/`
 
-•  `npm install` dependencies from the package.json within the frontend directory 
+3 )  Install dependencies
+     
+     `pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt`
 
-•  `cd gameZ-starter-main/` change into the gameZ-starter-main directory 
+4 )  Create a .env file based on the example with proper settings for your development environment
 
-•  `pipenv install` dependencies from the Pipfile within the backend directory
+5 )  Setup your PostgreSQL user, password, database, and make sure it matches your .env file
 
-•  `pipenv shell` to enter the pipenv shell 
 
-•  `flask run` while in the shell and within the backend (gameZ-starter-main/) directory under localhost:5000
+  
+6 ) To setup the backend application...
+   
+   enter the pipenv shell, migrate your database, seed your database, and run the flask application 
+     
 
-•  `npm start` within the frontend directory(gameZ-starter-main/react-app) under localhost:3000
+  •  `pipenv shell` to enter the pipenv shell 
+
+  •  `flask db upgrade`
+
+  •  `flask seed all`
+
+  •  `flask run` while in the shell and within the backend (edcGear/) directory under localhost:5000
+  
+7 ) To run the frontend react application...
+
+  •  Change into the frontend directory `cd react-app/`
+
+  •  Run `npm install` to install all dependencies from the package.json within the frontend directory 
+  
+  •  `npm start` within the frontend directory(gameZ/react-app/) under localhost:3000
+
 
 ## Future Features:
 

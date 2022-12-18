@@ -43,7 +43,6 @@ def product(id):
 def post_product():
     data = request.json
     form = AddProductForm()
-    print("FORM DATA________>",form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
